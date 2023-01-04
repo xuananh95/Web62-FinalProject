@@ -1,0 +1,45 @@
+.wrapper {
+    background-color: rgb(24, 24, 24);
+    height: 25%;
+    display: flex;
+    gap: 5rem;
+    padding: 1rem 0;
+    color: aliceblue;
+    line-height: 2.2em;
+    align-items: center;
+    font-size: 0.8em;
+    justify-content: space-around;
+}
+
+.footer--left {
+    h1 {
+        text-shadow: 2px 2px 5px rgb(243, 243, 189);
+        letter-spacing: 0.1em;
+    }
+}
+
+.footer--center {
+    display: flex;
+    flex-direction: column;
+}
+
+.link {
+    text-decoration: none;
+    color: aliceblue;
+    &:hover {
+        color: rgb(209, 209, 211);
+    }
+}
+
+.footer--right {
+    div {
+        display: flex;
+        gap: 1rem;
+        font-size: 1.6rem;
+        cursor: pointer;
+    }
+
+    p:hover {
+        color: rgb(209, 209, 211);
+    }
+}

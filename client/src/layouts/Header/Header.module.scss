@@ -1,0 +1,28 @@
+.wrapper {
+    background-color: rgb(24, 24, 24);
+    color: aliceblue;
+    display: flex;
+    padding: 0.5rem 3rem;
+    gap: 3rem;
+}
+
+.header--left {
+    h1 {
+        text-align: center;
+        letter-spacing: 0.2em;
+        font-size: 2em;
+        text-shadow: 2px 2px 5px rgb(243, 243, 189);
+    }
+}
+
+.header--center {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    font-size: 0.8em;
+    flex: 1;
+}
+
+.link {
+    letter-spacing: 0.1rem;
+}
