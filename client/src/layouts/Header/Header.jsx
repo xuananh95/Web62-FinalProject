@@ -10,10 +10,13 @@ import { Link } from "react-router-dom";
 import { Menu } from "antd";
 
 import styles from "./Header.module.scss";
+import { useContext } from "react";
+import { StateContext } from "../../contexts/GlobalState";
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
+    const { setIsModalOpen } = useContext(StateContext);
     const menu = [
         {
             label: "Home",
@@ -34,11 +37,13 @@ const Header = () => {
             label: "Sign in",
             path: "/sign-in",
             icon: <UserOutlined />,
+            event: () => alert("login success"),
         },
         {
             label: "Sign up",
             path: "/sign-up",
             icon: <UserAddOutlined />,
+            event: () => setIsModalOpen(true),
         },
     ];
     return (
@@ -55,7 +60,11 @@ const Header = () => {
                     return {
                         key,
                         label: (
-                            <Link className={cx("link")} to={item.path}>
+                            <Link
+                                className={cx("link")}
+                                to={item.path}
+                                onClick={item?.event}
+                            >
                                 {item.icon} {item.label}
                             </Link>
                         ),
