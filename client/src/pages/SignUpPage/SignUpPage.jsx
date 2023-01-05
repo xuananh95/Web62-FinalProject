@@ -9,12 +9,14 @@ import { Button, Checkbox, Input, Modal } from "antd";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import { StateContext } from "../../contexts/GlobalState";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./SignUpPage.module.scss";
 
 const cx = classNames.bind(styles);
 
 const SignUpPage = () => {
+    const navigate = useNavigate();
     const {
         isModalOpen,
         setIsModalOpen,
@@ -26,10 +28,12 @@ const SignUpPage = () => {
     const handleOk = () => {
         console.log(inputValue);
         setInputValue(initalValue);
+        navigate("/sign-in");
     };
 
     const handleCancel = () => {
         setIsModalOpen(false);
+        navigate("/");
     };
 
     return (
@@ -41,13 +45,6 @@ const SignUpPage = () => {
             footer={[
                 <Button onClick={handleOk} type="primary" className={cx("btn")}>
                     Sign Up
-                </Button>,
-                <Button
-                    onClick={handleCancel}
-                    danger
-                    style={{ margin: "0.7rem 0", width: "100%" }}
-                >
-                    Cancel
                 </Button>,
             ]}
             className={cx("wrapper")}

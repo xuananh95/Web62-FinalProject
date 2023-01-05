@@ -6,7 +6,7 @@ import {
     UserOutlined,
 } from "@ant-design/icons";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Menu } from "antd";
 
 import styles from "./Header.module.scss";
@@ -17,6 +17,9 @@ const cx = classNames.bind(styles);
 
 const Header = () => {
     const { setIsModalOpen } = useContext(StateContext);
+    const url = window.location.href;
+    const path = url.slice(21);
+
     const menu = [
         {
             label: "Home",
@@ -37,7 +40,7 @@ const Header = () => {
             label: "Sign in",
             path: "/sign-in",
             icon: <UserOutlined />,
-            event: () => alert("login success"),
+            event: () => setIsModalOpen(true),
         },
         {
             label: "Sign up",
@@ -46,6 +49,9 @@ const Header = () => {
             event: () => setIsModalOpen(true),
         },
     ];
+
+    const result = menu.findIndex((item) => item.path === path) + 1;
+
     return (
         <div className={cx("wrapper")}>
             <div className={cx("header--left")}>
@@ -55,6 +61,7 @@ const Header = () => {
                 className={cx("header--center")}
                 defaultSelectedKeys={["1"]}
                 theme="dark"
+                selectedKeys={[result.toString()]}
                 items={menu.map((item, index) => {
                     const key = index + 1;
                     return {
@@ -63,6 +70,7 @@ const Header = () => {
                             <Link
                                 className={cx("link")}
                                 to={item.path}
+                                state={{ from: item.label }}
                                 onClick={item?.event}
                             >
                                 {item.icon} {item.label}
