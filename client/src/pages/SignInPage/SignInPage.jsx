@@ -1,10 +1,11 @@
 import { Button, Checkbox, Input, Modal } from "antd";
-import React, { useContext } from "react";
-import { StateContext } from "../../contexts/GlobalState";
-import { useNavigate } from "react-router-dom";
-import { KeyOutlined, MailOutlined } from "@ant-design/icons";
 import classNames from "classnames/bind";
+import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { StateContext } from "../../contexts/GlobalState";
 
+import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./SignInPage.module.scss";
 
 const cx = classNames.bind(styles);
@@ -40,13 +41,13 @@ const SignInPage = () => {
         >
             <h2>Sign In</h2>
             <Input
-                prefix={<MailOutlined />}
+                prefix={<FontAwesomeIcon icon={faEnvelope} />}
                 placeholder="Email"
                 type="email"
                 className={cx("input")}
             />
             <Input.Password
-                prefix={<KeyOutlined />}
+                prefix={<FontAwesomeIcon icon={faKey} />}
                 placeholder="Password"
                 className={cx("input")}
             />

@@ -1,16 +1,17 @@
-import {
-    EnvironmentOutlined,
-    KeyOutlined,
-    MailOutlined,
-    PhoneOutlined,
-    UserOutlined,
-} from "@ant-design/icons";
 import { Button, Checkbox, Input, Modal } from "antd";
 import classNames from "classnames/bind";
 import { useContext } from "react";
-import { StateContext } from "../../contexts/GlobalState";
 import { useNavigate } from "react-router-dom";
+import { StateContext } from "../../contexts/GlobalState";
 
+import {
+    faEnvelope,
+    faKey,
+    faLocationDot,
+    faPhone,
+    faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from "./SignUpPage.module.scss";
 
 const cx = classNames.bind(styles);
@@ -51,7 +52,7 @@ const SignUpPage = () => {
         >
             <h2>Sign Up</h2>
             <Input
-                prefix={<UserOutlined />}
+                prefix={<FontAwesomeIcon icon={faUser} />}
                 placeholder="User name"
                 className={cx("input")}
                 onChange={(e) =>
@@ -63,7 +64,7 @@ const SignUpPage = () => {
                 value={inputValue.userName}
             />
             <Input
-                prefix={<MailOutlined />}
+                prefix={<FontAwesomeIcon icon={faEnvelope} />}
                 placeholder="Email"
                 className={cx("input")}
                 type="email"
@@ -76,7 +77,7 @@ const SignUpPage = () => {
                 value={inputValue.email}
             />
             <Input
-                prefix={<PhoneOutlined />}
+                prefix={<FontAwesomeIcon icon={faPhone} />}
                 placeholder="Phone"
                 className={cx("input")}
                 type="number"
@@ -89,7 +90,7 @@ const SignUpPage = () => {
                 value={inputValue.phone}
             />
             <Input
-                prefix={<EnvironmentOutlined />}
+                prefix={<FontAwesomeIcon icon={faLocationDot} />}
                 placeholder="Address"
                 className={cx("input")}
                 onChange={(e) =>
@@ -101,7 +102,7 @@ const SignUpPage = () => {
                 value={inputValue.address}
             />
             <Input.Password
-                prefix={<KeyOutlined />}
+                prefix={<FontAwesomeIcon icon={faKey} />}
                 placeholder="Password"
                 className={cx("input")}
                 onChange={(e) =>
@@ -114,7 +115,7 @@ const SignUpPage = () => {
             />
 
             <Input.Password
-                prefix={<KeyOutlined />}
+                prefix={<FontAwesomeIcon icon={faKey} />}
                 placeholder="Confirm Password"
                 className={cx("input")}
                 onChange={(e) =>

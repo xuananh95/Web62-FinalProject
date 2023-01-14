@@ -5,45 +5,49 @@ import {
     UserAddOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import classNames from "classnames/bind";
-import { Link, useParams } from "react-router-dom";
 import { Menu } from "antd";
+import classNames from "classnames/bind";
+import { Link } from "react-router-dom";
 
-import styles from "./Header.module.scss";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { StateContext } from "../../contexts/GlobalState";
+import styles from "./Header.module.scss";
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
     const { setIsModalOpen } = useContext(StateContext);
+    const [selectedKeys, setSelectedKeys] = useState(false);
     const url = window.location.href;
     const path = url.slice(21);
 
     const menu = [
         {
-            label: "Home",
+            label: "Trang chủ",
             path: "/",
             icon: <HomeOutlined />,
+            event: () => setSelectedKeys(!selectedKeys),
         },
         {
             label: "Calo",
             path: "/calo",
             icon: <AppstoreOutlined />,
+            event: () => setSelectedKeys(!selectedKeys),
         },
         {
-            label: "Product",
+            label: "Sản phẩm",
             path: "/product",
             icon: <ShoppingCartOutlined />,
+            event: () => setSelectedKeys(!selectedKeys),
         },
         {
-            label: "Sign in",
+            label: "Đăng nhập",
             path: "/sign-in",
             icon: <UserOutlined />,
             event: () => setIsModalOpen(true),
         },
         {
-            label: "Sign up",
+            label: "Đăng kí",
             path: "/sign-up",
             icon: <UserAddOutlined />,
             event: () => setIsModalOpen(true),
