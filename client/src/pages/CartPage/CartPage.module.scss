@@ -1,0 +1,19 @@
+.wrapper {
+    padding: 1rem 2rem;
+    height: 70%;
+    overflow: auto;
+
+    .table {
+        margin-bottom: 1rem;
+    }
+
+    .btn--cart {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .icon {
+        width: 1.3rem;
+        height: 1.3rem;
+    }
+}

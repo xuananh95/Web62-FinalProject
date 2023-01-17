@@ -57,7 +57,7 @@ const WheyProtein = () => {
                     <span> 250</span>
                     <p>2.000.000 d</p>
                     <div className={cx("buy")}>
-                        <Button block danger>
+                        <Button type="primary" block>
                             <FontAwesomeIcon
                                 icon={faCartPlus}
                                 style={{ marginRight: "0.5rem" }}
@@ -66,7 +66,6 @@ const WheyProtein = () => {
                         </Button>
                         <Button
                             block
-                            danger
                             type="primary"
                             style={{ marginTop: "0.5rem" }}
                         >
@@ -89,7 +88,7 @@ const WheyProtein = () => {
                     <span> 250</span>
                     <p>2.000.000 d</p>
                     <div className={cx("buy")}>
-                        <Button block danger>
+                        <Button type="primary" block>
                             <FontAwesomeIcon
                                 icon={faCartPlus}
                                 style={{ marginRight: "0.5rem" }}
@@ -98,7 +97,6 @@ const WheyProtein = () => {
                         </Button>
                         <Button
                             block
-                            danger
                             type="primary"
                             style={{ marginTop: "0.5rem" }}
                         >
@@ -121,7 +119,7 @@ const WheyProtein = () => {
                     <span> 250</span>
                     <p>2.000.000 d</p>
                     <div className={cx("buy")}>
-                        <Button block danger>
+                        <Button type="primary" block>
                             <FontAwesomeIcon
                                 icon={faCartPlus}
                                 style={{ marginRight: "0.5rem" }}
@@ -130,7 +128,6 @@ const WheyProtein = () => {
                         </Button>
                         <Button
                             block
-                            danger
                             type="primary"
                             style={{ marginTop: "0.5rem" }}
                         >
@@ -153,7 +150,7 @@ const WheyProtein = () => {
                     <span> 250</span>
                     <p>2.000.000 d</p>
                     <div className={cx("buy")}>
-                        <Button block danger>
+                        <Button type="primary" block>
                             <FontAwesomeIcon
                                 icon={faCartPlus}
                                 style={{ marginRight: "0.5rem" }}
@@ -162,7 +159,6 @@ const WheyProtein = () => {
                         </Button>
                         <Button
                             block
-                            danger
                             type="primary"
                             style={{ marginTop: "0.5rem" }}
                         >
@@ -185,7 +181,7 @@ const WheyProtein = () => {
                     <span> 250</span>
                     <p>2.000.000 d</p>
                     <div className={cx("buy")}>
-                        <Button block danger>
+                        <Button type="primary" block>
                             <FontAwesomeIcon
                                 icon={faCartPlus}
                                 style={{ marginRight: "0.5rem" }}
@@ -194,7 +190,6 @@ const WheyProtein = () => {
                         </Button>
                         <Button
                             block
-                            danger
                             type="primary"
                             style={{ marginTop: "0.5rem" }}
                         >

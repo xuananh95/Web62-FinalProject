@@ -24,30 +24,11 @@ const ProductPage = () => {
     const { Sider } = Layout;
     const items = [
         {
-            label: "Whey protein",
-            path: "whey-protein",
-            icon: <FontAwesomeIcon icon={faTrophy} />,
-        },
-        {
-            label: "Protein thực vật",
-            path: "protein-thuc-vat",
-            icon: <FontAwesomeIcon icon={faGauge} />,
-        },
-        {
             label: "Sữa tăng cân",
             path: "sua-tang-can",
             icon: <FontAwesomeIcon icon={faBagShopping} />,
         },
-        {
-            label: "BCAA Amino Acids",
-            path: "BCAA-amino-acids",
-            icon: <FontAwesomeIcon icon={faGears} />,
-        },
-        {
-            label: "Tăng sức mạnh",
-            path: "tang-suc-manh",
-            icon: <FontAwesomeIcon icon={faFire} />,
-        },
+
         {
             label: "Hỗ trợ giảm cân",
             path: "ho-tro-giam-can",
@@ -58,16 +39,7 @@ const ProductPage = () => {
             path: "vitamin-khoang-chat",
             icon: <FontAwesomeIcon icon={faScaleUnbalanced} />,
         },
-        {
-            label: "Dầu cá Omega-3",
-            path: "dau-ca-omega3",
-            icon: <FontAwesomeIcon icon={faFish} />,
-        },
-        {
-            label: "Dinh dưỡng chạy bộ",
-            path: "dinh-duong-chay-bo",
-            icon: <FontAwesomeIcon icon={faPersonRunning} />,
-        },
+
         {
             label: "Phụ kiện tập ",
             path: "phu-kien-tap",
