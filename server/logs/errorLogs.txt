@@ -1,0 +1,32 @@
+2023-1-16 - 15:35:58 - Error: Invalid token - Path: /users/63c4c541f0339edaf6f665d0 
+2023-1-16 - 15:36:30 - Error: Invalid token - Path: /users/63c4c541f0339edaf6f665d0 
+2023-1-16 - 15:36:56 - Error: Invalid token - Path: /users/63c4c541f0339edaf6f665d0 
+2023-1-16 - 15:37:41 - Error: Invalid token - Path: /users/63c4c541f0339edaf6f665d0 
+2023-1-16 - 15:53:47 - Error: Cannot read properties of null (reading '_id') - Path: /users/ 
+2023-1-16 - 15:54:56 - Error: Cannot read properties of null (reading '_id') - Path: /users/ 
+2023-1-18 - 8:25:58 - Error: Unexpected number in JSON at position 58 - Path: /users/changePassword 
+2023-1-18 - 8:26:18 - Error: No token or token invalid - Path: /users/changePassword 
+2023-1-18 - 8:26:20 - Error: No token or token invalid - Path: /users/changePassword 
+2023-1-18 - 8:28:17 - Error: Invalid password - Path: /users/changePassword 
+2023-1-18 - 8:28:25 - Error: Invalid password - Path: /users/changePassword 
+2023-1-18 - 8:33:12 - Error: No token or token invalid - Path: /users/changeRole 
+2023-1-18 - 8:33:23 - Error: Unauthorized - Path: /users/changeRole 
+2023-1-18 - 8:33:36 - Error: Incorrect username or password! - Path: /users/login 
+2023-1-18 - 8:33:43 - Error: Incorrect username or password! - Path: /users/login 
+2023-1-18 - 8:34:32 - Error: Incorrect username or password! - Path: /users/login 
+2023-1-18 - 8:34:36 - Error: Incorrect username or password! - Path: /users/login 
+2023-1-18 - 8:34:43 - Error: Incorrect username or password! - Path: /users/login 
+2023-1-18 - 8:37:53 - Error: User not found! - Path: /users/changeRole 
+2023-1-18 - 8:40:0 - Error: Missing required fields - Path: /users/changeRole 
+2023-1-18 - 8:40:4 - Error: Missing required fields - Path: /users/changeRole 
+2023-1-18 - 8:43:40 - Error: Missing required fields - Path: /users/changeRole 
+2023-1-18 - 8:43:42 - Error: Missing required fields - Path: /users/changeRole 
+2023-1-18 - 8:44:7 - Error: Missing required fields - Path: /users/changeRole 
+2023-1-18 - 8:44:18 - Error: Missing required fields - Path: /users/changeRole 
+2023-1-18 - 8:44:27 - Error: User validation failed: role: `123` is not a valid enum value for path `role`. - Path: /users/changeRole 
+2023-1-18 - 8:45:8 - Error: User validation failed: role: `NORMAdL` is not a valid enum value for path `role`. - Path: /users/changeRole 
+2023-1-18 - 8:47:14 - Error: No token or token invalid - Path: /users/ 
+2023-1-18 - 8:51:44 - Error: No token or token invalid - Path: /users/dadfqwerqfadf 
+2023-1-18 - 8:51:54 - Error: Cast to ObjectId failed for value "dadfqwerqfadf" (type string) at path "_id" for model "User" - Path: /users/dadfqwerqfadf 
+2023-1-18 - 8:54:7 - Error: Invalid data - Path: /users/dadfqwerqfadf 
+2023-1-18 - 8:54:24 - Error: Invalid data - Path: /users/dadfqwerqfadf 
