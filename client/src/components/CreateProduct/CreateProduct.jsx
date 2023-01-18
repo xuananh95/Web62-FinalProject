@@ -25,6 +25,7 @@ const CreateProduct = () => {
             label: "Phụ kiện tập",
         },
     ];
+
     return (
         <>
             <Form className={cx("wrapper")} labelCol={{ span: 2 }}>
@@ -40,12 +41,15 @@ const CreateProduct = () => {
                 <Form.Item label="Qty" name="qty">
                     <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
+                <Form.Item label="Description" name="description">
+                    <InputNumber style={{ width: "100%" }} />
+                </Form.Item>
                 <Form.Item label="Image " name="image">
                     <Upload listType="picture">
                         <Button icon={<UploadOutlined />}>Upload File</Button>
                     </Upload>
                 </Form.Item>
-                <Button type="primary" block>
+                <Button type="primary" className={cx("btn")}>
                     Thêm sản phẩm
                 </Button>
             </Form>

@@ -105,11 +105,6 @@ const CartPage = () => {
             title: "Số lượng",
             dataIndex: "qty",
         },
-        {
-            render: () => (
-                <FontAwesomeIcon icon={faTrash} className={cx("icon")} />
-            ),
-        },
     ];
 
     return (
@@ -119,6 +114,7 @@ const CartPage = () => {
                 columns={columnsCart}
                 dataSource={dataSourseCart}
                 pagination={false}
+                rowSelection
             />
             <div className={cx("btn--cart")}>
                 <h2>Tổng: 22222222$</h2>
