@@ -30,3 +30,7 @@
 2023-1-18 - 8:51:54 - Error: Cast to ObjectId failed for value "dadfqwerqfadf" (type string) at path "_id" for model "User" - Path: /users/dadfqwerqfadf 
 2023-1-18 - 8:54:7 - Error: Invalid data - Path: /users/dadfqwerqfadf 
 2023-1-18 - 8:54:24 - Error: Invalid data - Path: /users/dadfqwerqfadf 
+2023-1-18 - 10:45:39 - Error: User validation failed: phone: Path `phone` is required., address: Path `address` is required. - Path: /user/sign-up 
+2023-1-18 - 10:45:49 - Error: Unexpected number in JSON at position 76 - Path: /user/sign-up 
+2023-1-18 - 10:46:14 - Error: User validation failed: phone: Path `phone` is required., address: Path `address` is required. - Path: /user/sign-up 
+2023-1-18 - 10:47:1 - Error: User validation failed: phone: Path `phone` is required., address: Path `address` is required. - Path: /user/sign-up 

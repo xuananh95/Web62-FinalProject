@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 
 // routes
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 
 // handling errors
 app.use(errorHandle);

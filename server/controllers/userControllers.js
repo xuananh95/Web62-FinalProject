@@ -4,7 +4,7 @@ const bcryptjs = require("bcryptjs");
 const { signJWt } = require("../utils/jwt");
 
 const register = asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
+    const { username, email, password, phone, address } = req.body;
     if (!username || !email || !password) {
         res.status(400);
         throw new Error("Missing required fields!");
@@ -45,6 +45,8 @@ const register = asyncHandler(async (req, res) => {
                     username,
                     email,
                     password,
+                    phone,
+                    address,
                 });
                 if (newUser) {
                     res.status(200).json({
