@@ -2,8 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    register,
-    login,
+    signUp,
+    signIn,
     getUserByID,
     updateUser,
     changePassword,
@@ -32,7 +32,7 @@ const { protect, isAdmin } = require("../middlewares/authMiddleware");
             data: created user (id + username + email) (null if errors occurs)
         }
  */
-router.post("/sign-up", register);
+router.post("/sign-up", signUp);
 
 /**
  *  2. Login
@@ -51,7 +51,7 @@ router.post("/sign-up", register);
             data: JWT-token (null if errors occurs)
         }
  */
-router.post("/sign-in", login);
+router.post("/sign-in", signIn);
 
 /**
  *  3. get User by ID

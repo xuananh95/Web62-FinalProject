@@ -5,6 +5,10 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    slug: {
+        type: String,
+        required: true,
+    },
     price: {
         type: Number,
         min: 0,
@@ -13,7 +17,7 @@ const productSchema = mongoose.Schema({
     image: {
         type: String,
     },
-    descript: {
+    description: {
         type: String,
     },
 });

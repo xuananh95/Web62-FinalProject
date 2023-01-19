@@ -5,6 +5,7 @@ const RefreshTokenModel = require("../models/RefreshTokenModel");
 const { User } = require("../models/UserModel");
 const { signJWt, refreshToken } = require("../utils/jwt");
 
+<<<<<<< HEAD
 const register = asyncHandler(async (req, res) => {
     const { username, email, password, phone: phoneNumber, address } = req.body;
 
@@ -12,6 +13,14 @@ const register = asyncHandler(async (req, res) => {
     //     res.status(400);
     //     throw new Error("Missing required fields!");
     // }
+=======
+const signUp = asyncHandler(async (req, res) => {
+    const { username, email, password, phoneNumber, address } = req.body;
+    if (!username || !email || !password || !phoneNumber || !address) {
+        res.status(400);
+        throw new Error("Missing required fields!");
+    }
+>>>>>>> dd77e1bbba49fbf85d443dc215ded3217c84db4f
 
     // Count the number of documents in User collection. If 0 => create ADMIN user
     const documentsCount = await User.estimatedDocumentCount();
@@ -71,7 +80,7 @@ const register = asyncHandler(async (req, res) => {
     }
 });
 
-const login = asyncHandler(async (req, res) => {
+const signIn = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         res.status(400);
@@ -234,8 +243,8 @@ const deleteUserByID = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-    register,
-    login,
+    signUp,
+    signIn,
     getUserByID,
     updateUser,
     changePassword,
