@@ -3,9 +3,9 @@ const asyncHandler = require("express-async-handler");
 const bcryptjs = require("bcryptjs");
 const { signJWt } = require("../utils/jwt");
 
-const register = asyncHandler(async (req, res) => {
-    const { username, email, password } = req.body;
-    if (!username || !email || !password) {
+const signUp = asyncHandler(async (req, res) => {
+    const { username, email, password, phoneNumber, address } = req.body;
+    if (!username || !email || !password || !phone || !address) {
         res.status(400);
         throw new Error("Missing required fields!");
     }
@@ -18,6 +18,8 @@ const register = asyncHandler(async (req, res) => {
                 username,
                 email,
                 password,
+                phoneNumber,
+                address,
                 role: "ADMIN",
             });
             if (adminUser) {
@@ -45,6 +47,8 @@ const register = asyncHandler(async (req, res) => {
                     username,
                     email,
                     password,
+                    phoneNumber,
+                    address,
                 });
                 if (newUser) {
                     res.status(200).json({
@@ -64,7 +68,7 @@ const register = asyncHandler(async (req, res) => {
     }
 });
 
-const login = asyncHandler(async (req, res) => {
+const signIn = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
         res.status(400);
@@ -221,8 +225,8 @@ const deleteUserByID = asyncHandler(async (req, res) => {
 });
 
 module.exports = {
-    register,
-    login,
+    signUp,
+    signIn,
     getUserByID,
     updateUser,
     changePassword,

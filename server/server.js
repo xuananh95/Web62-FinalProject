@@ -6,6 +6,7 @@ const connectToDB = require("./config/db");
 connectToDB();
 
 const userRouter = require("./routes/userRoute");
+const productRouter = require("./routes/productRoute");
 
 const { errorHandle } = require("./middlewares/errorMiddleware");
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 // routes
 app.use("/users", userRouter);
+app.use("/products", productRouter);
 
 // handling errors
 app.use(errorHandle);
