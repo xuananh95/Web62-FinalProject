@@ -30,3 +30,37 @@
 2023-1-18 - 8:51:54 - Error: Cast to ObjectId failed for value "dadfqwerqfadf" (type string) at path "_id" for model "User" - Path: /users/dadfqwerqfadf 
 2023-1-18 - 8:54:7 - Error: Invalid data - Path: /users/dadfqwerqfadf 
 2023-1-18 - 8:54:24 - Error: Invalid data - Path: /users/dadfqwerqfadf 
+2023-1-18 - 10:45:39 - Error: User validation failed: phone: Path `phone` is required., address: Path `address` is required. - Path: /user/sign-up 
+2023-1-18 - 10:45:49 - Error: Unexpected number in JSON at position 76 - Path: /user/sign-up 
+2023-1-18 - 10:46:14 - Error: User validation failed: phone: Path `phone` is required., address: Path `address` is required. - Path: /user/sign-up 
+2023-1-18 - 10:47:1 - Error: User validation failed: phone: Path `phone` is required., address: Path `address` is required. - Path: /user/sign-up 
+2023-1-19 - 8:49:8 - Error: Operation `users.estimatedDocumentCount()` buffering timed out after 10000ms - Path: /user/sign-up 
+2023-1-19 - 8:52:14 - Error: Operation `users.estimatedDocumentCount()` buffering timed out after 10000ms - Path: /user/sign-up 
+2023-1-19 - 9:43:2 - Error: Email already registered - Path: /user/sign-up 
+2023-1-19 - 10:4:45 - Error: Missing required fields! - Path: /users/sign-up 
+2023-1-19 - 10:4:55 - Error: Missing required fields! - Path: /users/sign-up 
+2023-1-19 - 10:4:58 - Error: Missing required fields! - Path: /users/sign-up 
+2023-1-19 - 10:11:22 - Error: UserModel validation failed: username: Path `username` is required. - Path: /users/sign-up 
+2023-1-19 - 10:12:15 - Error: UserModel validation failed: username: Path `username` is required. - Path: /users/sign-up 
+2023-1-19 - 10:13:11 - Error: UserModel validation failed: username: Path `username` is required. - Path: /users/sign-up 
+2023-1-19 - 10:16:15 - Error: UserModel validation failed: username: Path `username` is required. - Path: /users/sign-up 
+2023-1-19 - 10:25:24 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:31 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:36 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:37 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:41 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:43 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:51 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:25:54 - Error: ValidationError: username: Path `username` is required. - Path: /users/sign-up 
+2023-1-19 - 10:26:13 - Error: ValidationError: username: Path `username` is required. - Path: /users/sign-up 
+2023-1-19 - 10:26:19 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:22 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:22 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:24 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:24 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:26 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:29 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:30 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:34 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:35 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 10:26:38 - Error: Email already registered - Path: /users/sign-up 

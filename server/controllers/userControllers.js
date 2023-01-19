@@ -5,7 +5,7 @@ const { signJWt } = require("../utils/jwt");
 
 const signUp = asyncHandler(async (req, res) => {
     const { username, email, password, phoneNumber, address } = req.body;
-    if (!username || !email || !password || !phone || !address) {
+    if (!username || !email || !password || !phoneNumber || !address) {
         res.status(400);
         throw new Error("Missing required fields!");
     }
