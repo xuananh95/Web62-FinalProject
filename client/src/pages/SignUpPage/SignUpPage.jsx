@@ -31,18 +31,24 @@ const SignUpPage = () => {
     } = useContext(StateContext);
 
     const handleOk = async () => {
-        //await authSevices.register(initalValue);
-        api.open({
-            icon: (
-                <FontAwesomeIcon
-                    icon={faCircleCheck}
-                    style={{ color: "green" }}
-                />
-            ),
-            message: "Đăng kí thành công!",
-        });
-        console.log(inputValue);
-        setInputValue(initalValue);
+        try {
+            const { confirmPassword, isCheckRules, ...rest } = inputValue;
+            const response = await authSevices.register(rest);
+
+            api.open({
+                duration: 1.5,
+                icon: (
+                    <FontAwesomeIcon
+                        icon={faCircleCheck}
+                        style={{ color: "green" }}
+                    />
+                ),
+                message: `${response?.data.message}`,
+            });
+            setInputValue(initalValue);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     const handleCancel = () => {
@@ -61,7 +67,7 @@ const SignUpPage = () => {
                 className={cx("wrapper")}
             >
                 <h2>Sign Up</h2>
-                <Form>
+                <Form onFinish={handleOk}>
                     <Form.Item
                         name={"username"}
                         rules={[
@@ -70,7 +76,7 @@ const SignUpPage = () => {
                                 message: "Vui lòng điền username!",
                             },
                             {
-                                pattern: "^([a-z]+)((s{1}[a-z]+){1,})$",
+                                pattern: "^[a-zA-Z0-9+]*$",
                                 message: "Tên không có kí tự đặc biệt!",
                             },
                         ]}
@@ -82,10 +88,10 @@ const SignUpPage = () => {
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
-                                    userName: e.target.value,
+                                    username: e.target.value,
                                 })
                             }
-                            value={inputValue.userName}
+                            value={inputValue.username}
                         />
                     </Form.Item>
                     <Form.Item
@@ -265,7 +271,6 @@ const SignUpPage = () => {
                             type="primary"
                             className={cx("btn")}
                             htmlType="submit"
-                            onClick={handleOk}
                         >
                             Sign Up
                         </Button>

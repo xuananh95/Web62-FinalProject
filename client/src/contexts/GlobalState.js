@@ -4,7 +4,7 @@ export const StateContext = createContext();
 
 const GlobalState = ({ children }) => {
     const initalValue = {
-        userName: "",
+        username: "",
         email: "",
         phone: "",
         address: "",

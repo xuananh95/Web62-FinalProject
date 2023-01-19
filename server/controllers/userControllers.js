@@ -4,11 +4,12 @@ const bcryptjs = require("bcryptjs");
 const { signJWt } = require("../utils/jwt");
 
 const register = asyncHandler(async (req, res) => {
-    const { username, email, password, phone, address } = req.body;
-    if (!username || !email || !password) {
-        res.status(400);
-        throw new Error("Missing required fields!");
-    }
+    const { username, email, password, phone: phoneNumber, address } = req.body;
+    console.log(req.body);
+    // if (!username || !email || !password) {
+    //     res.status(400);
+    //     throw new Error("Missing required fields!");
+    // }
 
     // Count the number of documents in User collection. If 0 => create ADMIN user
     const documentsCount = await User.estimatedDocumentCount();
@@ -18,6 +19,8 @@ const register = asyncHandler(async (req, res) => {
                 username,
                 email,
                 password,
+                phoneNumber,
+                address,
                 role: "ADMIN",
             });
             if (adminUser) {
@@ -45,7 +48,7 @@ const register = asyncHandler(async (req, res) => {
                     username,
                     email,
                     password,
-                    phone,
+                    phoneNumber,
                     address,
                 });
                 if (newUser) {
