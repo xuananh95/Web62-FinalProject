@@ -2,7 +2,6 @@ import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { StateContext } from "../../contexts/GlobalState";
 
@@ -14,14 +13,15 @@ import {
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./SignUpPage.module.scss";
 import authSevices from "../../services/authServices";
+import styles from "./SignUpPage.module.scss";
 
 const cx = classNames.bind(styles);
 
 const SignUpPage = () => {
     const navigate = useNavigate();
     const [api, contextHolder] = notification.useNotification();
+    const [form] = Form.useForm();
     const {
         isModalOpen,
         setIsModalOpen,
@@ -33,21 +33,22 @@ const SignUpPage = () => {
     const handleOk = async () => {
         try {
             const { confirmPassword, isCheckRules, ...rest } = inputValue;
-            const response = await authSevices.register(rest);
 
-            api.open({
+            const response = await authSevices.register(rest);
+            api.success({
                 duration: 1.5,
-                icon: (
-                    <FontAwesomeIcon
-                        icon={faCircleCheck}
-                        style={{ color: "green" }}
-                    />
-                ),
-                message: `${response?.data.message}`,
+                message: `${response?.data?.message}`,
             });
-            setInputValue(initalValue);
+
+            form.resetFields();
+            setTimeout(() => {
+                navigate("/users/sign-in", { replace: true });
+            }, 1200);
         } catch (error) {
-            console.log(error);
+            api.warning({
+                duration: 1.5,
+                message: error,
+            });
         }
     };
 
@@ -67,7 +68,7 @@ const SignUpPage = () => {
                 className={cx("wrapper")}
             >
                 <h2>Sign Up</h2>
-                <Form onFinish={handleOk}>
+                <Form onFinish={handleOk} form={form} className={cx("form")}>
                     <Form.Item
                         name={"username"}
                         rules={[
@@ -84,7 +85,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faUser} />}
                             placeholder="User name"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -111,7 +111,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faEnvelope} />}
                             placeholder="Email"
-                            className={cx("input")}
                             type="email"
                             onChange={(e) =>
                                 setInputValue({
@@ -134,7 +133,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faPhone} />}
                             placeholder="Phone"
-                            className={cx("input")}
                             type="number"
                             onChange={(e) =>
                                 setInputValue({
@@ -157,7 +155,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faLocationDot} />}
                             placeholder="Address"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -186,7 +183,6 @@ const SignUpPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Password"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -226,7 +222,6 @@ const SignUpPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Confirm Password"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -254,7 +249,6 @@ const SignUpPage = () => {
                         ]}
                     >
                         <Checkbox
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -267,11 +261,7 @@ const SignUpPage = () => {
                         </Checkbox>
                     </Form.Item>
                     <Form.Item>
-                        <Button
-                            type="primary"
-                            className={cx("btn")}
-                            htmlType="submit"
-                        >
+                        <Button type="primary" htmlType="submit" block>
                             Sign Up
                         </Button>
                     </Form.Item>

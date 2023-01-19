@@ -64,3 +64,17 @@
 2023-1-19 - 10:26:34 - Error: Email already registered - Path: /users/sign-up 
 2023-1-19 - 10:26:35 - Error: Email already registered - Path: /users/sign-up 
 2023-1-19 - 10:26:38 - Error: Email already registered - Path: /users/sign-up 
+2023-1-19 - 15:20:22 - Error: User validation failed: username: Path `username` is required., email: Path `email` is required., password: Path `password` is required. - Path: /users/sign-up 
+2023-1-19 - 15:20:25 - Error: User validation failed: username: Path `username` is required., email: Path `email` is required., password: Path `password` is required. - Path: /users/sign-up 
+2023-1-19 - 15:40:57 - Error: ValidationError: username: Path `username` is required., email: Path `email` is required., password: Path `password` is required. - Path: /users/sign-up 
+2023-1-19 - 15:41:47 - Error: User validation failed: username: Path `username` is required., email: Path `email` is required., password: Path `password` is required. - Path: /users/sign-up 
+2023-1-19 - 15:42:39 - Error: ValidationError: username: Path `username` is required., email: Path `email` is required., password: Path `password` is required. - Path: /users/sign-up 
+2023-1-19 - 15:43:37 - Error: ValidationError: username: Path `username` is required., email: Path `email` is required., password: Path `password` is required. - Path: /users/sign-up 
+2023-1-19 - 16:37:37 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-19 - 16:37:44 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-19 - 16:40:3 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-19 - 17:3:7 - Error: Cannot access 'refreshtoken' before initialization - Path: /users/sign-in 
+2023-1-19 - 17:4:2 - Error: Cannot access 'refreshtoken' before initialization - Path: /users/sign-in 
+2023-1-19 - 17:5:37 - Error: Cannot access 'refreshtoken' before initialization - Path: /users/sign-in 
+2023-1-19 - 17:6:38 - Error: Cannot access 'refreshtoken' before initialization - Path: /users/sign-in 
+2023-1-19 - 17:9:50 - Error: Cannot access 'refreshToken' before initialization - Path: /users/sign-in 

@@ -12,8 +12,12 @@ const GlobalState = ({ children }) => {
         confirmPassword: "",
         isCheckRules: false,
     };
+
+    const initalFormLogin = { email: "", password: "" };
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [inputValue, setInputValue] = useState(initalValue);
+    const [formLogin, setFormLogin] = useState(initalFormLogin);
 
     const value = {
         isModalOpen,
@@ -21,6 +25,9 @@ const GlobalState = ({ children }) => {
         inputValue,
         setInputValue,
         initalValue,
+        formLogin,
+        setFormLogin,
+        initalFormLogin,
     };
 
     return (

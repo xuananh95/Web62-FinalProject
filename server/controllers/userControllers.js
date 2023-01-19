@@ -1,11 +1,13 @@
-const { User } = require("../models/UserModel");
 const asyncHandler = require("express-async-handler");
 const bcryptjs = require("bcryptjs");
-const { signJWt } = require("../utils/jwt");
+
+const RefreshTokenModel = require("../models/RefreshTokenModel");
+const { User } = require("../models/UserModel");
+const { signJWt, refreshToken } = require("../utils/jwt");
 
 const register = asyncHandler(async (req, res) => {
     const { username, email, password, phone: phoneNumber, address } = req.body;
-    console.log(req.body);
+
     // if (!username || !email || !password) {
     //     res.status(400);
     //     throw new Error("Missing required fields!");
@@ -77,12 +79,18 @@ const login = asyncHandler(async (req, res) => {
     } else {
         const user = await User.findOne({ email });
         if (user && (await bcryptjs.compare(password, user.password))) {
-            res.status(200);
             const payload = {
                 _id: user._id,
                 role: user.role,
             };
-            res.json({
+
+            const refreshtoken = await refreshToken(payload);
+
+            await RefreshTokenModel.create({
+                refreshtoken,
+            });
+
+            res.status(200).json({
                 statusCode: 200,
                 message: "Login success!",
                 data: {
