@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+    flex-direction: rows;
+    gap: 3rem;
+    margin: 0 2rem;
+}
+
+.item {
+    flex: 1;
+    margin: 1rem 0;
+}
