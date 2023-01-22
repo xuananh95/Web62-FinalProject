@@ -1,8 +1,8 @@
 import axiosInstant from "./axiosInstant";
 
 const authSevices = {
-    login: ({ username, password }) => {
-        return axiosInstant.post("/users/sign-in", { username, password });
+    login: (data) => {
+        return axiosInstant.post("/users/sign-in", data);
     },
 
     register: (data) => {
