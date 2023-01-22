@@ -64,3 +64,10 @@
 2023-1-19 - 10:26:34 - Error: Email already registered - Path: /users/sign-up 
 2023-1-19 - 10:26:35 - Error: Email already registered - Path: /users/sign-up 
 2023-1-19 - 10:26:38 - Error: Email already registered - Path: /users/sign-up 
+2023-1-20 - 9:50:52 - Error: No token or token invalid - Path: /products/add-product 
+2023-1-20 - 9:51:13 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-20 - 10:19:40 - Error: Missing required fields! - Path: /users/sign-up 
+2023-1-20 - 10:20:49 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-20 - 10:20:58 - Error: Email already registered - Path: /users/sign-up 
+2023-1-20 - 16:13:34 - Error: File too large - Path: /products/add-product 
+2023-1-20 - 16:48:28 - Error: Unexpected field - Path: /products/add-product 

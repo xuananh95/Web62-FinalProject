@@ -2,7 +2,8 @@ const { Product } = require("../models/ProductModel");
 const asyncHandler = require("express-async-handler");
 
 const addProduct = asyncHandler(async (req, res) => {
-    const { name, slug, price, image, description } = req.body;
+    // const { name, slug, price, image, description } = req.body;
+    console.log(req.file);
 });
 
 const getAllProducts = asyncHandler(async (req, res) => {

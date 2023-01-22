@@ -1,14 +1,20 @@
 const express = require("express");
 
-const router = express.Router();
-
+// controllers
 const {
     addProduct,
     getAllProducts,
 } = require("../controllers/productControllers");
-const { protect, isAdmin } = require("../middlewares/authMiddleware");
 
-router.post("/add-product", protect, isAdmin, addProduct);
+// middlewares
+const { protect, isAdmin } = require("../middlewares/authMiddleware");
+const {
+    imageUploadLocal,
+} = require("../middlewares/uploadImageToLocalMiddleware");
+
+const router = express.Router();
+
+router.post("/add-product", protect, isAdmin, imageUploadLocal, addProduct);
 router.get("/", getAllProducts);
 
 module.exports = router;
