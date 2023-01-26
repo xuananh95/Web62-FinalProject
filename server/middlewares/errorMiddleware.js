@@ -14,9 +14,12 @@ const errorHandle = (err, req, res, next) => {
         err.message
     } - Path: ${req.originalUrl} \n`;
     try {
+        if (!fs.existsSync(__dirname + "/../logs")){
+            fs.mkdirSync(__dirname + "/../logs")
+        }
         fs.appendFileSync(__dirname + "/../logs/errorLogs.txt", content);
     } catch (error) {
-        // console.log(error);
+        console.log(error);
     }
     res.json({
         statusCode: res.statusCode,
