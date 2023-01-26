@@ -4,6 +4,7 @@ const express = require("express");
 const {
     addProduct,
     getAllProducts,
+    updateProduct,
 } = require("../controllers/productControllers");
 
 // middlewares
@@ -16,5 +17,6 @@ const router = express.Router();
 
 router.post("/add-product", protect, isAdmin, imageUploadLocal, addProduct);
 router.get("/", getAllProducts);
+router.put("/:slug", protect, isAdmin, imageUploadLocal, updateProduct);
 
 module.exports = router;

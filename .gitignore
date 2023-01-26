@@ -1,3 +1,4 @@
 node_modules/
 .env
-errorLogs.txt
+logs/
+uploads/
