@@ -6,7 +6,7 @@ const { isValidObjectId } = require("../utils/checkValidObjectId");
 const FOLDER = "product";
 
 const addProduct = asyncHandler(async (req, res) => {
-    const { name, slug, price, description } = req.body;
+    const { name, slug, price, quantity, description } = req.body;
     const image = req.file;
     if (!name || !slug || !price || !image) {
         res.status(400);
@@ -30,6 +30,7 @@ const addProduct = asyncHandler(async (req, res) => {
                 name,
                 slug,
                 price,
+                quantity,
                 image: imageURL,
                 description,
             });
@@ -94,11 +95,12 @@ const updateProduct = asyncHandler(async (req, res) => {
         const product = await Product.findById(id);
         if (product) {
             try {
-                const { name, slug, price, description } = req.body;
+                const { name, slug, price, quantity, description } = req.body;
                 // update name, price, description
                 product.name = name || product.name;
                 product.price = price || product.price;
                 product.description = description || product.description;
+                product.quantity = quantity || product.quantity;
                 // check if slug exist in DB. If not, update the slug
                 if (slug) {
                     const isSlugExist = await Product.find({ slug });

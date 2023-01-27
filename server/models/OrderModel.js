@@ -27,6 +27,10 @@ const orderSchema = mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    shippingAddress: {
+        type: String,
+        required: true,
+    },
 });
 
 const Order = mongoose.model("Order", orderSchema);
