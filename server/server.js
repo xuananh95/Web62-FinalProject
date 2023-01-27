@@ -8,6 +8,7 @@ const connectToDB = require("./config/db");
 const userRouter = require("./routes/userRoute");
 const productRouter = require("./routes/productRoute");
 const foodRouter = require("./routes/foodRoute");
+const orderRouter = require("./routes/orderRoute");
 
 // import middlewares
 const { errorHandle } = require("./middlewares/errorMiddleware");
@@ -25,6 +26,7 @@ connectToDB();
 app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/foods", foodRouter);
+app.use("/orders", orderRouter);
 
 // handling errors
 app.use(errorHandle);

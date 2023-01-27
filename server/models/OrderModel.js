@@ -11,12 +11,19 @@ const itemSchema = mongoose.Schema({
     },
 });
 
+const Item = mongoose.model("Item", itemSchema);
+
 const orderSchema = mongoose.Schema({
     user: {
         type: mongoose.Types.ObjectId,
         ref: "User",
     },
-    items: [itemSchema],
+    items: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "Item",
+        },
+    ],
     totalPrice: {
         type: Number,
     },
@@ -29,12 +36,11 @@ const orderSchema = mongoose.Schema({
     },
     shippingAddress: {
         type: String,
-        required: true,
     },
 });
 
 const Order = mongoose.model("Order", orderSchema);
 module.exports = {
     Order,
-    orderSchema,
+    Item,
 };
