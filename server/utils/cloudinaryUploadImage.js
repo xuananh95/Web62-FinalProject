@@ -7,12 +7,12 @@ cloudinary.config({
     secure: true,
 });
 
-const cloudinaryUploadImage = (file) => {
+const cloudinaryUploadImage = (file, folder) => {
     return new Promise((resolve, reject) => {
         cloudinary.uploader.upload(
             file,
             {
-                folder: process.env.API_FOLDER_CLOUDINARY,
+                folder,
             },
             (err, result) => {
                 if (err) {

@@ -98,6 +98,14 @@ router.put("/:id", protect, isAdmin, imageUploadLocal, updateProduct);
     /products/:id: DEL 
 	+ desc: delete products based on id 
 	+ access: admin
+	+ req.body: (all fields optional)
+		{
+            name: ,
+            slug: ,
+            price: ,
+            description: ,
+            image: ,
+		}
 	+ return values: 
         {
             statusCode:

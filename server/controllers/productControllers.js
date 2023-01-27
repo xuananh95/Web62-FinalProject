@@ -3,6 +3,8 @@ const asyncHandler = require("express-async-handler");
 const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
+const FOLDER = "product";
+
 const addProduct = asyncHandler(async (req, res) => {
     const { name, slug, price, description } = req.body;
     const image = req.file;
@@ -19,7 +21,10 @@ const addProduct = asyncHandler(async (req, res) => {
     } else {
         try {
             // upload image to cloudinary
-            const imageUploaded = await cloudinaryUploadImage(image.path);
+            const imageUploaded = await cloudinaryUploadImage(
+                image.path,
+                FOLDER
+            );
             const imageURL = imageUploaded.secure_url;
             const newProduct = await Product.create({
                 name,
@@ -88,41 +93,49 @@ const updateProduct = asyncHandler(async (req, res) => {
     } else {
         const product = await Product.findById(id);
         if (product) {
-            const { name, slug, price, description } = req.body;
-            // update name, price, description
-            product.name = name || product.name;
-            product.price = price || product.price;
-            product.description = description || product.description;
-            // check if slug exist in DB. If not, update the slug
-            if (slug) {
-                const isSlugExist = await Product.find({ slug });
-                if (isSlugExist.length > 0) {
-                    res.status(400);
-                    throw new Error("Slug already existed");
-                } else {
-                    product.slug = slug;
+            try {
+                const { name, slug, price, description } = req.body;
+                // update name, price, description
+                product.name = name || product.name;
+                product.price = price || product.price;
+                product.description = description || product.description;
+                // check if slug exist in DB. If not, update the slug
+                if (slug) {
+                    const isSlugExist = await Product.find({ slug });
+                    if (isSlugExist.length > 0) {
+                        res.status(400);
+                        throw new Error("Slug already existed");
+                    } else {
+                        product.slug = slug;
+                    }
                 }
+                // Check if user send image
+                const image = req.file;
+                if (image) {
+                    const imageUploaded = await cloudinaryUploadImage(
+                        image.path,
+                        FOLDER
+                    );
+                    product.image = imageUploaded.secure_url;
+                }
+                const updatedProduct = await product.save();
+                res.status(200).json({
+                    statusCode: 200,
+                    message: "Success",
+                    data: {
+                        name: updatedProduct.name,
+                        slug: updatedProduct.slug,
+                        price: updatedProduct.price,
+                        description: updatedProduct.description,
+                        image: updatedProduct.image,
+                    },
+                });
+            } catch (error) {
+                res.status(400);
+                throw new Error("Invalid data");
             }
-            // Check if user send image
-            const image = req.file;
-            if (image) {
-                const imageUploaded = await cloudinaryUploadImage(image.path);
-                product.image = imageUploaded.secure_url;
-            }
-            const updatedProduct = await product.save();
-            res.status(200).json({
-                statusCode: 200,
-                message: "Success",
-                data: {
-                    name: updatedProduct.name,
-                    slug: updatedProduct.slug,
-                    price: updatedProduct.price,
-                    description: updatedProduct.description,
-                    image: updatedProduct.image,
-                },
-            });
         } else {
-            res.status(400);
+            res.status(404);
             throw new Error("Product not found");
         }
     }

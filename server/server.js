@@ -4,9 +4,12 @@ const cors = require("cors");
 
 const connectToDB = require("./config/db");
 
+// import routers
 const userRouter = require("./routes/userRoute");
 const productRouter = require("./routes/productRoute");
+const foodRouter = require("./routes/foodRoute");
 
+// import middlewares
 const { errorHandle } = require("./middlewares/errorMiddleware");
 
 // basic setup
@@ -21,6 +24,7 @@ connectToDB();
 // routes
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+app.use("/foods", foodRouter);
 
 // handling errors
 app.use(errorHandle);
