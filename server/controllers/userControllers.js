@@ -5,6 +5,8 @@ const RefreshTokenModel = require("../models/RefreshTokenModel");
 const { User } = require("../models/UserModel");
 const { signJWt, refreshToken } = require("../utils/jwt");
 
+const { isValidObjectId } = require("../utils/checkValidObjectId");
+
 const signUp = asyncHandler(async (req, res) => {
     const { username, email, password, phoneNumber, address } = req.body;
     if (!username || !email || !password || !phoneNumber || !address) {
@@ -144,7 +146,7 @@ const updateUser = asyncHandler(async (req, res) => {
             },
         });
     } else {
-        res.status(401);
+        res.status(400);
         throw new Error("User not found!");
     }
 });
@@ -152,18 +154,23 @@ const updateUser = asyncHandler(async (req, res) => {
 const changePassword = asyncHandler(async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const id = req.user._id;
-    const user = await User.findById(id);
-    if (user && (await bcryptjs.compare(oldPassword, user.password))) {
-        user.password = newPassword;
-        const updatedPwd = await user.save();
-        res.status(200).json({
-            statusCode: 200,
-            message: "Password changed Successfully",
-            data: null,
-        });
-    } else {
+    if (!isValidObjectId(id)) {
         res.status(400);
-        throw new Error("Invalid password");
+        throw new Error("Invalid ID");
+    } else {
+        const user = await User.findById(id);
+        if (user && (await bcryptjs.compare(oldPassword, user.password))) {
+            user.password = newPassword;
+            const updatedPwd = await user.save();
+            res.status(200).json({
+                statusCode: 200,
+                message: "Password changed Successfully",
+                data: null,
+            });
+        } else {
+            res.status(400);
+            throw new Error("Invalid password");
+        }
     }
 });
 
@@ -172,6 +179,10 @@ const changeRole = asyncHandler(async (req, res) => {
     if (!id || !newRole) {
         res.status(400);
         throw new Error("Missing required fields");
+    }
+    if (!isValidObjectId(id)) {
+        res.status(400);
+        throw new Error("Invalid ID");
     }
     try {
         const user = await User.findById(id);
@@ -213,6 +224,10 @@ const getAllUsers = asyncHandler(async (req, res) => {
 
 const deleteUserByID = asyncHandler(async (req, res) => {
     const id = req.params.id;
+    if (!isValidObjectId(id)) {
+        res.status(400);
+        throw new Error("Invalid ID");
+    }
     try {
         const user = await User.findById(id);
         if (!user) {
