@@ -2,22 +2,53 @@ import {
     AppstoreOutlined,
     HomeOutlined,
     ShoppingCartOutlined,
-    UserAddOutlined,
     UserOutlined,
 } from "@ant-design/icons";
-import { Menu } from "antd";
+import {
+    faCaretDown,
+    faCartShopping,
+    faRightFromBracket,
+    faUser,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Avatar, Badge, Button, Dropdown, Menu, Space, Tooltip } from "antd";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 
 import { useContext, useState } from "react";
 import { StateContext } from "../../contexts/GlobalState";
+import LocalStorage from "../../contexts/LocalStorage";
 import styles from "./Header.module.scss";
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
-    const { setIsModalOpen } = useContext(StateContext);
+    const { setIsModalSignUp, setIsModalSignIn, setIsLogined } =
+        useContext(StateContext);
     const [selectedKeys, setSelectedKeys] = useState(false);
+    const usersLocal = LocalStorage?.getItem("users")?.other;
+
+    const onLogout = () => {
+        LocalStorage.deleteItem("users");
+    };
+
+    const items = [
+        {
+            label:
+                usersLocal?.role === "ADMIN" ? (
+                    <Link to="/dasboard/kho-hang">Quản lí kho</Link>
+                ) : (
+                    <Link>Thông tin cá nhân</Link>
+                ),
+            icon: <FontAwesomeIcon icon={faUser} />,
+        },
+
+        {
+            label: <p onClick={onLogout}>Đăng xuất</p>,
+            icon: <FontAwesomeIcon icon={faRightFromBracket} />,
+        },
+    ];
+
     const url = window.location.href;
     const path = url.slice(21);
 
@@ -39,18 +70,6 @@ const Header = () => {
             path: "/product",
             icon: <ShoppingCartOutlined />,
             event: () => setSelectedKeys(!selectedKeys),
-        },
-        {
-            label: "Đăng nhập",
-            path: "/users/sign-in",
-            icon: <UserOutlined />,
-            event: () => setIsModalOpen(true),
-        },
-        {
-            label: "Đăng kí",
-            path: "/users/sign-up",
-            icon: <UserAddOutlined />,
-            event: () => setIsModalOpen(true),
         },
     ];
 
@@ -83,6 +102,54 @@ const Header = () => {
                     };
                 })}
             />
+            <div className={cx("account")}>
+                {usersLocal !== undefined ? (
+                    <>
+                        <Space size={20}>
+                            <Badge
+                                showZero
+                                count={2}
+                                size="default"
+                                offset={[1, 5]}
+                            >
+                                <Tooltip title="Giỏ hàng">
+                                    <Link to="/cart/:id">
+                                        <Avatar
+                                            icon={
+                                                <FontAwesomeIcon
+                                                    icon={faCartShopping}
+                                                />
+                                            }
+                                        />
+                                    </Link>
+                                </Tooltip>
+                            </Badge>
+                            <di>
+                                <Avatar
+                                    icon={<UserOutlined />}
+                                    style={{ backgroundColor: "#bfbfbf" }}
+                                />
+                                {usersLocal?.username}
+                            </di>
+                            <Dropdown menu={{ items }} arrow>
+                                <FontAwesomeIcon icon={faCaretDown} />
+                            </Dropdown>
+                        </Space>
+                    </>
+                ) : (
+                    <>
+                        <Button
+                            type="primary"
+                            onClick={() => setIsModalSignIn(true)}
+                        >
+                            Sign In
+                        </Button>
+                        <Button onClick={() => setIsModalSignUp(true)}>
+                            Sign Up
+                        </Button>
+                    </>
+                )}
+            </div>
         </div>
     );
 };

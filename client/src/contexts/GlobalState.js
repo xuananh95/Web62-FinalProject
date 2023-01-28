@@ -15,19 +15,41 @@ const GlobalState = ({ children }) => {
 
     const initalFormLogin = { email: "", password: "" };
 
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isModalSignIn, setIsModalSignIn] = useState(false);
+    const [isModalSignUp, setIsModalSignUp] = useState(false);
     const [inputValue, setInputValue] = useState(initalValue);
     const [formLogin, setFormLogin] = useState(initalFormLogin);
+    const [isLogined, setIsLogined] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [products, setProducts] = useState({
+        name: "",
+        slug: "",
+        price: "",
+        qty: "",
+        discription: "",
+        image: "",
+    });
+    const [uploadData, setUploadData] = useState({});
 
     const value = {
-        isModalOpen,
-        setIsModalOpen,
+        uploadData,
+        setUploadData,
+        products,
+        setProducts,
+        isModalSignIn,
+        setIsModalSignIn,
+        isModalSignUp,
+        setIsModalSignUp,
         inputValue,
         setInputValue,
         initalValue,
         formLogin,
         setFormLogin,
         initalFormLogin,
+        isLogined,
+        setIsLogined,
+        isLoading,
+        setIsLoading,
     };
 
     return (

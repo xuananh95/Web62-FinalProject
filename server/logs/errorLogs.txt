@@ -78,3 +78,7 @@
 2023-1-19 - 17:5:37 - Error: Cannot access 'refreshtoken' before initialization - Path: /users/sign-in 
 2023-1-19 - 17:6:38 - Error: Cannot access 'refreshtoken' before initialization - Path: /users/sign-in 
 2023-1-19 - 17:9:50 - Error: Cannot access 'refreshToken' before initialization - Path: /users/sign-in 
+2023-1-19 - 18:0:30 - Error: Missing required fields! - Path: /users/sign-up 
+2023-1-19 - 21:46:42 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-20 - 9:34:52 - Error: No token or token invalid - Path: /users/sign-in 
+2023-1-27 - 19:3:48 - Error: Incorrect username or password! - Path: /users/sign-in 

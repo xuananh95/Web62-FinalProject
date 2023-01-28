@@ -1,26 +1,17 @@
 const asyncHandler = require("express-async-handler");
 const bcryptjs = require("bcryptjs");
+const { serialize } = require("cookie");
 
 const RefreshTokenModel = require("../models/RefreshTokenModel");
 const { User } = require("../models/UserModel");
 const { signJWt, refreshToken } = require("../utils/jwt");
 
-<<<<<<< HEAD
-const register = asyncHandler(async (req, res) => {
-    const { username, email, password, phone: phoneNumber, address } = req.body;
-
-    // if (!username || !email || !password) {
-    //     res.status(400);
-    //     throw new Error("Missing required fields!");
-    // }
-=======
 const signUp = asyncHandler(async (req, res) => {
-    const { username, email, password, phoneNumber, address } = req.body;
+    const { username, email, password, phone: phoneNumber, address } = req.body;
     if (!username || !email || !password || !phoneNumber || !address) {
         res.status(400);
         throw new Error("Missing required fields!");
     }
->>>>>>> dd77e1bbba49fbf85d443dc215ded3217c84db4f
 
     // Count the number of documents in User collection. If 0 => create ADMIN user
     const documentsCount = await User.estimatedDocumentCount();
@@ -93,17 +84,52 @@ const signIn = asyncHandler(async (req, res) => {
                 role: user.role,
             };
 
+            //create refresh token
+
             const refreshtoken = await refreshToken(payload);
 
-            await RefreshTokenModel.create({
-                refreshtoken,
+            const existedRefreshToken = await RefreshTokenModel.findOne({
+                userId: user._id,
             });
 
+            if (existedRefreshToken) {
+                await RefreshTokenModel.findOneAndUpdate(
+                    existedRefreshToken._id,
+                    {
+                        refreshtoken,
+                    }
+                );
+            }
+
+            if (!existedRefreshToken) {
+                await RefreshTokenModel.create({
+                    userId: user._id,
+                    refreshtoken,
+                });
+            }
+
+            res.setHeader(
+                "Set-Cookie",
+                serialize(
+                    "refreshToken",
+                    existedRefreshToken?.refreshtoken || refreshtoken,
+                    {
+                        httpOnly: true,
+                        sameSite: "Strict",
+                        path: "/",
+                        secure: false,
+                        maxAge: 365 * 24 * 60 * 60,
+                    }
+                )
+            );
+
+            const { password, ...other } = user._doc;
             res.status(200).json({
                 statusCode: 200,
                 message: "Login success!",
                 data: {
-                    token: signJWt(payload),
+                    accessToken: signJWt(payload),
+                    other,
                 },
             });
         } else {
