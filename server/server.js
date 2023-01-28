@@ -4,26 +4,31 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 
 const connectToDB = require("./config/db");
+
+// import routers
 const userRouter = require("./routes/userRoute");
 const productRouter = require("./routes/productRoute");
+const foodRouter = require("./routes/foodRoute");
+const orderRouter = require("./routes/orderRoute");
 
+// import middlewares
 const { errorHandle } = require("./middlewares/errorMiddleware");
 
 // basic setup
-
 const PORT = 5000;
-
 const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(cors());
 
-//connect db
+// connect db
 connectToDB();
 
 // routes
 app.use("/users", userRouter);
 app.use("/products", productRouter);
+app.use("/foods", foodRouter);
+app.use("/orders", orderRouter);
 
 // handling errors
 app.use(errorHandle);

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const foodIngredientSchema = mongoose.Schema({
+const foodDataSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -24,10 +24,16 @@ const foodIngredientSchema = mongoose.Schema({
         max: 100,
         min: 0,
     },
+    // auto calculated
     calories: {
         type: Number,
     },
 });
 
-const FoodIngredient = mongoose.model("FoodIngredient", foodIngredientSchema);
-module.exports = { FoodIngredient };
+foodDataSchema.pre("save", function (next) {
+    this.calories = 4 * this.carb + 4 * this.protein + 9 * this.fat;
+    return next();
+});
+
+const FoodData = mongoose.model("FoodData", foodDataSchema);
+module.exports = { FoodData };
