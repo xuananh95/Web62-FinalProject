@@ -44,7 +44,10 @@ app.post(
     imageUploadLocal,
     async (req, res) => {
         let image = req.file;
-        const imageUploaded = await cloudinaryUploadImage(image.path, FOLDER);
+        const imageUploaded = await cloudinaryUploadImage(
+            image.path,
+            "product"
+        );
         const imageURL = imageUploaded.secure_url;
         res.json(imageURL);
     }
