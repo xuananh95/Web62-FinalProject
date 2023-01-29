@@ -134,12 +134,49 @@ const getOrderById = asyncHandler(async (req, res) => {
 });
 
 const updateOrder = asyncHandler(async (req, res) => {
-    // const userId = req.user._id;
-    // const orderId = req.params.id;
-    // const order = await Order.find({ _id: orderId, user: userId });
+    const userId = req.user._id;
+    const orderId = req.params.id;
+    if (!isValidObjectId(orderId)) {
+        res.status(400);
+        throw new Error("Invalid order ID!");
+    }
+    const order = await Order.findOne({ _id: orderId, user: userId });
+    if (order) {
+        const { isPaid, shippingAddress } = req.body;
+        order.isPaid = isPaid || order.isPaid;
+        order.shippingAddress = shippingAddress || order.shippingAddress;
+        const updatedOrder = await order.save();
+        res.status(200).json({
+            statusCode: 200,
+            message: "Order updated successfully!",
+            data: updatedOrder,
+        });
+    } else {
+        res.status(404);
+        throw new Error("Order not found!");
+    }
 });
 
-const deleteOrderById = asyncHandler(async (req, res) => {});
+const deleteOrderById = asyncHandler(async (req, res) => {
+    const orderId = req.params.id;
+    if (!isValidObjectId(orderId)) {
+        res.status(400);
+        throw new Error("Invalid order ID!");
+    }
+    const userId = req.user._id;
+    const order = await Order.findOne({ _id: orderId, user: userId });
+    if (order) {
+        await order.remove();
+        res.json({
+            statusCode: 200,
+            message: `Deleted order with id ${order._id}`,
+            data: null,
+        });
+    } else {
+        res.status(404);
+        throw new Error("Order not found!");
+    }
+});
 
 module.exports = {
     addOrder,
