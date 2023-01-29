@@ -4,6 +4,7 @@
 const fs = require("fs");
 
 const errorHandle = (err, req, res, next) => {
+    console.log(err);
     res.status(res.statusCode);
     const date = new Date();
 
@@ -14,8 +15,8 @@ const errorHandle = (err, req, res, next) => {
         err.message
     } - Path: ${req.originalUrl} \n`;
     try {
-        if (!fs.existsSync(__dirname + "/../logs")){
-            fs.mkdirSync(__dirname + "/../logs")
+        if (!fs.existsSync(__dirname + "/../logs")) {
+            fs.mkdirSync(__dirname + "/../logs");
         }
         fs.appendFileSync(__dirname + "/../logs/errorLogs.txt", content);
     } catch (error) {

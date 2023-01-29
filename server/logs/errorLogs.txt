@@ -82,6 +82,7 @@
 2023-1-19 - 21:46:42 - Error: Incorrect username or password! - Path: /users/sign-in 
 2023-1-20 - 9:34:52 - Error: No token or token invalid - Path: /users/sign-in 
 2023-1-27 - 19:3:48 - Error: Incorrect username or password! - Path: /users/sign-in 
+<<<<<<< HEAD
 2023-1-28 - 15:6:1 - Error: No token or token invalid - Path: /products/add-product 
 2023-1-28 - 15:7:48 - Error: No token or token invalid - Path: /products/add-product 
 2023-1-28 - 15:7:49 - Error: No token or token invalid - Path: /products/add-product 
@@ -209,3 +210,29 @@
 2023-1-29 - 21:13:1 - Error: Missing required fields! - Path: /products/add-product 
 2023-1-29 - 21:15:53 - Error: Unexpected field - Path: /products/add-product 
 2023-1-29 - 21:17:6 - Error: Unexpected field - Path: /products/add-product 
+=======
+2023-1-29 - 10:23:28 - Error: userid is not defined - Path: /orders/63d396833c3b1d1ef4679667 
+2023-1-29 - 10:23:47 - Error: Cast to ObjectId failed for value "{ userID: undefined }" (type Object) at path "_id" for model "User" - Path: /orders/63d396833c3b1d1ef4679667 
+2023-1-29 - 10:24:3 - Error: Cast to ObjectId failed for value "{ userID: undefined }" (type Object) at path "_id" for model "User" - Path: /orders/63d396833c3b1d1ef4679667 
+2023-1-29 - 10:24:31 - Error: Cast to ObjectId failed for value "{ userID: new ObjectId("63d5e6efa025b10bae66ff4f") }" (type Object) at path "_id" for model "User" - Path: /orders/63d396833c3b1d1ef4679667 
+2023-1-29 - 10:28:16 - Error: Cannot populate path `User` because it is not in your schema. Set the `strictPopulate` option to false to override. - Path: /orders/all 
+2023-1-29 - 10:30:47 - Error: Cannot populate path `product` because it is not in your schema. Set the `strictPopulate` option to false to override. - Path: /orders/all 
+2023-1-29 - 10:35:37 - Error: utils.populate: invalid path. Expected string. Got typeof `object` - Path: /orders/all 
+2023-1-29 - 10:40:36 - Error: Unexpected token } in JSON at position 208 - Path: /orders/add-order 
+2023-1-29 - 10:40:44 - Error: Argument passed in must be a string of 12 bytes or a string of 24 hex characters or an integer - Path: /orders/add-order 
+2023-1-29 - 10:41:20 - Error: Invalid user ID - Path: /orders/add-order 
+2023-1-29 - 10:41:48 - Error: Invalid user ID - Path: /orders/add-order 
+2023-1-29 - 10:41:49 - Error: Invalid user ID - Path: /orders/add-order 
+2023-1-29 - 10:42:11 - Error: Invalid user ID - Path: /orders/add-order 
+2023-1-29 - 10:43:15 - Error: Invalid user ID - Path: /orders/add-order 
+2023-1-29 - 10:43:52 - Error: Invalid product ID - Path: /orders/add-order 
+2023-1-29 - 10:44:15 - Error: Invalid product ID - Path: /orders/add-order 
+2023-1-29 - 10:44:39 - Error: Invalid product ID - Path: /orders/add-order 
+2023-1-29 - 10:44:40 - Error: Invalid product ID - Path: /orders/add-order 
+2023-1-29 - 10:45:18 - Error: Invalid product ID - Path: /orders/add-order 
+2023-1-29 - 10:47:57 - Error: clg is not defined - Path: /orders/add-order 
+2023-1-29 - 10:48:8 - Error: Cannot access 'product' before initialization - Path: /orders/add-order 
+2023-1-29 - 10:48:35 - Error: Cannot access 'product' before initialization - Path: /orders/add-order 
+2023-1-29 - 10:49:28 - Error: Cannot access 'product' before initialization - Path: /orders/add-order 
+2023-1-29 - 10:50:40 - Error: utils.populate: invalid path. Expected string. Got typeof `object` - Path: /orders/all 
+>>>>>>> dae9f613f2f65e64febbe6cd153a33f77bd1e717

@@ -3,10 +3,11 @@ const { User } = require("../models/UserModel");
 const { Product } = require("../models/ProductModel");
 const asyncHandler = require("express-async-handler");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
+const ToObjectId = require("mongoose").Types.ObjectId;
 
 const addOrder = asyncHandler(async (req, res) => {
-    // items = array of product ID with its quantity
-    const { userID, items, totalPrice, dateCreated, isPaid, shippingAddress } =
+    const userID = String(req.user._id);
+    const { items, totalPrice, dateCreated, isPaid, shippingAddress } =
         req.body;
     const newOrder = await Order.create({
         totalPrice,
@@ -22,15 +23,15 @@ const addOrder = asyncHandler(async (req, res) => {
         newOrder.user = user;
     }
     for (let i = 0; i < items.length; i++) {
-        const { productID, qty } = items[i];
-        if (!isValidObjectId(productID)) {
+        const { product, qty } = items[i];
+        if (!isValidObjectId(product)) {
             res.status(400);
             throw new Error("Invalid product ID");
         } else {
-            const product = await Product.findById(productID);
+            const foundProduct = await Product.findById(product);
             try {
                 const newItem = await Item.create({
-                    product: product,
+                    product: foundProduct,
                     quantity: qty,
                 });
                 newOrder.items.push(newItem);
@@ -47,4 +48,104 @@ const addOrder = asyncHandler(async (req, res) => {
     });
 });
 
-module.exports = { addOrder };
+const getAllOrders = asyncHandler(async (req, res) => {
+    const orders = await Order.find({})
+        .populate("user", "-password")
+        .populate({
+            path: "items",
+            populate: { path: "product" },
+        });
+    if (orders.length > 0) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success",
+            data: orders,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Orders list empty",
+            data: null,
+        });
+    }
+});
+
+const getOrdersByUser = asyncHandler(async (req, res) => {
+    const userID = req.user._id;
+    const orders = await Order.find({ user: userID })
+        .populate("user", "-password")
+        .populate({
+            path: "items",
+            populate: { path: "product" },
+        });
+    if (orders.length > 0) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success",
+            data: orders,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Orders list empty",
+            data: null,
+        });
+    }
+});
+
+const getOrderById = asyncHandler(async (req, res) => {
+    let orderId;
+    if (!isValidObjectId(req.params.id)) {
+        res.status(400);
+        throw new Error("Invalid order id");
+    } else {
+        orderId = ToObjectId(req.params.id);
+    }
+    let orders;
+    if (req.user.isAdmin) {
+        orders = await Order.findById(orderId)
+            .populate("user", "-password")
+            .populate({
+                path: "items",
+                populate: { path: "product" },
+            });
+    } else {
+        const userID = req.user._id;
+        orders = await Order.find({ _id: orderId, user: userID })
+            .populate("user", "-password")
+            .populate({
+                path: "items",
+                populate: { path: "product" },
+            });
+    }
+    if (orders.length > 0) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success",
+            data: orders,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Orders list empty",
+            data: null,
+        });
+    }
+});
+
+const updateOrder = asyncHandler(async (req, res) => {
+    // const userId = req.user._id;
+    // const orderId = req.params.id;
+    // const order = await Order.find({ _id: orderId, user: userId });
+});
+
+const deleteOrderById = asyncHandler(async (req, res) => {});
+
+module.exports = {
+    addOrder,
+    getAllOrders,
+    getOrdersByUser,
+    getOrderById,
+    updateOrder,
+    deleteOrderById,
+};
