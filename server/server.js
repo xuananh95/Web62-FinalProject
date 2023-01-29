@@ -4,6 +4,11 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 
+const { protect, isAdmin } = require("./middlewares/authMiddleware");
+const {
+    imageUploadLocal,
+} = require("./middlewares/uploadImageToLocalMiddleware");
+
 const connectToDB = require("./config/db");
 
 // import routers
@@ -31,6 +36,19 @@ app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/foods", foodRouter);
 app.use("/orders", orderRouter);
+
+app.post(
+    "/tools/uploadImage",
+    protect,
+    isAdmin,
+    imageUploadLocal,
+    async (req, res) => {
+        let image = req.file;
+        const imageUploaded = await cloudinaryUploadImage(image.path, FOLDER);
+        const imageURL = imageUploaded.secure_url;
+        res.json(imageURL);
+    }
+);
 
 // handling errors
 app.use(errorHandle);
