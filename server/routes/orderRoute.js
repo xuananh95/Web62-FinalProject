@@ -82,6 +82,24 @@ router.get("/", protect, getOrdersByUser);
         }
  */
 router.get("/:id", protect, getOrderById);
+
+/**
+ * 4. update order (isPaid, shippingAddress) by ID
+    /orders/: GET 
+	+ desc: update order (isPaid, shippingAddress) by ID
+	+ access: user
+    + req.body:
+        {
+            "isPaid": ,
+            "shippingAddress": "new addresS"
+        }
+    + return values: 
+        {
+            statusCode:
+            message:
+            data: 
+        }
+ */
 router.put("/:id", protect, updateOrder);
 router.delete("/:id", protect, deleteOrderById);
 
