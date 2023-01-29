@@ -26,6 +26,7 @@ const router = express.Router();
             name: ,
             slug: ,
             price: ,
+            qt: ,
             description: ,
             image: ,
 		}
@@ -37,6 +38,7 @@ const router = express.Router();
                         name,
                         slug,
                         price,
+                        qty,
                         imageURL,
                         description,
                     },

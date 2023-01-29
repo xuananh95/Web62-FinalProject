@@ -6,7 +6,8 @@ const { isValidObjectId } = require("../utils/checkValidObjectId");
 const FOLDER = "product";
 
 const addProduct = asyncHandler(async (req, res) => {
-    const { name, slug, price, quantity, description } = req.body;
+    const { name, slug, price, qty: quantity, description } = req.body;
+    console.log(req.body);
     const image = req.file;
     if (!name || !slug || !price || !image) {
         res.status(400);

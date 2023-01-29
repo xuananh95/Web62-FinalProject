@@ -26,8 +26,7 @@ const GlobalState = ({ children }) => {
         slug: "",
         price: "",
         qty: "",
-        discription: "",
-        image: "",
+        description: "",
     });
     const [uploadData, setUploadData] = useState({});
 

@@ -3,6 +3,8 @@ import { Button, Form, Input, InputNumber, Select, Upload } from "antd";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import { StateContext } from "../../contexts/GlobalState";
+import productsService from "../../services/productsService";
+import LocalStorage from "../../contexts/LocalStorage";
 
 import styles from "./CreateProduct.module.scss";
 
@@ -13,13 +15,12 @@ const CreateProduct = () => {
 
     const { products, setProducts, uploadData, setUploadData } =
         useContext(StateContext);
-    const onChangeValue = (e) => {
-        const label = e?.target?.name;
-        const value = e?.target?.value;
-        setProducts({
-            ...products,
-            [label]: value,
-        });
+
+    const normFile = (e) => {
+        // const formData = new FormData();
+        // formData.append("data", values);
+
+        return e?.fileList;
     };
     const options = [
         {
@@ -40,10 +41,11 @@ const CreateProduct = () => {
         },
     ];
 
-    const onCreateProduct = () => {
-        const formData = new FormData();
-        formData.append("file", uploadData);
-        console.log(uploadData);
+    const onCreateProduct = async (values) => {
+        const token = await LocalStorage.getItem("users")?.accessToken;
+        const res = await productsService.create(values, token);
+        console.log(res);
+        console.log(values);
     };
 
     return (
@@ -53,7 +55,7 @@ const CreateProduct = () => {
                 labelCol={{ span: 4 }}
                 form={form}
                 size="large"
-                onClick={onCreateProduct}
+                onFinish={onCreateProduct}
             >
                 <Form.Item
                     label="Name"
@@ -65,59 +67,31 @@ const CreateProduct = () => {
                         },
                     ]}
                 >
-                    <Input
-                        style={{ width: "100%" }}
-                        name="name"
-                        onChange={(e) => onChangeValue(e)}
-                    />
+                    <Input style={{ width: "100%" }} name="name" />
                 </Form.Item>
                 <Form.Item label="Slug" name="slug">
                     <Select
                         options={options}
                         defaultValue="Chọn danh mục"
                         style={{ width: "100%" }}
-                        onChange={(e) =>
-                            setProducts({
-                                ...products,
-                                slug: e,
-                            })
-                        }
                     />
                 </Form.Item>
                 <Form.Item label="Price" name="price">
-                    <InputNumber
-                        style={{ width: "100%" }}
-                        onChange={(e) =>
-                            setProducts({
-                                ...products,
-                                price: e,
-                            })
-                        }
-                    />
+                    <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
                 <Form.Item label="Qty" name="qty">
-                    <InputNumber
-                        style={{ width: "100%" }}
-                        onChange={(e) =>
-                            setProducts({
-                                ...products,
-                                qty: e,
-                            })
-                        }
-                    />
+                    <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
                 <Form.Item label="Description" name="description">
-                    <Input
-                        style={{ width: "100%" }}
-                        name="description"
-                        onChange={(e) => onChangeValue(e)}
-                    />
+                    <Input style={{ width: "100%" }} name="description" />
                 </Form.Item>
-                <Form.Item label="Image " name="image">
-                    <Upload
-                        listType="picture"
-                        onChange={(e) => setUploadData(e.fileList[0])}
-                    >
+                <Form.Item
+                    label="Image "
+                    name="image"
+                    valuePropName="fileList"
+                    getValueFromEvent={normFile}
+                >
+                    <Upload listType="picture" action="/products/add-product">
                         <Button icon={<UploadOutlined />}>Upload File</Button>
                     </Upload>
                 </Form.Item>

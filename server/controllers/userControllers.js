@@ -6,11 +6,8 @@ const RefreshTokenModel = require("../models/RefreshTokenModel");
 const { User } = require("../models/UserModel");
 const { signJWt, refreshToken } = require("../utils/jwt");
 
-<<<<<<< HEAD
-=======
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
->>>>>>> b1341c7c380e7bd055a75ede45b06ae909c7a5d9
 const signUp = asyncHandler(async (req, res) => {
     const { username, email, password, phone: phoneNumber, address } = req.body;
     if (!username || !email || !password || !phoneNumber || !address) {
