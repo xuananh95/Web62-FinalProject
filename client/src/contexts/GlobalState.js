@@ -25,10 +25,10 @@ const GlobalState = ({ children }) => {
         name: "",
         slug: "",
         price: "",
-        qty: "",
+        quantity: "",
         description: "",
     });
-    const [uploadData, setUploadData] = useState({});
+    const [uploadData, setUploadData] = useState();
 
     const value = {
         uploadData,

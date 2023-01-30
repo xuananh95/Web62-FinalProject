@@ -16,12 +16,6 @@ const CreateProduct = () => {
     const { products, setProducts, uploadData, setUploadData } =
         useContext(StateContext);
 
-    const normFile = (e) => {
-        // const formData = new FormData();
-        // formData.append("data", values);
-
-        return e?.fileList;
-    };
     const options = [
         {
             value: "sua-tang-can",
@@ -43,9 +37,12 @@ const CreateProduct = () => {
 
     const onCreateProduct = async (values) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
-        const res = await productsService.create(values, token);
-        console.log(res);
-        console.log(values);
+        const formData = new FormData();
+        formData.append("file", uploadData);
+        const uploadImage = await productsService.uploadImage(formData, token);
+        values.image = uploadImage?.data?.data?.url;
+        values.slug += `-${Math.floor(Math.random() * 1000)}`;
+        await productsService.create(values, token);
     };
 
     return (
@@ -79,21 +76,17 @@ const CreateProduct = () => {
                 <Form.Item label="Price" name="price">
                     <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
-                <Form.Item label="Qty" name="qty">
+                <Form.Item label="Quantity" name="quantity">
                     <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
                 <Form.Item label="Description" name="description">
                     <Input style={{ width: "100%" }} name="description" />
                 </Form.Item>
-                <Form.Item
-                    label="Image "
-                    name="image"
-                    valuePropName="fileList"
-                    getValueFromEvent={normFile}
-                >
-                    <Upload listType="picture" action="/products/add-product">
-                        <Button icon={<UploadOutlined />}>Upload File</Button>
-                    </Upload>
+                <Form.Item label="Image " name="image" before>
+                    <Input
+                        type="file"
+                        onChange={(e) => setUploadData(e.target.files[0])}
+                    />
                 </Form.Item>
                 <Form.Item label=" ">
                     <Button type="primary" htmlType="submit" block>

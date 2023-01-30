@@ -14,6 +14,8 @@ const { protect, isAdmin } = require("../middlewares/authMiddleware");
 const {
     imageUploadLocal,
 } = require("../middlewares/uploadImageToLocalMiddleware");
+const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
+const image = require("../controllers/upload");
 
 const router = express.Router();
 /**
@@ -44,7 +46,9 @@ const router = express.Router();
                     },
         }
  */
-router.post("/add-product", protect, isAdmin, imageUploadLocal, addProduct);
+router.post("/add-product", protect, isAdmin, addProduct);
+
+router.post("/upload", protect, isAdmin, image.upload);
 
 /**
  *  2. Get all products

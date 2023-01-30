@@ -4,6 +4,17 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 
+const multer = require("multer");
+const { unlink } = require("fs");
+const { v2: cloudinary } = require("cloudinary");
+
+cloudinary.config({
+    api_key: process.env.API_KEY_CLOUDINARY,
+    api_secret: process.env.API_SECRET_CLOUDINARY,
+    cloud_name: process.env.API_CLOUD_NAME_CLOUDINARY,
+    secure: true,
+});
+
 const { protect, isAdmin } = require("./middlewares/authMiddleware");
 const {
     imageUploadLocal,

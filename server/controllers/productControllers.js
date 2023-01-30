@@ -5,55 +5,31 @@ const { isValidObjectId } = require("../utils/checkValidObjectId");
 
 const FOLDER = "product";
 
-const addProduct = asyncHandler(async (req, res) => {
-    const { name, slug, price, qty: quantity, description } = req.body;
-    console.log(req.body);
-    const image = req.file;
-    if (!name || !slug || !price || !image) {
-        res.status(400);
-        throw new Error("Missing required fields!");
-    }
-
-    // check if slug exists
-    const isSlugExist = await Product.find({ slug });
-    if (isSlugExist === []) {
-        res.status(400);
-        throw new Error("Slug already existed");
-    } else {
-        try {
-            // upload image to cloudinary
-            const imageUploaded = await cloudinaryUploadImage(
-                image.path,
-                FOLDER
-            );
-            const imageURL = imageUploaded.secure_url;
-            const newProduct = await Product.create({
-                name,
-                slug,
-                price,
-                quantity,
-                image: imageURL,
-                description,
+const addProduct = async (req, res) => {
+    console.log("req", req.body);
+    try {
+        // check if slug exists
+        const isSlugExist = await Product.find({ slug: req.body.slug });
+        if (isSlugExist) {
+            return res.status(400).json({
+                code: 400,
+                message: "Slug already existed",
             });
-            if (newProduct) {
-                res.status(200).json({
-                    statusCode: 200,
-                    message: "New product added!",
-                    data: {
-                        name,
-                        slug,
-                        price,
-                        imageURL,
-                        description,
-                    },
-                });
-            }
-        } catch (error) {
-            res.status(400);
-            throw new Error("Invalid data!");
         }
+
+        const newProduct = await Product.create(req.body);
+        return res.status(201).json({
+            code: 201,
+            message: "Created product success!",
+            data: newProduct,
+        });
+    } catch (error) {
+        return res.status(500).json({
+            message: error.message,
+            code: 500,
+        });
     }
-});
+};
 
 const getAllProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({});

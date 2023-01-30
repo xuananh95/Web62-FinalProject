@@ -243,3 +243,26 @@
 2023-1-29 - 18:8:42 - Error: Order not found! - Path: /orders/63d5ece9f6b58ab1de1271bb 
 2023-1-29 - 18:8:49 - Error: Order not found! - Path: /orders/63d5ecc89e81cb73593fe506 
 >>>>>>> b7a25b89e8842741693f7a870b0dda2eb6f2866c
+2023-1-29 - 21:46:33 - Error: Unexpected field - Path: /products/add-product 
+2023-1-29 - 21:56:17 - Error: Unexpected field - Path: /products/add-product 
+2023-1-29 - 22:6:17 - Error: No token or token invalid - Path: /products/add-product 
+2023-1-29 - 22:23:3 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:23:36 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:23:54 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:26:36 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:42:35 - Error: Invalid token - Path: /products/add-product 
+2023-1-29 - 22:44:6 - Error: Invalid token - Path: /products/add-product 
+2023-1-29 - 22:44:42 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:46:40 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:47:20 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:48:1 - Error: Missing required fields! - Path: /products/add-product 
+2023-1-29 - 22:48:46 - Error: Unexpected field - Path: /products/add-product 
+2023-1-30 - 9:13:29 - Error: No token or token invalid - Path: /products/upload 
+2023-1-30 - 9:14:34 - Error: Invalid token - Path: /products/upload 
+2023-1-30 - 9:15:45 - Error: Unexpected field - Path: /products/upload 
+2023-1-30 - 9:18:35 - Error: Unexpected field - Path: /products/upload 
+2023-1-30 - 9:53:47 - Error: No token or token invalid - Path: /products/upload 
+2023-1-30 - 9:58:21 - Error: Invalid token - Path: /products/upload 
+2023-1-30 - 10:8:51 - Error: Invalid data! - Path: /products/add-product 
+2023-1-30 - 10:9:29 - Error: Invalid data! - Path: /products/add-product 
+2023-1-30 - 10:10:13 - Error: Invalid data! - Path: /products/add-product 
