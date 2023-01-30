@@ -17,7 +17,7 @@ const DasboardPage = () => {
             icon: <FontAwesomeIcon icon={faWarehouse} />,
         },
         {
-            label: "Thêm sản phẩm",
+            label: "Thêm / sửa sản phẩm",
             path: "them-san-pham",
             icon: <FontAwesomeIcon icon={faPlus} />,
         },

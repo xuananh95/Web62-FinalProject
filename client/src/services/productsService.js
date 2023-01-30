@@ -22,6 +22,33 @@ const productsService = {
             data,
         });
     },
+
+    getAllProducts: () => {
+        return axiosInstant({
+            method: "GET",
+            url: "/products",
+        });
+    },
+
+    updateProduct: (id, token) => {
+        return axiosInstant({
+            method: "PUT",
+            url: `/products/${id}`,
+            headers: {
+                Authorization: ` Bearer ${token}`,
+            },
+        });
+    },
+
+    deleteProduct: (id, token) => {
+        return axiosInstant({
+            method: "DELETE",
+            url: `/products/${id}`,
+            headers: {
+                Authorization: ` Bearer ${token}`,
+            },
+        });
+    },
 };
 
 export default productsService;

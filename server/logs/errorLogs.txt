@@ -276,3 +276,20 @@
 2023-1-30 - 9:52:17 - Error: Measure record not found - Path: /fitness-profile/63d727571e0c13a94e56a537 
 2023-1-30 - 9:57:13 - Error: Measure record not found - Path: /fitness-profile/63d726e009336684d2b18263 
 >>>>>>> 16a0abaef4fddd095ce04d6e2cb315d0f4d3c375
+2023-1-30 - 13:26:47 - Error: Invalid token - Path: /products/upload 
+2023-1-30 - 14:34:24 - Error: Invalid token - Path: /products/upload 
+2023-1-30 - 14:34:40 - Error: Invalid token - Path: /products/upload 
+2023-1-30 - 14:35:22 - Error: Invalid token - Path: /products/upload 
+2023-1-30 - 15:54:17 - Error: No token or token invalid - Path: /products/63d77344744d4d15b4e3610b 
+2023-1-30 - 15:55:15 - Error: No token or token invalid - Path: /products/63d77344744d4d15b4e3610b 
+2023-1-30 - 15:55:36 - Error: No token or token invalid - Path: /products/63d77344744d4d15b4e3610b 
+2023-1-30 - 15:55:41 - Error: No token or token invalid - Path: /products/63d77344744d4d15b4e3610b 
+2023-1-30 - 15:56:10 - Error: No token or token invalid - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 16:59:51 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 16:59:57 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 17:21:53 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 17:21:59 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 17:22:8 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 20:22:3 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 20:22:7 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-30 - 20:23:50 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 

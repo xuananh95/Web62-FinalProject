@@ -21,16 +21,20 @@ const GlobalState = ({ children }) => {
     const [formLogin, setFormLogin] = useState(initalFormLogin);
     const [isLogined, setIsLogined] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [listsProduct, setListsProduct] = useState([]);
     const [products, setProducts] = useState({
         name: "",
         slug: "",
         price: "",
         quantity: "",
         description: "",
+        image: "",
     });
     const [uploadData, setUploadData] = useState();
 
     const value = {
+        listsProduct,
+        setListsProduct,
         uploadData,
         setUploadData,
         products,

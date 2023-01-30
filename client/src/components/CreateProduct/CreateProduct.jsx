@@ -1,20 +1,41 @@
-import { UploadOutlined } from "@ant-design/icons";
-import { Button, Form, Input, InputNumber, Select, Upload } from "antd";
+import {
+    Button,
+    Form,
+    Image,
+    Input,
+    InputNumber,
+    notification,
+    Select,
+    Upload,
+} from "antd";
 import classNames from "classnames/bind";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { StateContext } from "../../contexts/GlobalState";
-import productsService from "../../services/productsService";
 import LocalStorage from "../../contexts/LocalStorage";
+import productsService from "../../services/productsService";
 
 import styles from "./CreateProduct.module.scss";
 
 const cx = classNames.bind(styles);
 
 const CreateProduct = () => {
-    const { form } = Form.useForm();
+    const [form] = Form.useForm();
 
-    const { products, setProducts, uploadData, setUploadData } =
-        useContext(StateContext);
+    const { uploadData, setUploadData, products } = useContext(StateContext);
+    const [api, contextHolder] = notification.useNotification();
+    console.log("products", products);
+
+    useEffect(() => {
+        form.setFieldsValue({
+            name: products.name,
+            description: products.description,
+            slug: products.slug,
+            price: products.price,
+            quantity: products.quantity,
+        });
+    }, [products]);
+    console.log(uploadData.name);
 
     const options = [
         {
@@ -42,11 +63,18 @@ const CreateProduct = () => {
         const uploadImage = await productsService.uploadImage(formData, token);
         values.image = uploadImage?.data?.data?.url;
         values.slug += `-${Math.floor(Math.random() * 1000)}`;
-        await productsService.create(values, token);
+        const result = await productsService.create(values, token);
+        api.success({
+            duration: 1.5,
+            message: `${result?.data?.message}`,
+        });
+
+        form.resetFields();
     };
 
     return (
         <div className={cx("wrapper")}>
+            {contextHolder}
             <Form
                 className={cx("form")}
                 labelCol={{ span: 4 }}
@@ -66,32 +94,99 @@ const CreateProduct = () => {
                 >
                     <Input style={{ width: "100%" }} name="name" />
                 </Form.Item>
-                <Form.Item label="Slug" name="slug">
+                <Form.Item
+                    label="Slug"
+                    name="slug"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Vui lòng chọn trường này!",
+                        },
+                    ]}
+                >
                     <Select
                         options={options}
                         defaultValue="Chọn danh mục"
                         style={{ width: "100%" }}
                     />
                 </Form.Item>
-                <Form.Item label="Price" name="price">
+                <Form.Item
+                    label="Price"
+                    name="price"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Vui lòng nhập giá sản phẩm!",
+                        },
+                        {
+                            type: Number,
+                            message: "Vui lòng nhập số!",
+                        },
+                    ]}
+                >
                     <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
-                <Form.Item label="Quantity" name="quantity">
+                <Form.Item
+                    label="Quantity"
+                    name="quantity"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Vui lòng nhập số lượng sản phẩm!",
+                        },
+                        {
+                            type: Number,
+                            message: "Vui lòng nhập số!",
+                        },
+                    ]}
+                >
                     <InputNumber style={{ width: "100%" }} />
                 </Form.Item>
-                <Form.Item label="Description" name="description">
+                <Form.Item
+                    label="Description"
+                    name="description"
+                    rules={[
+                        {
+                            required: true,
+                            message: "Vui lòng nhập mô tả sản phẩm!",
+                        },
+                    ]}
+                >
                     <Input style={{ width: "100%" }} name="description" />
                 </Form.Item>
-                <Form.Item label="Image " name="image" before>
+                <Form.Item
+                    label="Image "
+                    name="image"
+                    before
+                    rules={[
+                        {
+                            required: true,
+                            message: "Vui lòng nhập hình ảnh sản phẩm!",
+                        },
+                        {
+                            type: File,
+                            message: "Vui lòng đúng file!",
+                        },
+                    ]}
+                >
                     <Input
                         type="file"
                         onChange={(e) => setUploadData(e.target.files[0])}
                     />
                 </Form.Item>
+
                 <Form.Item label=" ">
-                    <Button type="primary" htmlType="submit" block>
-                        Thêm sản phẩm
-                    </Button>
+                    {products === {} ? (
+                        <Button type="primary" htmlType="submit" block>
+                            Thêm sản phẩm
+                        </Button>
+                    ) : (
+                        <>
+                            <Button type="primary" htmlType="submit" block>
+                                Cập nhập
+                            </Button>
+                        </>
+                    )}
                 </Form.Item>
             </Form>
         </div>

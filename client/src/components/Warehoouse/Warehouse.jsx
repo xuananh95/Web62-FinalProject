@@ -1,81 +1,77 @@
-import { Button, Image, Space, Table } from "antd";
+import { Button, Form, Image, Space, Table } from "antd";
 import classNames from "classnames/bind";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { StateContext } from "../../contexts/GlobalState";
+import LocalStorage from "../../contexts/LocalStorage";
+import productsService from "../../services/productsService";
 
 import styles from "./Warehouse.module.scss";
 
 const cx = classNames.bind(styles);
 
 const Warehouse = () => {
-    const dataSourse = [
-        {
-            name: "whey protein",
-            image: (
-                <Image
-                    width={"120px"}
-                    src="https://7ut8g5rmobj.cdn.hostvn.net/wp-content/uploads/2018/05/Now-Omega-3-200-vi%C3%AAn-280x280.jpg"
-                />
-            ),
-            price: 2000000,
-            qty: 200,
-        },
-        {
-            name: "whey protein",
-            image: (
-                <Image
-                    width={"120px"}
-                    src="https://7ut8g5rmobj.cdn.hostvn.net/wp-content/uploads/2018/05/Now-Omega-3-200-vi%C3%AAn-280x280.jpg"
-                />
-            ),
-            price: 2000000,
-            qty: 200,
-        },
-        {
-            name: "whey protein",
-            image: (
-                <Image
-                    width={"120px"}
-                    src="https://7ut8g5rmobj.cdn.hostvn.net/wp-content/uploads/2018/05/Now-Omega-3-200-vi%C3%AAn-280x280.jpg"
-                />
-            ),
-            price: 2000000,
-            qty: 200,
-        },
-        {
-            name: "whey protein",
-            image: (
-                <Image
-                    width={"120px"}
-                    src="https://7ut8g5rmobj.cdn.hostvn.net/wp-content/uploads/2018/05/Now-Omega-3-200-vi%C3%AAn-280x280.jpg"
-                />
-            ),
-            price: 2000000,
-            qty: 200,
-        },
-    ];
+    const { listsProduct, setListsProduct, products, setProducts } =
+        useContext(StateContext);
+    const navigate = useNavigate();
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        (async function fetchApi() {
+            const res = await productsService.getAllProducts();
+            setListsProduct(res?.data.data);
+        })();
+    }, []);
+
+    const onDelete = async (product) => {
+        const token = await LocalStorage.getItem("users")?.accessToken;
+        await productsService.deleteProduct(product._id, token);
+    };
+
+    const onUpdate = async (product) => {
+        const token = await LocalStorage.getItem("users")?.accessToken;
+        const res = await productsService.updateProduct(product._id, token);
+        const { __v, _id, ...other } = res?.data?.data.updatedProduct;
+        setProducts(other);
+        navigate("/dasboard/them-san-pham");
+    };
 
     const columns = [
         {
+            title: "ID",
+            dataIndex: "_id",
+            align: "center",
+        },
+        {
             title: "Tên sản phẩm",
             dataIndex: "name",
+            align: "center",
         },
         {
             title: "Hình ảnh",
             dataIndex: "image",
+            render: (url) => <Image width={"120px"} src={url} />,
+            align: "center",
         },
         {
             title: "Giá",
             dataIndex: "price",
+            align: "center",
         },
         {
             title: "Số lượng",
-            dataIndex: "qty",
+            dataIndex: "quantity",
+            align: "center",
         },
         {
             title: "Hành động",
-            render: () => (
+            align: "center",
+            render: (_id) => (
                 <Space>
-                    <Button>Chỉnh sửa</Button>
-                    <Button>Xóa</Button>
+                    <Button onClick={() => onUpdate(_id)}>Chỉnh sửa</Button>
+                    <Button onClick={() => onDelete(_id)}>Xóa</Button>
                 </Space>
             ),
         },
@@ -86,9 +82,8 @@ const Warehouse = () => {
             <Table
                 className={cx("table")}
                 columns={columns}
-                dataSource={dataSourse}
+                dataSource={listsProduct}
                 tableLayout="auto"
-                pagination={"3"}
             />
         </>
     );

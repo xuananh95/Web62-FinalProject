@@ -3,13 +3,11 @@ const asyncHandler = require("express-async-handler");
 const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
-const FOLDER = "product";
-
 const addProduct = async (req, res) => {
     console.log("req", req.body);
     try {
         // check if slug exists
-        const isSlugExist = await Product.find({ slug: req.body.slug });
+        const isSlugExist = await Product.findOne({ slug: req.body.slug });
         if (isSlugExist) {
             return res.status(400).json({
                 code: 400,
@@ -98,16 +96,11 @@ const updateProduct = asyncHandler(async (req, res) => {
                     product.image = imageUploaded.secure_url;
                 }
                 const updatedProduct = await product.save();
+
                 res.status(200).json({
                     statusCode: 200,
                     message: "Success",
-                    data: {
-                        name: updatedProduct.name,
-                        slug: updatedProduct.slug,
-                        price: updatedProduct.price,
-                        description: updatedProduct.description,
-                        image: updatedProduct.image,
-                    },
+                    data: { updatedProduct },
                 });
             } catch (error) {
                 res.status(400);
@@ -122,6 +115,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
 const deleteProduct = asyncHandler(async (req, res) => {
     const id = req.params.id;
+    console.log(req.params);
     if (!isValidObjectId(id)) {
         res.status(400);
         throw new Error("Invalid ID");
