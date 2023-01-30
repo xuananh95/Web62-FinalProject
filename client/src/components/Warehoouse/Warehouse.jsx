@@ -13,8 +13,13 @@ import styles from "./Warehouse.module.scss";
 const cx = classNames.bind(styles);
 
 const Warehouse = () => {
-    const { listsProduct, setListsProduct, products, setProducts } =
-        useContext(StateContext);
+    const {
+        listsProduct,
+        setListsProduct,
+        products,
+        setIsUpdate,
+        setProducts,
+    } = useContext(StateContext);
     const navigate = useNavigate();
     const [form] = Form.useForm();
 
@@ -36,6 +41,7 @@ const Warehouse = () => {
         const { __v, _id, ...other } = res?.data?.data.updatedProduct;
         setProducts(other);
         navigate("/dasboard/them-san-pham");
+        setIsUpdate(true);
     };
 
     const columns = [

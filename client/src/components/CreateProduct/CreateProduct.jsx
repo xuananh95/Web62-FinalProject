@@ -6,6 +6,7 @@ import {
     InputNumber,
     notification,
     Select,
+    Space,
     Upload,
 } from "antd";
 import classNames from "classnames/bind";
@@ -22,7 +23,8 @@ const cx = classNames.bind(styles);
 const CreateProduct = () => {
     const [form] = Form.useForm();
 
-    const { uploadData, setUploadData, products } = useContext(StateContext);
+    const { uploadData, setUploadData, products, isUpdate, setIsUpdate } =
+        useContext(StateContext);
     const [api, contextHolder] = notification.useNotification();
     console.log("products", products);
 
@@ -34,8 +36,8 @@ const CreateProduct = () => {
             price: products.price,
             quantity: products.quantity,
         });
-    }, [products]);
-    console.log(uploadData.name);
+    }, [isUpdate]);
+    // console.log(uploadData.name);
 
     const options = [
         {
@@ -176,16 +178,19 @@ const CreateProduct = () => {
                 </Form.Item>
 
                 <Form.Item label=" ">
-                    {products === {} ? (
+                    {!isUpdate ? (
                         <Button type="primary" htmlType="submit" block>
                             Thêm sản phẩm
                         </Button>
                     ) : (
-                        <>
+                        <Space>
                             <Button type="primary" htmlType="submit" block>
                                 Cập nhập
                             </Button>
-                        </>
+                            <Button type="primary" htmlType="submit" block>
+                                Reset
+                            </Button>
+                        </Space>
                     )}
                 </Form.Item>
             </Form>

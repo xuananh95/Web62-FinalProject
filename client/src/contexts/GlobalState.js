@@ -31,8 +31,11 @@ const GlobalState = ({ children }) => {
         image: "",
     });
     const [uploadData, setUploadData] = useState();
+    const [isUpdate, setIsUpdate] = useState(false);
 
     const value = {
+        isUpdate,
+        setIsUpdate,
         listsProduct,
         setListsProduct,
         uploadData,
