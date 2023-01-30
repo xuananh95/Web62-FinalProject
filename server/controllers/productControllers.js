@@ -4,7 +4,7 @@ const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
 const addProduct = async (req, res) => {
-    console.log("req", req.body);
+    // console.log("req", req.body);
     try {
         // check if slug exists
         const isSlugExist = await Product.findOne({ slug: req.body.slug });
