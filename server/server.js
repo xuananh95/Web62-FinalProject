@@ -27,6 +27,7 @@ const userRouter = require("./routes/userRoute");
 const productRouter = require("./routes/productRoute");
 const foodRouter = require("./routes/foodRoute");
 const orderRouter = require("./routes/orderRoute");
+const fitnessProfileRouter = require("./routes/fitnessProfileRoute");
 
 // import middlewares
 const { errorHandle } = require("./middlewares/errorMiddleware");
@@ -47,6 +48,7 @@ app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/foods", foodRouter);
 app.use("/orders", orderRouter);
+app.use("/fitness-profile", fitnessProfileRouter);
 
 app.post(
     "/tools/uploadImage",
