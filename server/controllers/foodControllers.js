@@ -6,22 +6,18 @@ const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const FOLDER = "food";
 
 const addFoodData = asyncHandler(async (req, res) => {
-    const { name, protein, fat, carb } = req.body;
-    const image = req.file;
-    console.log(name, protein, fat, carb);
+    const { name, protein, fat, carb, image } = req.body;
     if (!name || !protein || !fat || !carb || !image) {
         res.status(400);
         throw new Error("Missing required fields!");
     }
     try {
-        const imageUploaded = await cloudinaryUploadImage(image.path, FOLDER);
-        const imageURL = imageUploaded.secure_url;
         const newFoodData = await FoodData.create({
             name,
-            image: imageURL,
             protein,
             fat,
             carb,
+            image,
         });
         if (newFoodData) {
             res.status(200).json({
@@ -32,7 +28,7 @@ const addFoodData = asyncHandler(async (req, res) => {
                     protein,
                     fat,
                     carb,
-                    imageURL,
+                    image,
                 },
             });
         }
@@ -61,19 +57,12 @@ const updateFoodDataById = asyncHandler(async (req, res) => {
     const food = await FoodData.findById(id);
     if (food) {
         try {
-            const { name, protein, fat, carb } = req.body;
-            const image = req.file;
+            const { name, protein, fat, carb, image } = req.body;
             food.name = name || food.name;
             food.protein = protein || food.protein;
             food.fat = fat || food.fat;
             food.carb = carb || food.carb;
-            if (image) {
-                const imageUploaded = await cloudinaryUploadImage(
-                    image.path,
-                    FOLDER
-                );
-                food.image = imageUploaded.secure_url;
-            }
+            food.image = image || food.image;
             const updatedFood = await food.save();
             res.status(200).json({
                 statusCode: 200,
