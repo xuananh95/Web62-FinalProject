@@ -1,7 +1,8 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, default: mongoose } = require("mongoose");
 
 const RefreshTokenModel = new Schema(
     {
+        userId: { type: Schema.Types.ObjectId },
         refreshtoken: { type: String, require: true },
     },
     {

@@ -2,7 +2,7 @@
     background-color: #001529;
     color: aliceblue;
     display: flex;
-    padding: 0.5rem 3rem;
+    padding: 0 1.5rem;
     gap: 3rem;
 }
 
@@ -10,7 +10,7 @@
     h1 {
         text-align: center;
         letter-spacing: 0.2em;
-        font-size: 2em;
+        font-size: 1.8em;
         text-shadow: 2px 2px 5px rgb(243, 243, 189);
     }
 }
@@ -25,4 +25,16 @@
 
 .link {
     letter-spacing: 0.1rem;
+}
+
+.account {
+    align-items: center;
+    width: 40%;
+    display: flex;
+    justify-content: end;
+    gap: 0.8rem;
+}
+
+.icon {
+    font-size: 1.2rem;
 }

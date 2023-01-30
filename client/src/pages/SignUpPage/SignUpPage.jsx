@@ -22,13 +22,8 @@ const SignUpPage = () => {
     const navigate = useNavigate();
     const [api, contextHolder] = notification.useNotification();
     const [form] = Form.useForm();
-    const {
-        isModalOpen,
-        setIsModalOpen,
-        setInputValue,
-        inputValue,
-        initalValue,
-    } = useContext(StateContext);
+    const { isModalSignUp, setIsModalSignUp, setInputValue, inputValue } =
+        useContext(StateContext);
 
     const handleOk = async () => {
         try {
@@ -53,15 +48,14 @@ const SignUpPage = () => {
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
-        navigate("/");
+        setIsModalSignUp(false);
     };
 
     return (
         <>
             {contextHolder}
             <Modal
-                open={isModalOpen}
+                open={isModalSignUp}
                 onCancel={handleCancel}
                 centered
                 footer={[]}

@@ -1,29 +1,32 @@
-import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
+import { Button, Form, Input, Modal, notification } from "antd";
 import classNames from "classnames/bind";
 import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import { StateContext } from "../../contexts/GlobalState";
 
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./SignInPage.module.scss";
 import authSevices from "../../services/authServices";
+import LocalStorage from "../../contexts/LocalStorage";
+import styles from "./SignInPage.module.scss";
 
 const cx = classNames.bind(styles);
 
 const SignInPage = () => {
-    const { isModalOpen, setIsModalOpen, formLogin, setFormLogin } =
-        useContext(StateContext);
+    const {
+        isModalSignIn,
+        setIsModalSignIn,
+        formLogin,
+        setFormLogin,
+        setIsLogined,
+    } = useContext(StateContext);
     const [form] = Form.useForm();
 
     const [api, contextHolder] = notification.useNotification();
 
-    const navigate = useNavigate();
-
     const handleOk = async () => {
         try {
             const res = await authSevices.login(formLogin);
-
+            LocalStorage.setItem("users", res?.data.data);
             api.success({
                 duration: 1.5,
                 message: `${res?.data.message}`,
@@ -32,8 +35,8 @@ const SignInPage = () => {
             form.resetFields();
 
             setTimeout(() => {
-                setIsModalOpen(false);
-                navigate("/", { replace: true });
+                setIsModalSignIn(false);
+                setIsLogined(true);
             }, 1000);
         } catch (error) {
             api.error({
@@ -44,14 +47,13 @@ const SignInPage = () => {
     };
 
     const handleCancel = () => {
-        setIsModalOpen(false);
-        navigate("/");
+        setIsModalSignIn(false);
     };
     return (
         <>
             {contextHolder}
             <Modal
-                open={isModalOpen}
+                open={isModalSignIn}
                 onOk={handleOk}
                 onCancel={handleCancel}
                 centered
@@ -115,9 +117,7 @@ const SignInPage = () => {
                             value={formLogin.password}
                         />
                     </Form.Item>
-                    <Form.Item>
-                        <Checkbox>Remember me</Checkbox>
-                    </Form.Item>
+
                     <Form.Item>
                         <Button type="primary" htmlType="submit" block>
                             Sign In
