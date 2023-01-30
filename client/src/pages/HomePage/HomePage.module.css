@@ -1,0 +1,20 @@
+.imgMain {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+.titleTDEE {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.TDEEContainer {
+  padding: 1em;
+  background-color: #bfe1ff;
+}
+.descTDEE {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.colHalf {
+  padding: 1rem;
+}

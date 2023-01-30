@@ -14,28 +14,30 @@ import ProductPage from "./pages/ProductPage/ProductPage";
 import SignInPage from "./pages/SignInPage/SignInPage";
 import SignUpPage from "./pages/SignUpPage/SignUpPage";
 import CartPage from "./pages/CartPage/CartPage";
+import { CaloPage } from "./pages/CaloPage/CaloPage";
 
 function App() {
-    const { isModalOpen } = useContext(StateContext);
-    return (
-        <div className="App">
-            {!isModalOpen ? <Header /> : <></>}
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/product" element={<ProductPage />}>
-                    <Route path="*" element={<Card />} />
-                </Route>
-                <Route path="/sign-up" element={<SignUpPage />} />
-                <Route path="/sign-in" element={<SignInPage />} />
-                <Route path="/cart/:id" element={<CartPage />} />
-                <Route path="dasboard" element={<DasboardPage />}>
-                    <Route path="kho-hang" element={<Warehouse />} />
-                    <Route path="them-san-pham" element={<CreateProduct />} />
-                </Route>
-            </Routes>
-            {!isModalOpen ? <Footer /> : <></>}
-        </div>
-    );
+  const { isModalOpen } = useContext(StateContext);
+  return (
+    <div className="App">
+      {!isModalOpen ? <Header /> : <></>}
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/calo" element={<CaloPage />} />
+        <Route path="/product" element={<ProductPage />}>
+          <Route path="*" element={<Card />} />
+        </Route>
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/cart/:id" element={<CartPage />} />
+        <Route path="dasboard" element={<DasboardPage />}>
+          <Route path="kho-hang" element={<Warehouse />} />
+          <Route path="them-san-pham" element={<CreateProduct />} />
+        </Route>
+      </Routes>
+      {!isModalOpen ? <Footer /> : <></>}
+    </div>
+  );
 }
 
 export default App;

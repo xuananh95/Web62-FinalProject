@@ -1,0 +1,30 @@
+.CaloPageWrapper {
+  height: 110vh;
+  background-image: url("../../../public/img/whitep.jpg");
+}
+.CaloPageMenu {
+  border-radius: 15px;
+  border: 1px solid;
+  padding-bottom: 10px;
+}
+.foodList {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 90vh;
+}
+.foodList::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+.foodListContainer {
+  border-radius: 15px;
+  border: 1px solid;
+  min-width: 1078px;
+}
+.CaloPageModal:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

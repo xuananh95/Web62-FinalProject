@@ -1,0 +1,58 @@
+.wrapper {
+    padding: 0 1rem;
+}
+
+.wrapper p {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+
+
+.action {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sort {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sort h3 {
+    align-items: center;
+    padding: 0.5rem 0;
+}
+
+.card {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.search {
+    flex: 1;
+}
+
+.pagination {
+    width: 100%;
+    margin-top: 1rem;
+    text-align: center;
+}
+.fooditemRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    margin: 10px 0;
+  }
+  
+  .fooditemCol {
+    width: 45%;
+  }
+  
+  .fooditem-ic::before {
+    font-size: 20px;
+  }
+  
