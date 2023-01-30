@@ -42,13 +42,13 @@ const Header = () => {
         },
         {
             label: "Đăng nhập",
-            path: "/sign-in",
+            path: "/users/sign-in",
             icon: <UserOutlined />,
             event: () => setIsModalOpen(true),
         },
         {
             label: "Đăng kí",
-            path: "/sign-up",
+            path: "/users/sign-up",
             icon: <UserAddOutlined />,
             event: () => setIsModalOpen(true),
         },

@@ -2,7 +2,6 @@ import { Button, Checkbox, Form, Input, Modal, notification } from "antd";
 import classNames from "classnames/bind";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { StateContext } from "../../contexts/GlobalState";
 
@@ -14,14 +13,15 @@ import {
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./SignUpPage.module.scss";
 import authSevices from "../../services/authServices";
+import styles from "./SignUpPage.module.scss";
 
 const cx = classNames.bind(styles);
 
 const SignUpPage = () => {
     const navigate = useNavigate();
     const [api, contextHolder] = notification.useNotification();
+    const [form] = Form.useForm();
     const {
         isModalOpen,
         setIsModalOpen,
@@ -31,18 +31,25 @@ const SignUpPage = () => {
     } = useContext(StateContext);
 
     const handleOk = async () => {
-        //await authSevices.register(initalValue);
-        api.open({
-            icon: (
-                <FontAwesomeIcon
-                    icon={faCircleCheck}
-                    style={{ color: "green" }}
-                />
-            ),
-            message: "Đăng kí thành công!",
-        });
-        console.log(inputValue);
-        setInputValue(initalValue);
+        try {
+            const { confirmPassword, isCheckRules, ...rest } = inputValue;
+
+            const response = await authSevices.register(rest);
+            api.success({
+                duration: 1.5,
+                message: `${response?.data?.message}`,
+            });
+
+            form.resetFields();
+            setTimeout(() => {
+                navigate("/users/sign-in", { replace: true });
+            }, 1200);
+        } catch (error) {
+            api.warning({
+                duration: 1.5,
+                message: error,
+            });
+        }
     };
 
     const handleCancel = () => {
@@ -61,7 +68,7 @@ const SignUpPage = () => {
                 className={cx("wrapper")}
             >
                 <h2>Sign Up</h2>
-                <Form>
+                <Form onFinish={handleOk} form={form} className={cx("form")}>
                     <Form.Item
                         name={"username"}
                         rules={[
@@ -70,7 +77,7 @@ const SignUpPage = () => {
                                 message: "Vui lòng điền username!",
                             },
                             {
-                                pattern: "^([a-z]+)((s{1}[a-z]+){1,})$",
+                                pattern: "^[a-zA-Z0-9+]*$",
                                 message: "Tên không có kí tự đặc biệt!",
                             },
                         ]}
@@ -78,14 +85,13 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faUser} />}
                             placeholder="User name"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
-                                    userName: e.target.value,
+                                    username: e.target.value,
                                 })
                             }
-                            value={inputValue.userName}
+                            value={inputValue.username}
                         />
                     </Form.Item>
                     <Form.Item
@@ -105,7 +111,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faEnvelope} />}
                             placeholder="Email"
-                            className={cx("input")}
                             type="email"
                             onChange={(e) =>
                                 setInputValue({
@@ -128,7 +133,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faPhone} />}
                             placeholder="Phone"
-                            className={cx("input")}
                             type="number"
                             onChange={(e) =>
                                 setInputValue({
@@ -151,7 +155,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faLocationDot} />}
                             placeholder="Address"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -180,7 +183,6 @@ const SignUpPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Password"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -220,7 +222,6 @@ const SignUpPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Confirm Password"
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -248,7 +249,6 @@ const SignUpPage = () => {
                         ]}
                     >
                         <Checkbox
-                            className={cx("input")}
                             onChange={(e) =>
                                 setInputValue({
                                     ...inputValue,
@@ -261,12 +261,7 @@ const SignUpPage = () => {
                         </Checkbox>
                     </Form.Item>
                     <Form.Item>
-                        <Button
-                            type="primary"
-                            className={cx("btn")}
-                            htmlType="submit"
-                            onClick={handleOk}
-                        >
+                        <Button type="primary" htmlType="submit" block>
                             Sign Up
                         </Button>
                     </Form.Item>

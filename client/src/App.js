@@ -27,8 +27,8 @@ function App() {
         <Route path="/product" element={<ProductPage />}>
           <Route path="*" element={<Card />} />
         </Route>
-        <Route path="/sign-up" element={<SignUpPage />} />
-        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/users/sign-up" element={<SignUpPage />} />
+        <Route path="/users/sign-in" element={<SignInPage />} />
         <Route path="/cart/:id" element={<CartPage />} />
         <Route path="dasboard" element={<DasboardPage />}>
           <Route path="kho-hang" element={<Warehouse />} />
