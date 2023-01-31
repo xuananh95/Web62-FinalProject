@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const mealSchema = require("./MealModel").mealSchema;
 const exerciseSchema = require("./ExerciseModel").exerciseSchema;
 
 const fitnessDiarySchema = mongoose.Schema({
@@ -10,7 +9,12 @@ const fitnessDiarySchema = mongoose.Schema({
     day: {
         type: Date,
     },
-    meals: [mealSchema],
+    menus: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: "Menu",
+        },
+    ],
     exercises: [exerciseSchema],
     caloriesIn: {
         type: Number,

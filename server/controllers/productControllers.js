@@ -1,6 +1,5 @@
 const { Product } = require("../models/ProductModel");
 const asyncHandler = require("express-async-handler");
-const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
 const addProduct = async (req, res) => {
@@ -55,6 +54,28 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
     }
 });
 
+const findProductById = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    if (!isValidObjectId(id)) {
+        res.status(400);
+        throw new Error("Invalid product id");
+    }
+    const product = await Product.findById(id);
+    if (product) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success",
+            data: product,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Product not found",
+            data: null,
+        });
+    }
+});
+
 const updateProduct = asyncHandler(async (req, res) => {
     const id = req.params.id;
     if (!isValidObjectId(id)) {
@@ -64,12 +85,14 @@ const updateProduct = asyncHandler(async (req, res) => {
         const product = await Product.findById(id);
         if (product) {
             try {
-                const { name, slug, price, quantity, description } = req.body;
+                const { name, slug, price, quantity, description, image } =
+                    req.body;
                 // update name, price, description
                 product.name = name || product.name;
                 product.price = price || product.price;
                 product.description = description || product.description;
                 product.quantity = quantity || product.quantity;
+                product.image = image || product.image;
                 // check if slug exist in DB. If not, update the slug
                 if (slug) {
                     const isSlugExist = await Product.find({ slug });
@@ -80,21 +103,12 @@ const updateProduct = asyncHandler(async (req, res) => {
                         product.slug = slug;
                     }
                 }
-                // Check if user send image
-                const image = req.file;
-                if (image) {
-                    const imageUploaded = await cloudinaryUploadImage(
-                        image.path,
-                        FOLDER
-                    );
-                    product.image = imageUploaded.secure_url;
-                }
                 const updatedProduct = await product.save();
 
                 res.status(200).json({
                     statusCode: 200,
                     message: "Success",
-                    data: { updatedProduct },
+                    data: updatedProduct,
                 });
             } catch (error) {
                 res.status(400);
@@ -139,4 +153,5 @@ module.exports = {
     updateProduct,
     findProductsBySlug,
     deleteProduct,
+    findProductById,
 };

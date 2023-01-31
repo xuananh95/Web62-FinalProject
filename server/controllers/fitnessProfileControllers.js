@@ -49,8 +49,8 @@ const addProfile = asyncHandler(async (req, res) => {
         newProfile.measure.push(userMeasure);
         try {
             newProfile.save();
-            res.status(200).json({
-                statusCode: 200,
+            res.status(201).json({
+                statusCode: 201,
                 message: "New profile added",
                 data: newProfile,
             });

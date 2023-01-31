@@ -22,11 +22,16 @@ const userSchema = mongoose.Schema({
     },
     address: {
         type: String,
-        require: true,
+        required: true,
     },
     phoneNumber: {
         type: String,
-        require: true,
+        required: true,
+    },
+    image: {
+        type: String,
+        default:
+            "https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg",
     },
     role: {
         type: String,
