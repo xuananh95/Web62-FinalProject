@@ -40,6 +40,12 @@ const productsService = {
             data,
         });
     },
+    findUpdateProduct: (id) => {
+        return axiosInstant({
+            method: "GET",
+            url: `/products/find/${id}`,
+        });
+    },
 
     deleteProduct: (id, token) => {
         return axiosInstant({

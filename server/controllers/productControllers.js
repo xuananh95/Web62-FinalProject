@@ -54,8 +54,9 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
     }
 });
 
-const findProductById = asyncHandler(async (req, res) => {
+const findProductById = async (req, res) => {
     const id = req.params.id;
+    console.log("id", req.params);
     if (!isValidObjectId(id)) {
         res.status(400);
         throw new Error("Invalid product id");
@@ -74,7 +75,7 @@ const findProductById = asyncHandler(async (req, res) => {
             data: null,
         });
     }
-});
+};
 
 const updateProduct = asyncHandler(async (req, res) => {
     const id = req.params.id;

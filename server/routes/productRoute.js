@@ -87,7 +87,7 @@ router.get("/find/:slug", findProductsBySlug);
             data: ,
         }
  */
-router.find("/find/:id", findProductById);
+router.get("/find/:id", findProductById);
 
 /**
  *  5. update products based on id 
@@ -108,7 +108,7 @@ router.find("/find/:id", findProductById);
             data: ,
         }
  */
-router.put("/:id", protect, isAdmin, image.upload, updateProduct);
+router.put("/:id", protect, isAdmin, updateProduct);
 
 /**
  *  6. delete products based on id 

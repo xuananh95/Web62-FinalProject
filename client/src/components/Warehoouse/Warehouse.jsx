@@ -36,9 +36,7 @@ const Warehouse = () => {
     };
 
     const onUpdate = async (product) => {
-        const token = await LocalStorage.getItem("users")?.accessToken;
-        console.log(token);
-        const res = await productsService.updateProduct(product._id, token);
+        const res = await productsService.findUpdateProduct(product._id);
         const { __v, ...other } = res?.data?.data.updatedProduct;
         setProducts(other);
         navigate("/dasboard/them-san-pham");
