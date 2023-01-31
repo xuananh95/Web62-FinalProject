@@ -47,6 +47,28 @@ const getFoodDataList = asyncHandler(async (req, res) => {
     });
 });
 
+const getFoodDataById = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    if (!isValidObjectId) {
+        res.status(400);
+        throw new Error("Invalid food id");
+    }
+    const food = await FoodData.findById(id);
+    if (food) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success!",
+            data: food,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Food data not found",
+            data: null,
+        });
+    }
+});
+
 const updateFoodDataById = asyncHandler(async (req, res) => {
     const id = req.params.id;
     if (!isValidObjectId(id)) {
@@ -112,6 +134,7 @@ const deleteFoodData = asyncHandler(async (req, res) => {
 module.exports = {
     addFoodData,
     getFoodDataList,
+    getFoodDataById,
     updateFoodDataById,
     deleteFoodData,
 };

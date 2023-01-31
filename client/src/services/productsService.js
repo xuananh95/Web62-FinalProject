@@ -14,7 +14,7 @@ const productsService = {
     uploadImage: (data, token) => {
         return axiosInstant({
             method: "POST",
-            url: "/products/upload",
+            url: "/uploadImage",
             headers: {
                 "Content-type": "multipart/form-data",
                 Authorization: ` Bearer ${token}`,
