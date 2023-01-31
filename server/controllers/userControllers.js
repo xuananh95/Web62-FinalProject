@@ -163,13 +163,14 @@ const getUserByID = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-    const { username, address, phoneNumber } = req.body;
+    const { username, address, phoneNumber, image } = req.body;
     const id = req.user._id;
     const user = await User.findById(id);
     if (user) {
         user.username = username || user.username;
         user.address = address || user.address;
         user.phoneNumber = phoneNumber || user.phoneNumber;
+        user.image = image || user.image;
         const updatedUser = await user.save();
         res.status(200).json({
             statusCode: 200,
@@ -179,6 +180,7 @@ const updateUser = asyncHandler(async (req, res) => {
                 username: updatedUser.username,
                 address: updatedUser.address,
                 phoneNumber: updatedUser.phoneNumber,
+                image: updatedUser.image,
             },
         });
     } else {
