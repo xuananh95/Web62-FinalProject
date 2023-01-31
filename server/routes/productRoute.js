@@ -87,7 +87,7 @@ router.get("/find/:slug", findProductsBySlug);
             data: ,
         }
  */
-router.find("/find/:id", findProductById);
+router.get("/find/:id", findProductById);
 
 /**
  *  5. update products based on id 
