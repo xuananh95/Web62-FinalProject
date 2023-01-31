@@ -1,9 +1,8 @@
 const { FoodData } = require("../models/FoodDataModel");
 const asyncHandler = require("express-async-handler");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
-const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 
-const FOLDER = "food";
+// const FOLDER = "food";
 
 const addFoodData = asyncHandler(async (req, res) => {
     const { name, protein, fat, carb, image } = req.body;
