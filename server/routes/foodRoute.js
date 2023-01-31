@@ -4,6 +4,7 @@ const express = require("express");
 const {
     addFoodData,
     getFoodDataList,
+    getFoodDataById,
     updateFoodDataById,
     deleteFoodData,
 } = require("../controllers/foodControllers");
@@ -53,7 +54,21 @@ router.post("/add-food-data", protect, isAdmin, imageUploadLocal, addFoodData);
 router.get("/", getFoodDataList);
 
 /**
- *  3. update food data by id
+ *  3. Get food data by id
+    /foods/: GET 
+	+ desc: Get food data by id
+	+ access: none
+	+ return values: 
+        {
+            statusCode:
+            message:
+            data: 
+        }
+ */
+router.get("/:id", getFoodDataById);
+
+/**
+ *  4. update food data by id
     /foods/:id: PUT 
 	+ desc: update food data by id
 	+ access: admin
@@ -75,7 +90,7 @@ router.get("/", getFoodDataList);
 router.put("/:id", protect, isAdmin, imageUploadLocal, updateFoodDataById);
 
 /**
- *  4. Delete food data by id
+ *  5. Delete food data by id
     /foods/:id: PUT 
 	+ desc: delete food data by id
 	+ access: admin
