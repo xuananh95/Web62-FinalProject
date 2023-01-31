@@ -4,16 +4,10 @@ const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
 const addProduct = async (req, res) => {
-    // console.log("req", req.body);
+    console.log("req", req.body);
     try {
-        // check if slug exists
-        const isSlugExist = await Product.findOne({ slug: req.body.slug });
-        if (isSlugExist) {
-            return res.status(400).json({
-                code: 400,
-                message: "Slug already existed",
-            });
-        }
+        // const existProduct = await Product.findOne({ _id });
+        // console.log(existProduct);
 
         const newProduct = await Product.create(req.body);
         return res.status(201).json({

@@ -30,13 +30,14 @@ const productsService = {
         });
     },
 
-    updateProduct: (id, token) => {
+    updateProduct: (data, id, token) => {
         return axiosInstant({
             method: "PUT",
             url: `/products/${id}`,
             headers: {
                 Authorization: ` Bearer ${token}`,
             },
+            data,
         });
     },
 

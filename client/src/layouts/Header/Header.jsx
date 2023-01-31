@@ -37,66 +37,68 @@ const Header = () => {
         {
             label:
                 usersLocal?.role === "ADMIN" ? (
-                    <Link to="/dasboard/kho-hang">Quản lí kho</Link>
+                    <Link to="/dasboard/kho-hang" className={cx("link")}>
+                        Quản lí kho
+                    </Link>
                 ) : (
-                    <Link>Thông tin cá nhân</Link>
+                    <Link to="/dashboard/profile" className={cx("link")}>
+                        Thông tin cá nhân
+                    </Link>
                 ),
-            icon: <FontAwesomeIcon icon={faUser} />,
+            icon: (
+                <FontAwesomeIcon style={{ fontSize: "1rem" }} icon={faUser} />
+            ),
         },
 
         {
-            label: <p onClick={onLogout}>Đăng xuất</p>,
-            icon: <FontAwesomeIcon icon={faRightFromBracket} />,
+            label: (
+                <p onClick={onLogout} className={cx("link")}>
+                    Đăng xuất
+                </p>
+            ),
+            icon: (
+                <FontAwesomeIcon
+                    style={{ fontSize: "1rem" }}
+                    icon={faRightFromBracket}
+                />
+            ),
         },
     ];
-
-    const url = window.location.href;
-    const path = url.slice(21);
 
     const menu = [
         {
             label: "Trang chủ",
-            path: "/",
-            icon: <HomeOutlined />,
-            event: () => setSelectedKeys(!selectedKeys),
+            keyPath: "/",
+            icon: <HomeOutlined style={{ fontSize: "1.5rem" }} />,
         },
         {
             label: "Calo",
-            path: "/calo",
-            icon: <AppstoreOutlined />,
-            event: () => setSelectedKeys(!selectedKeys),
+            keyPath: "/calo",
+            icon: <AppstoreOutlined style={{ fontSize: "1.5rem" }} />,
         },
         {
             label: "Sản phẩm",
-            path: "/product",
-            icon: <ShoppingCartOutlined />,
-            event: () => setSelectedKeys(!selectedKeys),
+            keyPath: "/product",
+            icon: <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />,
         },
     ];
-
-    const result = menu.findIndex((item) => item.path === path) + 1;
 
     return (
         <div className={cx("wrapper")}>
             <div className={cx("header--left")}>
                 <h1>Fitness Health</h1>
             </div>
+
             <Menu
                 className={cx("header--center")}
                 defaultSelectedKeys={["1"]}
                 theme="dark"
-                selectedKeys={[result.toString()]}
                 items={menu.map((item, index) => {
                     const key = index + 1;
                     return {
                         key,
                         label: (
-                            <Link
-                                className={cx("link")}
-                                to={item.path}
-                                state={{ from: item.label }}
-                                onClick={item?.event}
-                            >
+                            <Link className={cx("link")} to={item.keyPath}>
                                 {item.icon} {item.label}
                             </Link>
                         ),
@@ -106,7 +108,7 @@ const Header = () => {
             <div className={cx("account")}>
                 {usersLocal !== undefined ? (
                     <>
-                        <Space size={20}>
+                        <Space size={40}>
                             <Badge
                                 showZero
                                 count={2}
@@ -116,6 +118,7 @@ const Header = () => {
                                 <Tooltip title="Giỏ hàng">
                                     <Link to="/cart/:id">
                                         <Avatar
+                                            size={"large"}
                                             icon={
                                                 <FontAwesomeIcon
                                                     icon={faCartShopping}
@@ -125,30 +128,38 @@ const Header = () => {
                                     </Link>
                                 </Tooltip>
                             </Badge>
-                            <di>
+                            <Space size={10}>
                                 <Avatar
                                     icon={<UserOutlined />}
+                                    size={"large"}
                                     style={{ backgroundColor: "#bfbfbf" }}
                                 />
                                 {usersLocal?.username}
-                            </di>
-                            <Dropdown menu={{ items }} arrow>
-                                <FontAwesomeIcon
-                                    icon={faList}
-                                    style={{ cursor: "pointer" }}
-                                />
-                            </Dropdown>
+                            </Space>
                         </Space>
+                        <Dropdown menu={{ items }} className={cx("menu")} arrow>
+                            <FontAwesomeIcon
+                                icon={faCaretDown}
+                                style={{
+                                    cursor: "pointer",
+                                    fontSize: "1.5rem",
+                                }}
+                            />
+                        </Dropdown>
                     </>
                 ) : (
                     <>
                         <Button
                             type="primary"
+                            size="large"
                             onClick={() => setIsModalSignIn(true)}
                         >
                             Sign In
                         </Button>
-                        <Button onClick={() => setIsModalSignUp(true)}>
+                        <Button
+                            size="large"
+                            onClick={() => setIsModalSignUp(true)}
+                        >
                             Sign Up
                         </Button>
                     </>

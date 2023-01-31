@@ -11,6 +11,7 @@ import {
     SkypeOutlined,
     YoutubeOutlined,
 } from "@ant-design/icons";
+import { Space } from "antd";
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 
@@ -37,35 +38,26 @@ const Footer = () => {
 
             <div className={cx("footer--center")}>
                 <Link className={cx("link")} to="/">
-                    <HomeOutlined /> Home
+                    <HomeOutlined style={{ fontSize: "1.5rem" }} /> Home
                 </Link>
                 <Link className={cx("link")} to="/calo">
-                    <AppstoreOutlined /> Calo
+                    <AppstoreOutlined style={{ fontSize: "1.5rem" }} /> Calo
                 </Link>
                 <Link className={cx("link")} to="/product">
-                    <ShoppingCartOutlined /> Product
+                    <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />{" "}
+                    Product
                 </Link>
             </div>
 
             <div className={cx("footer--right")}>
                 <p>Follow us</p>
-                <div>
-                    <p>
-                        <YoutubeOutlined />
-                    </p>
-                    <p>
-                        <GooglePlusOutlined />
-                    </p>
-                    <p>
-                        <InstagramOutlined />
-                    </p>
-                    <p>
-                        <SkypeOutlined />
-                    </p>
-                    <p>
-                        <FacebookOutlined />
-                    </p>
-                </div>
+                <Space size={20}>
+                    <YoutubeOutlined className={cx("icon")} />
+                    <GooglePlusOutlined className={cx("icon")} />
+                    <InstagramOutlined className={cx("icon")} />
+                    <SkypeOutlined className={cx("icon")} />
+                    <FacebookOutlined className={cx("icon")} />
+                </Space>
             </div>
         </div>
     );

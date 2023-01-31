@@ -37,19 +37,15 @@ const Warehouse = () => {
 
     const onUpdate = async (product) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
+        console.log(token);
         const res = await productsService.updateProduct(product._id, token);
-        const { __v, _id, ...other } = res?.data?.data.updatedProduct;
+        const { __v, ...other } = res?.data?.data.updatedProduct;
         setProducts(other);
         navigate("/dasboard/them-san-pham");
         setIsUpdate(true);
     };
 
     const columns = [
-        {
-            title: "ID",
-            dataIndex: "_id",
-            align: "center",
-        },
         {
             title: "Tên sản phẩm",
             dataIndex: "name",
@@ -58,7 +54,7 @@ const Warehouse = () => {
         {
             title: "Hình ảnh",
             dataIndex: "image",
-            render: (url) => <Image width={"120px"} src={url} />,
+            render: (url) => <Image width={"150px"} src={url} />,
             align: "center",
         },
         {
@@ -76,8 +72,12 @@ const Warehouse = () => {
             align: "center",
             render: (_id) => (
                 <Space>
-                    <Button onClick={() => onUpdate(_id)}>Chỉnh sửa</Button>
-                    <Button onClick={() => onDelete(_id)}>Xóa</Button>
+                    <Button size="large" onClick={() => onUpdate(_id)}>
+                        Chỉnh sửa
+                    </Button>
+                    <Button danger size="large" onClick={() => onDelete(_id)}>
+                        Xóa
+                    </Button>
                 </Space>
             ),
         },
@@ -86,6 +86,7 @@ const Warehouse = () => {
     return (
         <>
             <Table
+                size="large"
                 className={cx("table")}
                 columns={columns}
                 dataSource={listsProduct}

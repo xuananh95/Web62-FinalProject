@@ -37,7 +37,6 @@ const CreateProduct = () => {
             quantity: products.quantity,
         });
     }, [isUpdate]);
-    // console.log(uploadData.name);
 
     const options = [
         {
@@ -74,6 +73,25 @@ const CreateProduct = () => {
         form.resetFields();
     };
 
+    const onUpdate = async (values) => {
+        const token = await LocalStorage.getItem("users")?.accessToken;
+        const result = await productsService.updateProduct(
+            values,
+            products._id,
+            token
+        );
+        api.success({
+            duration: 1.5,
+            message: `${result?.data?.message}`,
+        });
+        form.resetFields();
+    };
+
+    const onReset = () => {
+        form.resetFields();
+        setIsUpdate(true);
+    };
+
     return (
         <div className={cx("wrapper")}>
             {contextHolder}
@@ -82,7 +100,7 @@ const CreateProduct = () => {
                 labelCol={{ span: 4 }}
                 form={form}
                 size="large"
-                onFinish={onCreateProduct}
+                onFinish={isUpdate ? onUpdate : onCreateProduct}
             >
                 <Form.Item
                     label="Name"
@@ -187,7 +205,7 @@ const CreateProduct = () => {
                             <Button type="primary" htmlType="submit" block>
                                 Cập nhập
                             </Button>
-                            <Button type="primary" htmlType="submit" block>
+                            <Button type="primary" onClick={onReset} block>
                                 Reset
                             </Button>
                         </Space>

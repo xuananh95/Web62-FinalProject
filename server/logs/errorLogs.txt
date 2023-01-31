@@ -293,3 +293,12 @@
 2023-1-30 - 20:22:3 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
 2023-1-30 - 20:22:7 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
 2023-1-30 - 20:23:50 - Error: Invalid token - Path: /products/63d77476744d4d15b4e36110 
+2023-1-31 - 15:30:23 - Error: Invalid id - Path: /products/[object%20Object] 
+2023-1-31 - 15:30:51 - Error: Invalid id - Path: /products/[object%20Object] 
+2023-1-31 - 15:32:56 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTE3MjQsImV4cCI6MTY3NTE1NTMyNH0.4ehAOBGg6yp32wkfAHj59H_iZ2rltjltdQxEglfCanM 
+2023-1-31 - 15:33:28 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTQwMDQsImV4cCI6MTY3NTE1NzYwNH0.EI_V_rXaw2LGFUFRK4YPwcoouthIpGoY3eEaPHVLnOY 
+2023-1-31 - 15:34:41 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTQwMDQsImV4cCI6MTY3NTE1NzYwNH0.EI_V_rXaw2LGFUFRK4YPwcoouthIpGoY3eEaPHVLnOY 
+2023-1-31 - 15:35:28 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTQwMDQsImV4cCI6MTY3NTE1NzYwNH0.EI_V_rXaw2LGFUFRK4YPwcoouthIpGoY3eEaPHVLnOY 
+2023-1-31 - 15:36:12 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTQwMDQsImV4cCI6MTY3NTE1NzYwNH0.EI_V_rXaw2LGFUFRK4YPwcoouthIpGoY3eEaPHVLnOY 
+2023-1-31 - 15:36:24 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTQwMDQsImV4cCI6MTY3NTE1NzYwNH0.EI_V_rXaw2LGFUFRK4YPwcoouthIpGoY3eEaPHVLnOY 
+2023-1-31 - 15:36:55 - Error: Invalid token - Path: /products/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2M2M5MDdkZjZkYzJjZjQ0YjRjMjQ4NmYiLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE2NzUxNTQwMDQsImV4cCI6MTY3NTE1NzYwNH0.EI_V_rXaw2LGFUFRK4YPwcoouthIpGoY3eEaPHVLnOY 

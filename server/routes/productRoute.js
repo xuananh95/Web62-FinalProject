@@ -97,7 +97,7 @@ router.get("/find/:slug", findProductsBySlug);
             data: ,
         }
  */
-router.put("/:id", protect, isAdmin, imageUploadLocal, updateProduct);
+router.put("/:id", protect, isAdmin, image.upload, updateProduct);
 
 /**
  *  4. delete products based on id 

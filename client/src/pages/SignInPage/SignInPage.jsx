@@ -61,7 +61,12 @@ const SignInPage = () => {
                 className={cx("wrapper")}
             >
                 <h2>Sign In</h2>
-                <Form className={cx("form")} onFinish={handleOk} form={form}>
+                <Form
+                    className={cx("form")}
+                    onFinish={handleOk}
+                    form={form}
+                    size="large"
+                >
                     <Form.Item
                         name={"email"}
                         rules={[
