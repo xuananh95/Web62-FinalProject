@@ -2,13 +2,7 @@ import {
     faBagShopping,
     faBriefcase,
     faDumbbell,
-    faFire,
-    faFish,
-    faGauge,
-    faGears,
-    faPersonRunning,
     faScaleUnbalanced,
-    faTrophy,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Layout, Menu } from "antd";

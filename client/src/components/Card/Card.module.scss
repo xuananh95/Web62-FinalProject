@@ -1,5 +1,5 @@
 .wrapper {
-    padding: 0 1rem;
+    flex: 1;
 }
 
 .wrapper p {
@@ -11,30 +11,11 @@
     font-size: 1rem;
 }
 
-.action {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.sort {
-    display: flex;
-    gap: 0.5rem;
-}
-
-.sort h3 {
-    align-items: center;
-    padding: 0.5rem 0;
-}
-
 .card {
+    padding: 2rem;
     display: flex;
-    gap: 1rem;
     flex-wrap: wrap;
-    margin-top: 1rem;
-}
-
-.search {
-    flex: 1;
+    gap: 2.3333rem;
 }
 
 .pagination {
