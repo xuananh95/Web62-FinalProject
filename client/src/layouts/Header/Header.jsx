@@ -7,30 +7,42 @@ import {
 import {
     faCaretDown,
     faCartShopping,
-    faList,
     faRightFromBracket,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { notification } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { Avatar, Badge, Button, Dropdown, Menu, Space, Tooltip } from "antd";
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { StateContext } from "../../contexts/GlobalState";
 import LocalStorage from "../../contexts/LocalStorage";
+import authSevices from "../../services/authServices";
 import styles from "./Header.module.scss";
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
-    const { setIsModalSignUp, setIsModalSignIn, setIsLogined } =
+    const navigate = useNavigate();
+    const { setIsModalSignUp, setIsModalSignIn, isLogined, setIsLogined } =
         useContext(StateContext);
-    const [selectedKeys, setSelectedKeys] = useState(false);
+    const [api, contextHolder] = notification.useNotification();
+
     const usersLocal = LocalStorage?.getItem("users")?.other;
 
-    const onLogout = () => {
+    const onLogout = async () => {
+        const accessToken = await LocalStorage.getItem("users")?.accessToken;
+        const res = await authSevices.logout(accessToken);
+        api.success({
+            duration: 1.5,
+            message: `${res?.data?.message}`,
+        });
         LocalStorage.deleteItem("users");
+        setIsLogined(false);
+        navigate("/");
     };
 
     const items = [
@@ -85,6 +97,7 @@ const Header = () => {
 
     return (
         <div className={cx("wrapper")}>
+            {contextHolder}
             <div className={cx("header--left")}>
                 <h1>Fitness Health</h1>
             </div>

@@ -1,7 +1,6 @@
-import { Button, Form, Image, Space, Table } from "antd";
+import { Button, Image, Space, Table } from "antd";
 import classNames from "classnames/bind";
-import { useContext } from "react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StateContext } from "../../contexts/GlobalState";
@@ -13,15 +12,9 @@ import styles from "./Warehouse.module.scss";
 const cx = classNames.bind(styles);
 
 const Warehouse = () => {
-    const {
-        listsProduct,
-        setListsProduct,
-        products,
-        setIsUpdate,
-        setProducts,
-    } = useContext(StateContext);
+    const { listsProduct, setListsProduct, setIsUpdate, setProducts } =
+        useContext(StateContext);
     const navigate = useNavigate();
-    const [form] = Form.useForm();
 
     useEffect(() => {
         (async function fetchApi() {
@@ -37,7 +30,7 @@ const Warehouse = () => {
 
     const onUpdate = async (product) => {
         const res = await productsService.findUpdateProduct(product._id);
-        const { __v, ...other } = res?.data?.data.updatedProduct;
+        const { __v, ...other } = res?.data?.data;
         setProducts(other);
         navigate("/dasboard/them-san-pham");
         setIsUpdate(true);
@@ -55,16 +48,8 @@ const Warehouse = () => {
             render: (url) => <Image width={"150px"} src={url} />,
             align: "center",
         },
-        {
-            title: "Giá",
-            dataIndex: "price",
-            align: "center",
-        },
-        {
-            title: "Số lượng",
-            dataIndex: "quantity",
-            align: "center",
-        },
+        { title: "Giá", dataIndex: "price", align: "center" },
+        { title: "Số lượng", dataIndex: "quantity", align: "center" },
         {
             title: "Hành động",
             align: "center",

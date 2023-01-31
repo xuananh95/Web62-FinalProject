@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Modal } from "antd";
+
 import "./App.css";
 
 import Card from "./components/Card/Card";
@@ -28,11 +30,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/calo" element={<CaloPage />} />
-                <Route path="/product" element={<ProductPage />}>
-                    <Route path="*" element={<Card />} />
-                </Route>
+                <Route path="product" element={<ProductPage />} />
 
                 <Route path="/cart/:id" element={<CartPage />} />
+
                 <Route path="dasboard" element={<DasboardPage />}>
                     <Route path="kho-hang" element={<Warehouse />} />
                     <Route path="them-san-pham" element={<CreateProduct />} />

@@ -9,6 +9,7 @@ import { Layout, Menu } from "antd";
 import classNames from "classnames/bind";
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import Card from "../../components/Card/Card";
 
 import styles from "./ProductPage.module.scss";
 
@@ -20,24 +21,44 @@ const ProductPage = () => {
         {
             label: "Sữa tăng cân",
             path: "sua-tang-can",
-            icon: <FontAwesomeIcon icon={faBagShopping} />,
+            icon: (
+                <FontAwesomeIcon
+                    icon={faBagShopping}
+                    style={{ fontSize: "1.2rem" }}
+                />
+            ),
         },
 
         {
             label: "Hỗ trợ giảm cân",
             path: "ho-tro-giam-can",
-            icon: <FontAwesomeIcon icon={faDumbbell} />,
+            icon: (
+                <FontAwesomeIcon
+                    icon={faDumbbell}
+                    style={{ fontSize: "1.2rem" }}
+                />
+            ),
         },
         {
             label: "Vitamin khoáng chất",
             path: "vitamin-khoang-chat",
-            icon: <FontAwesomeIcon icon={faScaleUnbalanced} />,
+            icon: (
+                <FontAwesomeIcon
+                    icon={faScaleUnbalanced}
+                    style={{ fontSize: "1.2rem" }}
+                />
+            ),
         },
 
         {
             label: "Phụ kiện tập ",
             path: "phu-kien-tap",
-            icon: <FontAwesomeIcon icon={faBriefcase} />,
+            icon: (
+                <FontAwesomeIcon
+                    icon={faBriefcase}
+                    style={{ fontSize: "1.2rem" }}
+                />
+            ),
         },
     ];
 
@@ -45,6 +66,7 @@ const ProductPage = () => {
         <div className={cx("wrapper")}>
             <Sider width="18%">
                 <Menu
+                    style={{ fontSize: "1rem" }}
                     items={items.map((el) => {
                         return {
                             label: (
@@ -56,6 +78,7 @@ const ProductPage = () => {
                     })}
                 />
             </Sider>
+            <Card />
 
             <Outlet />
         </div>

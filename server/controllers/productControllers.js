@@ -56,7 +56,7 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
 
 const findProductById = async (req, res) => {
     const id = req.params.id;
-    console.log("id", req.params);
+
     if (!isValidObjectId(id)) {
         res.status(400);
         throw new Error("Invalid product id");
@@ -85,10 +85,12 @@ const updateProduct = asyncHandler(async (req, res) => {
         throw new Error("Invalid id");
     } else {
         const product = await Product.findById(id);
+
         if (product) {
             try {
                 const { name, slug, price, quantity, description, image } =
                     req.body;
+
                 // update name, price, description
                 product.name = name || product.name;
                 product.price = price || product.price;
@@ -96,15 +98,17 @@ const updateProduct = asyncHandler(async (req, res) => {
                 product.quantity = quantity || product.quantity;
                 product.image = image || product.image;
                 // check if slug exist in DB. If not, update the slug
-                if (slug) {
-                    const isSlugExist = await Product.find({ slug });
-                    if (isSlugExist.length > 0) {
-                        res.status(400);
-                        throw new Error("Slug already existed");
-                    } else {
-                        product.slug = slug;
-                    }
-                }
+
+                // if (slug) {
+                //     console.log(slug);
+                //     const isSlugExist = await Product.find({ slug });
+                //     if (isSlugExist.length > 0) {
+                //         res.status(400);
+                //         throw new Error("Slug already existed");
+                //     } else {
+                //         product.slug = slug;
+                //     }
+                // }
                 const updatedProduct = await product.save();
 
                 res.status(200).json({

@@ -23,9 +23,9 @@ const SignInPage = () => {
 
     const [api, contextHolder] = notification.useNotification();
 
-    const handleOk = async () => {
+    const handleOk = async (values) => {
         try {
-            const res = await authSevices.login(formLogin);
+            const res = await authSevices.login(values);
             LocalStorage.setItem("users", res?.data.data);
             api.success({
                 duration: 1.5,
@@ -85,13 +85,6 @@ const SignInPage = () => {
                             prefix={<FontAwesomeIcon icon={faEnvelope} />}
                             placeholder="Email"
                             type="email"
-                            onChange={(e) =>
-                                setFormLogin({
-                                    ...formLogin,
-                                    email: e.target.value,
-                                })
-                            }
-                            value={formLogin.email}
                         />
                     </Form.Item>
                     <Form.Item
@@ -113,13 +106,6 @@ const SignInPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Password"
-                            onChange={(e) =>
-                                setFormLogin({
-                                    ...formLogin,
-                                    password: e.target.value,
-                                })
-                            }
-                            value={formLogin.password}
                         />
                     </Form.Item>
 

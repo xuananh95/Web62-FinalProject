@@ -25,9 +25,9 @@ const SignUpPage = () => {
     const { isModalSignUp, setIsModalSignUp, setInputValue, inputValue } =
         useContext(StateContext);
 
-    const handleOk = async () => {
+    const handleOk = async (values) => {
         try {
-            const { confirmPassword, isCheckRules, ...rest } = inputValue;
+            const { confirmPassword, isCheckRules, ...rest } = values;
 
             const response = await authSevices.register(rest);
             api.success({
@@ -84,13 +84,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faUser} />}
                             placeholder="User name"
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    username: e.target.value,
-                                })
-                            }
-                            value={inputValue.username}
                         />
                     </Form.Item>
                     <Form.Item
@@ -111,13 +104,6 @@ const SignUpPage = () => {
                             prefix={<FontAwesomeIcon icon={faEnvelope} />}
                             placeholder="Email"
                             type="email"
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    email: e.target.value,
-                                })
-                            }
-                            value={inputValue.email}
                         />
                     </Form.Item>
                     <Form.Item
@@ -133,13 +119,6 @@ const SignUpPage = () => {
                             prefix={<FontAwesomeIcon icon={faPhone} />}
                             placeholder="Phone"
                             type="number"
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    phone: e.target.value,
-                                })
-                            }
-                            value={inputValue.phone}
                         />
                     </Form.Item>
                     <Form.Item
@@ -154,13 +133,6 @@ const SignUpPage = () => {
                         <Input
                             prefix={<FontAwesomeIcon icon={faLocationDot} />}
                             placeholder="Address"
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    address: e.target.value,
-                                })
-                            }
-                            value={inputValue.address}
                         />
                     </Form.Item>
                     <Form.Item
@@ -182,13 +154,6 @@ const SignUpPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Password"
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    password: e.target.value,
-                                })
-                            }
-                            value={inputValue.password}
                         />
                     </Form.Item>
 
@@ -221,13 +186,6 @@ const SignUpPage = () => {
                             minLength={"8"}
                             prefix={<FontAwesomeIcon icon={faKey} />}
                             placeholder="Confirm Password"
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    confirmPassword: e.target.value,
-                                })
-                            }
-                            value={inputValue.confirmPassword}
                         />
                     </Form.Item>
 
@@ -247,17 +205,7 @@ const SignUpPage = () => {
                             },
                         ]}
                     >
-                        <Checkbox
-                            onChange={(e) =>
-                                setInputValue({
-                                    ...inputValue,
-                                    isCheckRules: e.target.checked,
-                                })
-                            }
-                            checked={inputValue.isCheckRules}
-                        >
-                            I agree with the policy and privacy
-                        </Checkbox>
+                        <Checkbox>I agree with the policy and privacy</Checkbox>
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" block>

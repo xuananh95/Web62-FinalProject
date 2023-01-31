@@ -110,22 +110,13 @@ const signIn = asyncHandler(async (req, res) => {
                 });
             }
 
-            res.setHeader(
-                "Set-Cookie",
-                serialize(
-                    "refreshToken",
-                    existedRefreshToken?.refreshtoken || refreshtoken,
-                    {
-                        httpOnly: true,
-                        sameSite: "Strict",
-                        path: "/",
-                        secure: false,
-                        maxAge: 365 * 24 * 60 * 60,
-                    }
-                )
+            res.cookie(
+                "refreshtoken",
+                existedRefreshToken?.refreshtoken || refreshtoken
             );
 
             const { password, ...other } = user._doc;
+
             res.status(200).json({
                 statusCode: 200,
                 message: "Login success!",
@@ -140,6 +131,26 @@ const signIn = asyncHandler(async (req, res) => {
         }
     }
 });
+
+const signOut = async (req, res) => {
+    try {
+        const refreshtoken = req.cookies?.refreshtoken;
+
+        await RefreshTokenModel.findOneAndDelete(refreshtoken);
+
+        res.clearCookie("refreshtoken");
+
+        return res.status(200).json({
+            code: 200,
+            message: "Logout success!",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            code: 500,
+            message: error.message,
+        });
+    }
+};
 
 const getUserByID = asyncHandler(async (req, res) => {
     const id = req.params.id;
@@ -288,6 +299,7 @@ const deleteUserByID = asyncHandler(async (req, res) => {
 module.exports = {
     signUp,
     signIn,
+    signOut,
     getUserByID,
     updateUser,
     changePassword,

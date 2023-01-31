@@ -23,8 +23,14 @@ const cx = classNames.bind(styles);
 const CreateProduct = () => {
     const [form] = Form.useForm();
 
-    const { uploadData, setUploadData, products, isUpdate, setIsUpdate } =
-        useContext(StateContext);
+    const {
+        uploadData,
+        setUploadData,
+        products,
+        setProducts,
+        isUpdate,
+        setIsUpdate,
+    } = useContext(StateContext);
     const [api, contextHolder] = notification.useNotification();
     console.log("products", products);
 
@@ -75,6 +81,11 @@ const CreateProduct = () => {
 
     const onUpdate = async (values) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
+        const formData = new FormData();
+        formData.append("file", uploadData);
+        const uploadImage = await productsService.uploadImage(formData, token);
+        values.image = uploadImage?.data?.data?.url;
+        values.slug += `-${Math.floor(Math.random() * 1000)}`;
         const result = await productsService.updateProduct(
             values,
             products._id,
@@ -85,11 +96,13 @@ const CreateProduct = () => {
             message: `${result?.data?.message}`,
         });
         form.resetFields();
+        setProducts({});
     };
 
     const onReset = () => {
         form.resetFields();
-        setIsUpdate(true);
+        setIsUpdate(false);
+        setProducts({});
     };
 
     return (
@@ -177,7 +190,6 @@ const CreateProduct = () => {
                 <Form.Item
                     label="Image "
                     name="image"
-                    before
                     rules={[
                         {
                             required: true,
@@ -205,7 +217,7 @@ const CreateProduct = () => {
                             <Button type="primary" htmlType="submit" block>
                                 Cập nhập
                             </Button>
-                            <Button type="primary" onClick={onReset} block>
+                            <Button onClick={onReset} block>
                                 Reset
                             </Button>
                         </Space>
