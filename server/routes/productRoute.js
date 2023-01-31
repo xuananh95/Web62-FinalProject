@@ -6,6 +6,7 @@ const {
     getAllProducts,
     updateProduct,
     findProductsBySlug,
+    findProductById,
     deleteProduct,
 } = require("../controllers/productControllers");
 
@@ -75,7 +76,21 @@ router.get("/", getAllProducts);
 router.get("/find/:slug", findProductsBySlug);
 
 /**
- *  4. update products based on id 
+ *  4. Find product by ID 
+    /products/find/:slug: GET 
+	+ desc: Find product by ID 
+	+ access: none
+	+ return values: 
+        {
+            statusCode:
+            message:
+            data: ,
+        }
+ */
+router.find("/find/:id", findProductById);
+
+/**
+ *  5. update products based on id 
     /products/:id: PUT 
 	+ desc: update products based on id 
 	+ access: admin
@@ -96,7 +111,7 @@ router.get("/find/:slug", findProductsBySlug);
 router.put("/:id", protect, isAdmin, imageUploadLocal, updateProduct);
 
 /**
- *  4. delete products based on id 
+ *  6. delete products based on id 
     /products/:id: DEL 
 	+ desc: delete products based on id 
 	+ access: admin
