@@ -66,6 +66,7 @@ const findProductById = asyncHandler(async (req, res) => {
         res.status(400);
         throw new Error("Invalid product id");
     }
+    console.log(id);
     const product = await Product.findById(id);
     if (product) {
         res.status(200).json({
