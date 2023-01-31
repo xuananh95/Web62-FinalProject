@@ -56,8 +56,8 @@ const signUp = asyncHandler(async (req, res) => {
                     address,
                 });
                 if (newUser) {
-                    res.status(200).json({
-                        statusCode: 200,
+                    res.status(201).json({
+                        statusCode: 201,
                         message: "User created",
                         data: {
                             username,

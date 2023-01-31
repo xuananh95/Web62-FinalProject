@@ -41,9 +41,9 @@ const addOrder = asyncHandler(async (req, res) => {
         }
     }
     await newOrder.save();
-    res.status(200).json({
-        statusCode: 200,
-        message: "Success",
+    res.status(201).json({
+        statusCode: 201,
+        message: "New order created",
         data: newOrder,
     });
 });

@@ -19,8 +19,8 @@ const addFoodData = asyncHandler(async (req, res) => {
             image,
         });
         if (newFoodData) {
-            res.status(200).json({
-                statusCode: 200,
+            res.status(201).json({
+                statusCode: 201,
                 message: "New food added!",
                 data: {
                     name,
