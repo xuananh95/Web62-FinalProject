@@ -64,9 +64,13 @@ const ProductPage = () => {
 
     return (
         <div className={cx("wrapper")}>
-            <Sider width="18%">
+            <Sider width="15%" className={cx("item")}>
                 <Menu
-                    style={{ fontSize: "1rem" }}
+                    style={{
+                        fontSize: "1rem",
+                        backgroundColor: "rgb(119, 118, 118)",
+                        color: "#fff",
+                    }}
                     items={items.map((el) => {
                         return {
                             label: (

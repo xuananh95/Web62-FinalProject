@@ -11,6 +11,7 @@ cloudinary.config({
 
 const Image = {
     upload: async (req, res) => {
+        // console.log("req.file", req.files);
         await new Promise((resolve) => {
             const mw = multer({ storage: multer.diskStorage({}) }).any();
             mw(req, res, resolve);
@@ -29,7 +30,7 @@ const Image = {
                     if (err) console.log(`failed to deleted file ${err}`);
                 });
             });
-            console.log(response);
+
             return response;
         };
 

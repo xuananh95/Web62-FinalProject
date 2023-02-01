@@ -32,7 +32,12 @@ const WheyProtein = () => {
                     >
                         <Meta title={el.name} /> <Rate value={4} disabled />
                         <span> 250</span>
-                        <p>{el.price} VNĐ</p>
+                        <p>
+                            {new Intl.NumberFormat("vi-VN", {
+                                style: "currency",
+                                currency: "VND",
+                            }).format(el.price)}{" "}
+                        </p>
                         <div className={cx("buy")}>
                             <Button type="primary" size="large" block>
                                 <FontAwesomeIcon
@@ -80,15 +85,18 @@ const WheyProtein = () => {
                     />
                     <Input.Search
                         size="large"
-                        style={{ width: "100%" }}
-                        placeholder="Search product ..."
+                        placeholder="Tìm kiếm sản phẩm ..."
                     />
                 </Space>
             </div>
 
             <div className={cx("card")}>{renderCard}</div>
             <div className={cx("pagination")}>
-                <Pagination showQuickJumper defaultCurrent={1} total={100} />
+                <Pagination
+                    defaultCurrent={1}
+                    total={50}
+                    style={{ fontSize: "1rem" }}
+                />
             </div>
         </div>
     );

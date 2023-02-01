@@ -325,3 +325,12 @@
 2023-1-31 - 18:24:55 - Error: Incorrect username or password! - Path: /users/sign-in 
 2023-1-31 - 18:28:32 - Error: Incorrect username or password! - Path: /users/sign-in 
 2023-1-31 - 18:28:55 - Error: Incorrect username or password! - Path: /users/sign-in 
+2023-1-31 - 21:13:57 - Error: Invalid token - Path: /users/sign-out 
+2023-1-31 - 21:14:2 - Error: Invalid token - Path: /users/sign-out 
+2023-1-31 - 21:14:5 - Error: Invalid token - Path: /users/sign-out 
+2023-1-31 - 21:28:37 - Error: Invalid token - Path: /uploadImage 
+2023-1-31 - 21:29:46 - Error: Invalid token - Path: /uploadImage 
+2023-2-1 - 8:46:3 - Error: Invalid token - Path: /users/sign-out 
+2023-2-1 - 8:46:8 - Error: Invalid token - Path: /users/sign-out 
+2023-2-1 - 8:46:28 - Error: Invalid token - Path: /users/sign-out 
+2023-2-1 - 10:26:34 - Error: Invalid id - Path: /products/undefined 

@@ -1,4 +1,5 @@
-import { Button, Image, Space, Table } from "antd";
+import { Button, Image, Space, Table, notification } from "antd";
+import useNotification from "antd/es/notification/useNotification";
 import classNames from "classnames/bind";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,7 @@ import styles from "./Warehouse.module.scss";
 const cx = classNames.bind(styles);
 
 const Warehouse = () => {
+    const [api, contextHolder] = notification.useNotification();
     const { listsProduct, setListsProduct, setIsUpdate, setProducts } =
         useContext(StateContext);
     const navigate = useNavigate();
@@ -25,7 +27,11 @@ const Warehouse = () => {
 
     const onDelete = async (product) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
-        await productsService.deleteProduct(product._id, token);
+        const res = await productsService.deleteProduct(product._id, token);
+        api.success({
+            duration: 1.5,
+            message: `${res?.data?.message}`,
+        });
     };
 
     const onUpdate = async (product) => {
@@ -48,7 +54,21 @@ const Warehouse = () => {
             render: (url) => <Image width={"150px"} src={url} />,
             align: "center",
         },
-        { title: "Giá", dataIndex: "price", align: "center" },
+        {
+            title: "Phân loại",
+            dataIndex: "slug",
+            align: "center",
+        },
+        {
+            title: "Giá",
+            dataIndex: "price",
+            align: "center",
+            render: (price) =>
+                new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(price),
+        },
         { title: "Số lượng", dataIndex: "quantity", align: "center" },
         {
             title: "Hành động",
@@ -68,6 +88,8 @@ const Warehouse = () => {
 
     return (
         <>
+            {" "}
+            {contextHolder}
             <Table
                 size="large"
                 className={cx("table")}

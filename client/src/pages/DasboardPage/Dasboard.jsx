@@ -27,7 +27,11 @@ const DasboardPage = () => {
         <div className={cx("wrapper")}>
             <Sider width="20%">
                 <Menu
-                    style={{ fontSize: "1rem" }}
+                    style={{
+                        fontSize: "1rem",
+                        backgroundColor: "rgb(119, 118, 118)",
+                        color: "#fff",
+                    }}
                     items={items.map((el) => {
                         return {
                             label: (

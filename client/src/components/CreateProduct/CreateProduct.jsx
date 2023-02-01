@@ -66,10 +66,12 @@ const CreateProduct = () => {
     const onCreateProduct = async (values) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
         const formData = new FormData();
-        formData.append("file", uploadData);
+        formData.append("files", uploadData);
+
         const uploadImage = await productsService.uploadImage(formData, token);
         values.image = uploadImage?.data?.data?.url;
         values.slug += `-${Math.floor(Math.random() * 1000)}`;
+
         const result = await productsService.create(values, token);
         api.success({
             duration: 1.5,
