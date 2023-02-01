@@ -1,12 +1,75 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .App {
-    width: 100%;
-    height: 100%;
-    font-family: "Montserrat", sans-serif;
-    letter-spacing: 0.1em;
+  width: 100%;
+  height: 100%;
+  font-family: "Montserrat", sans-serif;
+  letter-spacing: 0.1em;
 }
+/* .ant-form-item-required {
+  color: red !important;
+} */
+/* css-start */
+.marquee-w {
+  position: relative;
+  display: block;
+  width: 100vw;
+  height: 140px;
+  margin-top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: hidden;
+}
+.marquee {
+  position: absolute;
+  display: block;
+  margin: auto auto;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 100%;
+  height: 100%;
+}
+.marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  font-family: "Fahkwang", sans-serif;
+
+  text-align: center;
+  -webkit-text-stroke: 1px #43e486;
+  white-space: nowrap;
+  min-width: 100%;
+  height: 100%;
+  line-height: 140px;
+  font-size: 85px;
+  animation: marquee 23s linear infinite;
+  /*  */
+  margin-right: 5rem;
+  -webkit-text-stroke-width: 2px;
+  width: max-content;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-color: #fff;
+  opacity: 0.4;
+  font-size: 4.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+
+.marquee1 span {
+  animation-delay: 12s;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+
+/* css-end */

@@ -101,7 +101,7 @@ export const TDEEForm = () => {
       autoComplete="off"
     >
       <Form.Item
-        label="Tuổi"
+        label={<p style={{ color: "rgba(185, 178, 172)" }}>Tuổi</p>}
         name="age"
         rules={[
           {
@@ -109,11 +109,13 @@ export const TDEEForm = () => {
             message: "Please input your age!",
           },
         ]}
+        style={{ color: "rgba(185,178,172)" }}
+        className={styles.rrrr}
       >
         <Input placeholder="Nhập tuổi của bạn" />
       </Form.Item>
       <Form.Item
-        label="Giới Tính"
+        label={<p style={{ color: "rgba(185, 178, 172)" }}>Giới Tính</p>}
         name="gender"
         rules={[
           {
@@ -128,7 +130,7 @@ export const TDEEForm = () => {
         </Select>
       </Form.Item>
       <Form.Item
-        label="Chiều Cao"
+        label={<p style={{ color: "rgba(185, 178, 172)" }}>Chiều Cao</p>}
         name="height"
         rules={[
           {
@@ -140,7 +142,7 @@ export const TDEEForm = () => {
         <Input placeholder="Nhập chiều cao của bạn" />
       </Form.Item>
       <Form.Item
-        label="Cân Nặng"
+        label={<p style={{ color: "rgba(185, 178, 172)" }}>Cân Nặng</p>}
         name="weight"
         rules={[
           {
@@ -152,7 +154,9 @@ export const TDEEForm = () => {
         <Input placeholder="Nhập cân nặng của bạn" />
       </Form.Item>
       <Form.Item
-        label="Tần suất tập luyên"
+        label={
+          <p style={{ color: "rgba(185, 178, 172)" }}>Tần suất tập luyện</p>
+        }
         name="practicefrequency"
         rules={[
           {
@@ -161,7 +165,7 @@ export const TDEEForm = () => {
           },
         ]}
       >
-        <Select placeholder="Lựa chọn tần suất tập luyện của bạn">
+        <Select placeholder="Lựa chọn tần suất tập luyện của bạn" styles={{}}>
           <Select.Option value="1.2">
             Ít vận động(công việc văn phòng)
           </Select.Option>
@@ -181,7 +185,7 @@ export const TDEEForm = () => {
       </Form.Item>
 
       <Form.Item
-        label="Tỉ lệ mỡ"
+        label={<p style={{ color: "rgba(185, 178, 172)" }}>Tỉ lệ mỡ</p>}
         name="fat"
         rules={[
           {

@@ -6,15 +6,54 @@
 .titleTDEE {
   text-align: center;
   margin-bottom: 1rem;
+  color: rgba(255, 111, 0, 1);
 }
 .TDEEContainer {
   padding: 1em;
-  background-color: #bfe1ff;
+  /* background-color: #fff; */
+  background-color: rgba(37, 36, 34, 1);
+  background-image: url("https://jamstackvietnam.com/images/pattern.png");
+
+  height: 90vh;
 }
 .descTDEE {
   margin-top: 0;
   margin-bottom: 1rem;
+  color: rgba(185, 178, 172, 1);
 }
 .colHalf {
   padding: 1rem;
+}
+.HomePageTitleContent {
+  /* padding-left: 100%; */
+  font-family: "Fahkwang", sans-serif;
+  text-align: center;
+  white-space: nowrap;
+  min-width: 100%;
+  /* height: 100%; */
+  line-height: 140px;
+  font-size: 85px;
+  margin-right: 5rem;
+  width: max-content;
+  color: rgba(255, 111, 0);
+  margin-bottom: 20px;
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  line-height: 1.25;
+}
+.HomePageDescContent {
+  /* padding-left: 100%; */
+  font-family: "Fahkwang", sans-serif;
+  text-align: left;
+  height: 100%;
+  line-height: 140px;
+  font-size: 85px;
+  margin-right: 5rem;
+  width: 593px;
+  color: rgba(185, 178, 172);
+  font-size: 1.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1.25;
 }

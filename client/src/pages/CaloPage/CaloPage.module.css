@@ -24,7 +24,7 @@
   border: 1px solid;
   min-width: 1078px;
 }
-.CaloPageModal:hover {
+.onHover:hover {
   opacity: 0.6;
   cursor: pointer;
 }
