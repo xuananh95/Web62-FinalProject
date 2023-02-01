@@ -29,7 +29,7 @@ const Image = {
                     if (err) console.log(`failed to deleted file ${err}`);
                 });
             });
-            console.log(response);
+            // console.log(response);
             return response;
         };
 
