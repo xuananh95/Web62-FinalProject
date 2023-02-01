@@ -12,9 +12,6 @@ const {
 
 // middlewares
 const { protect, isAdmin } = require("../middlewares/authMiddleware");
-const {
-    imageUploadLocal,
-} = require("../middlewares/uploadImageToLocalMiddleware");
 
 const router = express.Router();
 /**

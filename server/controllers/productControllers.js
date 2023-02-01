@@ -3,7 +3,7 @@ const asyncHandler = require("express-async-handler");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
 const addProduct = async (req, res) => {
-    console.log("req", req.body);
+    // console.log("req", req.body);
     try {
         // const existProduct = await Product.findOne({ _id });
         // console.log(existProduct);
@@ -23,12 +23,18 @@ const addProduct = async (req, res) => {
 };
 
 const getAllProducts = asyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const PER_PAGE = 10;
+    const page = req.query.page;
+    const productCount = await Product.count();
+    const products = await Product.find({})
+        .skip(PER_PAGE * page - PER_PAGE)
+        .limit(PER_PAGE);
+    const numbersOfPage = Math.floor(productCount / PER_PAGE) + 1;
     if (products) {
         res.status(200).json({
             statusCode: 200,
             message: "Success",
-            data: products,
+            data: { products, numbersOfPage },
         });
     }
 });
@@ -39,7 +45,6 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
         slug: { $regex: `${findSlug}`, $options: "i" },
     });
     if (result.length > 0) {
-        console.log("a");
         res.status(200).json({
             statusCode: 200,
             message: "Success",
@@ -50,6 +55,7 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
             statusCode: 404,
             message: "Not found",
             data: null,
+            page: page,
         });
     }
 });

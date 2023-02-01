@@ -104,7 +104,7 @@ const updateMeasure = asyncHandler(async (req, res) => {
                 data: userProfile,
             });
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             res.status(400);
             throw new Error("Invalid measure data");
         }
@@ -177,7 +177,9 @@ const deleteMeasureRecord = asyncHandler(async (req, res) => {
                 }
                 userProfile.save();
             } catch (error) {
-                console.log(error);
+                // console.log(error);
+                res.status(400);
+                throw new Error("Error deleting measure");
             }
             res.status(200).json({
                 statusCode: 200,
