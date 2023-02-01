@@ -1,7 +1,7 @@
-import { Button, Form, Image, Space, Table } from "antd";
+import { Button, Image, Space, Table, notification } from "antd";
+import useNotification from "antd/es/notification/useNotification";
 import classNames from "classnames/bind";
-import { useContext } from "react";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { StateContext } from "../../contexts/GlobalState";
@@ -13,43 +13,49 @@ import styles from "./Warehouse.module.scss";
 const cx = classNames.bind(styles);
 
 const Warehouse = () => {
+    const [api, contextHolder] = notification.useNotification();
     const {
         listsProduct,
         setListsProduct,
-        products,
         setIsUpdate,
         setProducts,
+        totalPage,
+        setTotalPage,
+        currentPage,
+        setCurrentPage,
     } = useContext(StateContext);
     const navigate = useNavigate();
-    const [form] = Form.useForm();
 
     useEffect(() => {
         (async function fetchApi() {
-            const res = await productsService.getAllProducts();
-            setListsProduct(res?.data.data);
+            const res = await productsService.getAllProducts(currentPage);
+            setListsProduct(res?.data.data.products);
+            setTotalPage(res?.data.data.productCount);
         })();
-    }, []);
+    }, [currentPage]);
 
     const onDelete = async (product) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
-        await productsService.deleteProduct(product._id, token);
+        const res = await productsService.deleteProduct(product._id, token);
+        api.success({
+            duration: 1.5,
+            message: `${res?.data?.message}`,
+        });
+    };
+
+    const onChangePage = (page) => {
+        setCurrentPage(page);
     };
 
     const onUpdate = async (product) => {
-        const token = await LocalStorage.getItem("users")?.accessToken;
-        const res = await productsService.updateProduct(product._id, token);
-        const { __v, _id, ...other } = res?.data?.data.updatedProduct;
+        const res = await productsService.findUpdateProduct(product._id);
+        const { __v, ...other } = res?.data?.data;
         setProducts(other);
         navigate("/dasboard/them-san-pham");
         setIsUpdate(true);
     };
 
     const columns = [
-        {
-            title: "ID",
-            dataIndex: "_id",
-            align: "center",
-        },
         {
             title: "Tên sản phẩm",
             dataIndex: "name",
@@ -58,26 +64,36 @@ const Warehouse = () => {
         {
             title: "Hình ảnh",
             dataIndex: "image",
-            render: (url) => <Image width={"120px"} src={url} />,
+            render: (url) => <Image width={"150px"} src={url} />,
+            align: "center",
+        },
+        {
+            title: "Phân loại",
+            dataIndex: "slug",
             align: "center",
         },
         {
             title: "Giá",
             dataIndex: "price",
             align: "center",
+            render: (price) =>
+                new Intl.NumberFormat("vi-VN", {
+                    style: "currency",
+                    currency: "VND",
+                }).format(price),
         },
-        {
-            title: "Số lượng",
-            dataIndex: "quantity",
-            align: "center",
-        },
+        { title: "Số lượng", dataIndex: "quantity", align: "center" },
         {
             title: "Hành động",
             align: "center",
             render: (_id) => (
                 <Space>
-                    <Button onClick={() => onUpdate(_id)}>Chỉnh sửa</Button>
-                    <Button onClick={() => onDelete(_id)}>Xóa</Button>
+                    <Button size="large" onClick={() => onUpdate(_id)}>
+                        Chỉnh sửa
+                    </Button>
+                    <Button danger size="large" onClick={() => onDelete(_id)}>
+                        Xóa
+                    </Button>
                 </Space>
             ),
         },
@@ -85,11 +101,18 @@ const Warehouse = () => {
 
     return (
         <>
+            {" "}
+            {contextHolder}
             <Table
+                size="large"
                 className={cx("table")}
                 columns={columns}
                 dataSource={listsProduct}
-                tableLayout="auto"
+                pagination={{
+                    total: totalPage,
+                    current: currentPage,
+                    onChange: onChangePage,
+                }}
             />
         </>
     );

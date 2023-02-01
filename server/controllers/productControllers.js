@@ -1,19 +1,12 @@
 const { Product } = require("../models/ProductModel");
 const asyncHandler = require("express-async-handler");
-const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
 
 const addProduct = async (req, res) => {
     // console.log("req", req.body);
     try {
-        // check if slug exists
-        const isSlugExist = await Product.findOne({ slug: req.body.slug });
-        if (isSlugExist) {
-            return res.status(400).json({
-                code: 400,
-                message: "Slug already existed",
-            });
-        }
+        // const existProduct = await Product.findOne({ _id });
+        // console.log(existProduct);
 
         const newProduct = await Product.create(req.body);
         return res.status(201).json({
@@ -30,12 +23,27 @@ const addProduct = async (req, res) => {
 };
 
 const getAllProducts = asyncHandler(async (req, res) => {
-    const products = await Product.find({});
+    const PER_PAGE = 10;
+    const page = req.query.page;
+    const productCount = await Product.count();
+    if (page === 0) {
+        const products = await Product.find({});
+        if (products) {
+            res.status(200).json({
+                statusCode: 200,
+                message: "Success",
+                data: { products, productCount },
+            });
+        }
+    }
+    const products = await Product.find({})
+        .skip(PER_PAGE * page - PER_PAGE)
+        .limit(PER_PAGE);
     if (products) {
         res.status(200).json({
             statusCode: 200,
             message: "Success",
-            data: products,
+            data: { products, productCount },
         });
     }
 });
@@ -46,7 +54,6 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
         slug: { $regex: `${findSlug}`, $options: "i" },
     });
     if (result.length > 0) {
-        console.log("a");
         res.status(200).json({
             statusCode: 200,
             message: "Success",
@@ -57,9 +64,34 @@ const findProductsBySlug = asyncHandler(async (req, res) => {
             statusCode: 404,
             message: "Not found",
             data: null,
+            page: page,
         });
     }
 });
+
+const findProductById = async (req, res) => {
+    const id = req.params.id;
+
+    if (!isValidObjectId(id)) {
+        res.status(400);
+        throw new Error("Invalid product id");
+    }
+    console.log(id);
+    const product = await Product.findById(id);
+    if (product) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success",
+            data: product,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Product not found",
+            data: null,
+        });
+    }
+};
 
 const updateProduct = asyncHandler(async (req, res) => {
     const id = req.params.id;
@@ -68,39 +100,36 @@ const updateProduct = asyncHandler(async (req, res) => {
         throw new Error("Invalid id");
     } else {
         const product = await Product.findById(id);
+
         if (product) {
             try {
-                const { name, slug, price, quantity, description } = req.body;
+                const { name, slug, price, quantity, description, image } =
+                    req.body;
+
                 // update name, price, description
                 product.name = name || product.name;
                 product.price = price || product.price;
                 product.description = description || product.description;
                 product.quantity = quantity || product.quantity;
+                product.image = image || product.image;
                 // check if slug exist in DB. If not, update the slug
-                if (slug) {
-                    const isSlugExist = await Product.find({ slug });
-                    if (isSlugExist.length > 0) {
-                        res.status(400);
-                        throw new Error("Slug already existed");
-                    } else {
-                        product.slug = slug;
-                    }
-                }
-                // Check if user send image
-                const image = req.file;
-                if (image) {
-                    const imageUploaded = await cloudinaryUploadImage(
-                        image.path,
-                        FOLDER
-                    );
-                    product.image = imageUploaded.secure_url;
-                }
+
+                // if (slug) {
+                //     console.log(slug);
+                //     const isSlugExist = await Product.find({ slug });
+                //     if (isSlugExist.length > 0) {
+                //         res.status(400);
+                //         throw new Error("Slug already existed");
+                //     } else {
+                //         product.slug = slug;
+                //     }
+                // }
                 const updatedProduct = await product.save();
 
                 res.status(200).json({
                     statusCode: 200,
                     message: "Success",
-                    data: { updatedProduct },
+                    data: updatedProduct,
                 });
             } catch (error) {
                 res.status(400);
@@ -145,4 +174,5 @@ module.exports = {
     updateProduct,
     findProductsBySlug,
     deleteProduct,
+    findProductById,
 };

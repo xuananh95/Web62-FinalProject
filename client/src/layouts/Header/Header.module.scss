@@ -1,8 +1,8 @@
 .wrapper {
     background-color: #001529;
-    color: aliceblue;
+    color: #fff;
     display: flex;
-    padding: 0 1.5rem;
+    padding: 1rem 3rem;
     gap: 3rem;
 }
 
@@ -10,8 +10,9 @@
     h1 {
         text-align: center;
         letter-spacing: 0.2em;
-        font-size: 1.8em;
+        font-size: 3rem;
         text-shadow: 2px 2px 5px rgb(243, 243, 189);
+        padding: 0.5rem 0;
     }
 }
 
@@ -19,22 +20,28 @@
     display: flex;
     justify-content: space-evenly;
     text-align: center;
-    font-size: 0.8em;
-    flex: 1;
+    color: #fff;
+    flex: 2;
+    padding: 1rem 0;
 }
 
 .link {
     letter-spacing: 0.1rem;
+    font-size: 1rem;
 }
 
 .account {
     align-items: center;
-    width: 40%;
+    flex: 1;
     display: flex;
     justify-content: end;
     gap: 0.8rem;
 }
 
 .icon {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+}
+
+.menu {
+    font-size: 1rem;
 }

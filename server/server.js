@@ -17,9 +17,13 @@ const productRouter = require("./routes/productRoute");
 const foodRouter = require("./routes/foodRoute");
 const orderRouter = require("./routes/orderRoute");
 const fitnessProfileRouter = require("./routes/fitnessProfileRoute");
+const menuRouter = require("./routes/menuRoute");
 
 // import middlewares
 const { errorHandle } = require("./middlewares/errorMiddleware");
+
+// upload image controller
+const image = require("./controllers/upload");
 
 // basic setup
 const PORT = 5000;
@@ -38,22 +42,10 @@ app.use("/products", productRouter);
 app.use("/foods", foodRouter);
 app.use("/orders", orderRouter);
 app.use("/fitness-profile", fitnessProfileRouter);
+app.use("/menu", menuRouter);
 
-app.post(
-    "/tools/uploadImage",
-    protect,
-    isAdmin,
-    imageUploadLocal,
-    async (req, res) => {
-        let image = req.file;
-        const imageUploaded = await cloudinaryUploadImage(
-            image.path,
-            "product"
-        );
-        const imageURL = imageUploaded.secure_url;
-        res.json(imageURL);
-    }
-);
+// routes to upload local image
+app.post("/uploadImage", protect, isAdmin, image.upload);
 
 // handling errors
 app.use(errorHandle);

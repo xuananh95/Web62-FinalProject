@@ -48,7 +48,7 @@ const IconText = ({ icon, text }) => (
 );
 const { Meta } = Card;
 
-export const CaloPage = () => {
+const CaloPage = () => {
   //props
 
   //state&hooks
@@ -389,48 +389,33 @@ export const CaloPage = () => {
     const f =
       totalfat -
       (Number(deleteProduct[0].fat) * Number(deleteProduct[0].quantity)) / 100;
-
+    console.log(deleteProduct);
+    console.log(deleteProduct[0].protein);
+    console.log(p, c, f);
     setTotalprotein(p);
     setTotalcarb(c);
     setTotalfat(f);
-    if (foodbasket.length == 1) {
-      setData({
-        labels: ["Protein", "Tinh bột", "Chất Béo"],
-        datasets: [
-          {
-            label: "Tỉ lệ các chất chính",
-            data: [0, 0, 0],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              // "rgb(75, 192, 192)",
-              "rgb(255, 205, 86)",
-              // "rgb(201, 203, 207)",
-              "rgb(54, 162, 235)",
-            ],
-          },
-        ],
-      });
-    } else {
-      setData({
-        labels: ["Protein", "Tinh bột", "Chất Béo"],
-        datasets: [
-          {
-            label: "Tỉ lệ các chất chính",
-            data: [
-              (p / (p + c + f)) * 100,
-              (c / (p + c + f)) * 100,
-              (f / (p + c + f)) * 100,
-            ],
-            backgroundColor: [
-              "rgb(255, 99, 132)",
-              "rgb(255, 205, 86)",
-              "rgb(54, 162, 235)",
-            ],
-          },
-        ],
-      });
-    }
 
+    setData({
+      labels: ["Protein", "Tinh bột", "Chất Béo"],
+      datasets: [
+        {
+          label: "Tỉ lệ các chất chính",
+          data: [
+            (p / (p + c + f)) * 100,
+            (c / (p + c + f)) * 100,
+            (f / (p + c + f)) * 100,
+          ],
+          backgroundColor: [
+            "rgb(255, 99, 132)",
+            // "rgb(75, 192, 192)",
+            "rgb(255, 205, 86)",
+            // "rgb(201, 203, 207)",
+            "rgb(54, 162, 235)",
+          ],
+        },
+      ],
+    });
     //logicchart-end
   };
 
@@ -464,36 +449,7 @@ export const CaloPage = () => {
       render: (quantity) => <p>{quantity}g</p>,
     },
     {
-      title: "Calo",
-      dataIndex: "calo",
-      key: "calo",
-      // render: (calo) => <p>{calo}</p>,
-      render: (calo, quantity) => <p>{(+calo * +quantity.quantity) / 100}</p>,
-    },
-    {
-      title: "Protein",
-      dataIndex: "protein",
-      key: "protein",
-      render: (protein, quantity) => (
-        <p>{(+protein * +quantity.quantity) / 100}</p>
-      ),
-    },
-    {
-      title: "Tinh Bột",
-      dataIndex: "carb",
-      key: "carb",
-      // render: (Carb) => <p>{Carb}</p>,
-      render: (carb, quantity) => <p>{(+carb * +quantity.quantity) / 100}</p>,
-    },
-    {
-      title: "Chất Béo",
-      dataIndex: "fat",
-      key: "fat",
-      // render: (fat) => <p>{fat}</p>,
-      render: (fat, quantity) => <p>{(+fat * +quantity.quantity) / 100}</p>,
-    },
-    {
-      title: "",
+      title: "Hành động",
       dataIndex: "id",
       key: "id",
       // render: () => <a>Xóa món</a>,
@@ -503,18 +459,16 @@ export const CaloPage = () => {
             title="Sure to delete?"
             onConfirm={() => handleDelete(id)}
           >
-            {/* <<a>Xóa Món</a>> */}
-            <FontAwesomeIcon icon={faTrash} className={styles.onHover} />
+            <a>Xóa Món</a>
           </Popconfirm>
         ) : null,
     },
   ];
-  console.log(foodbasket);
 
   return (
     <div className={styles.CaloPageWrapper}>
       <Row style={{ height: "110vh" }}>
-        <Col md={15} style={{ marginLeft: "20px" }}>
+        <Col md={15}>
           <div>
             <h2
               style={{
@@ -574,14 +528,14 @@ export const CaloPage = () => {
         </Col>
 
         {/* menu-end */}
-        <Col md={8} sm={8} xs={8}>
+        <Col md={9} sm={9} xs={9}>
           <Row>
             <Col md={4} offset={20} style={{ marginTop: "80px" }}>
               <Badge
                 count={foodbasket.length}
                 onClick={showModal}
                 showZero="true"
-                className={styles.onHover}
+                className={styles.CaloPageModal}
                 // text="Giỏ"
                 // placement="start"
                 // title="Giỏ đồ"
@@ -602,8 +556,7 @@ export const CaloPage = () => {
                   </Button>,
                 ]}
               >
-                {/* <Table columns={columns} dataSource={foodbasket} /> */}
-                <TableFood columns={columns} foodbasket={foodbasket} />
+                <Table columns={columns} dataSource={foodbasket} />
               </Modal>
             </Col>
           </Row>
@@ -615,3 +568,5 @@ export const CaloPage = () => {
     </div>
   );
 };
+
+export default CaloPage;

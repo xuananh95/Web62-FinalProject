@@ -23,8 +23,14 @@ const cx = classNames.bind(styles);
 const CreateProduct = () => {
     const [form] = Form.useForm();
 
-    const { uploadData, setUploadData, products, isUpdate, setIsUpdate } =
-        useContext(StateContext);
+    const {
+        uploadData,
+        setUploadData,
+        products,
+        setProducts,
+        isUpdate,
+        setIsUpdate,
+    } = useContext(StateContext);
     const [api, contextHolder] = notification.useNotification();
     console.log("products", products);
 
@@ -37,7 +43,6 @@ const CreateProduct = () => {
             quantity: products.quantity,
         });
     }, [isUpdate]);
-    // console.log(uploadData.name);
 
     const options = [
         {
@@ -61,10 +66,12 @@ const CreateProduct = () => {
     const onCreateProduct = async (values) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
         const formData = new FormData();
-        formData.append("file", uploadData);
+        formData.append("files", uploadData);
+
         const uploadImage = await productsService.uploadImage(formData, token);
         values.image = uploadImage?.data?.data?.url;
         values.slug += `-${Math.floor(Math.random() * 1000)}`;
+
         const result = await productsService.create(values, token);
         api.success({
             duration: 1.5,
@@ -72,6 +79,32 @@ const CreateProduct = () => {
         });
 
         form.resetFields();
+    };
+
+    const onUpdate = async (values) => {
+        const token = await LocalStorage.getItem("users")?.accessToken;
+        const formData = new FormData();
+        formData.append("file", uploadData);
+        const uploadImage = await productsService.uploadImage(formData, token);
+        values.image = uploadImage?.data?.data?.url;
+        values.slug += `-${Math.floor(Math.random() * 1000)}`;
+        const result = await productsService.updateProduct(
+            values,
+            products._id,
+            token
+        );
+        api.success({
+            duration: 1.5,
+            message: `${result?.data?.message}`,
+        });
+        form.resetFields();
+        setProducts({});
+    };
+
+    const onReset = () => {
+        form.resetFields();
+        setIsUpdate(false);
+        setProducts({});
     };
 
     return (
@@ -82,7 +115,7 @@ const CreateProduct = () => {
                 labelCol={{ span: 4 }}
                 form={form}
                 size="large"
-                onFinish={onCreateProduct}
+                onFinish={isUpdate ? onUpdate : onCreateProduct}
             >
                 <Form.Item
                     label="Name"
@@ -159,7 +192,6 @@ const CreateProduct = () => {
                 <Form.Item
                     label="Image "
                     name="image"
-                    before
                     rules={[
                         {
                             required: true,
@@ -187,7 +219,7 @@ const CreateProduct = () => {
                             <Button type="primary" htmlType="submit" block>
                                 Cập nhập
                             </Button>
-                            <Button type="primary" htmlType="submit" block>
+                            <Button onClick={onReset} block>
                                 Reset
                             </Button>
                         </Space>

@@ -56,8 +56,8 @@ const signUp = asyncHandler(async (req, res) => {
                     address,
                 });
                 if (newUser) {
-                    res.status(200).json({
-                        statusCode: 200,
+                    res.status(201).json({
+                        statusCode: 201,
                         message: "User created",
                         data: {
                             username,
@@ -110,22 +110,13 @@ const signIn = asyncHandler(async (req, res) => {
                 });
             }
 
-            res.setHeader(
-                "Set-Cookie",
-                serialize(
-                    "refreshToken",
-                    existedRefreshToken?.refreshtoken || refreshtoken,
-                    {
-                        httpOnly: true,
-                        sameSite: "Strict",
-                        path: "/",
-                        secure: false,
-                        maxAge: 365 * 24 * 60 * 60,
-                    }
-                )
+            res.cookie(
+                "refreshtoken",
+                existedRefreshToken?.refreshtoken || refreshtoken
             );
 
             const { password, ...other } = user._doc;
+
             res.status(200).json({
                 statusCode: 200,
                 message: "Login success!",
@@ -140,6 +131,26 @@ const signIn = asyncHandler(async (req, res) => {
         }
     }
 });
+
+const signOut = async (req, res) => {
+    try {
+        const refreshtoken = req.cookies?.refreshtoken;
+
+        await RefreshTokenModel.findOneAndDelete(refreshtoken);
+
+        res.clearCookie("refreshtoken");
+
+        return res.status(200).json({
+            code: 200,
+            message: "Logout success!",
+        });
+    } catch (error) {
+        return res.status(500).json({
+            code: 500,
+            message: error.message,
+        });
+    }
+};
 
 const getUserByID = asyncHandler(async (req, res) => {
     const id = req.params.id;
@@ -163,13 +174,14 @@ const getUserByID = asyncHandler(async (req, res) => {
 });
 
 const updateUser = asyncHandler(async (req, res) => {
-    const { username, address, phoneNumber } = req.body;
+    const { username, address, phoneNumber, image } = req.body;
     const id = req.user._id;
     const user = await User.findById(id);
     if (user) {
         user.username = username || user.username;
         user.address = address || user.address;
         user.phoneNumber = phoneNumber || user.phoneNumber;
+        user.image = image || user.image;
         const updatedUser = await user.save();
         res.status(200).json({
             statusCode: 200,
@@ -179,6 +191,7 @@ const updateUser = asyncHandler(async (req, res) => {
                 username: updatedUser.username,
                 address: updatedUser.address,
                 phoneNumber: updatedUser.phoneNumber,
+                image: updatedUser.image,
             },
         });
     } else {
@@ -286,6 +299,7 @@ const deleteUserByID = asyncHandler(async (req, res) => {
 module.exports = {
     signUp,
     signIn,
+    signOut,
     getUserByID,
     updateUser,
     changePassword,

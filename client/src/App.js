@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Modal } from "antd";
+
 import "./App.css";
 
 import Card from "./components/Card/Card";
@@ -8,7 +10,7 @@ import Warehouse from "./components/Warehoouse/Warehouse";
 import { StateContext } from "./contexts/GlobalState";
 import Footer from "./layouts/Footer/Footer";
 import Header from "./layouts/Header/Header";
-import { CaloPage } from "./pages/CaloPage/CaloPage";
+import CaloPage from "./pages/CaloPage/CaloPage";
 import CartPage from "./pages/CartPage/CartPage";
 import DasboardPage from "./pages/DasboardPage/Dasboard";
 import HomePage from "./pages/HomePage/HomePage";
@@ -26,13 +28,11 @@ function App() {
       {isModalSignUp && <SignUpPage />}
       <Routes>
         <Route path="/" element={<HomePage />} />
-
         <Route path="/calo" element={<CaloPage />} />
-        <Route path="/product" element={<ProductPage />}>
-          <Route path="*" element={<Card />} />
-        </Route>
+        <Route path="product" element={<ProductPage />} />
 
         <Route path="/cart/:id" element={<CartPage />} />
+
         <Route path="dasboard" element={<DasboardPage />}>
           <Route path="kho-hang" element={<Warehouse />} />
           <Route path="them-san-pham" element={<CreateProduct />} />

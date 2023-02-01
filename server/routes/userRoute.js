@@ -3,6 +3,7 @@ const router = express.Router();
 
 const {
     signUp,
+    signOut,
     signIn,
     getUserByID,
     updateUser,
@@ -33,6 +34,7 @@ const { protect, isAdmin } = require("../middlewares/authMiddleware");
         }
  */
 router.post("/sign-up", signUp);
+router.post("/sign-out", protect, signOut);
 
 /**
  *  2. Login

@@ -8,6 +8,16 @@ const authSevices = {
     register: (data) => {
         return axiosInstant.post("/users/sign-up", data);
     },
+
+    logout: (token) => {
+        return axiosInstant({
+            method: "POST",
+            url: "/users/sign-out",
+            headers: {
+                Authorization: ` Bearer ${token}`,
+            },
+        });
+    },
 };
 
 export default authSevices;

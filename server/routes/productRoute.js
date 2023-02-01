@@ -6,16 +6,12 @@ const {
     getAllProducts,
     updateProduct,
     findProductsBySlug,
+    findProductById,
     deleteProduct,
 } = require("../controllers/productControllers");
 
 // middlewares
 const { protect, isAdmin } = require("../middlewares/authMiddleware");
-const {
-    imageUploadLocal,
-} = require("../middlewares/uploadImageToLocalMiddleware");
-const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
-const image = require("../controllers/upload");
 
 const router = express.Router();
 /**
@@ -48,8 +44,6 @@ const router = express.Router();
  */
 router.post("/add-product", protect, isAdmin, addProduct);
 
-router.post("/upload", protect, isAdmin, image.upload);
-
 /**
  *  2. Get all products
     /products/: GET 
@@ -79,7 +73,21 @@ router.get("/", getAllProducts);
 router.get("/find/:slug", findProductsBySlug);
 
 /**
- *  4. update products based on id 
+ *  4. Find product by ID 
+    /products/find/:slug: GET 
+	+ desc: Find product by ID 
+	+ access: none
+	+ return values: 
+        {
+            statusCode:
+            message:
+            data: ,
+        }
+ */
+router.get("/findByID/:id", findProductById);
+
+/**
+ *  5. update products based on id 
     /products/:id: PUT 
 	+ desc: update products based on id 
 	+ access: admin
@@ -97,10 +105,10 @@ router.get("/find/:slug", findProductsBySlug);
             data: ,
         }
  */
-router.put("/:id", protect, isAdmin, imageUploadLocal, updateProduct);
+router.put("/:id", protect, isAdmin, updateProduct);
 
 /**
- *  4. delete products based on id 
+ *  6. delete products based on id 
     /products/:id: DEL 
 	+ desc: delete products based on id 
 	+ access: admin

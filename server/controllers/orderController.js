@@ -36,14 +36,16 @@ const addOrder = asyncHandler(async (req, res) => {
                 });
                 newOrder.items.push(newItem);
             } catch (error) {
-                console.log("product", error);
+                // console.log("product", error);
+                res.status(400);
+                throw new error("Error creating Item");
             }
         }
     }
     await newOrder.save();
-    res.status(200).json({
-        statusCode: 200,
-        message: "Success",
+    res.status(201).json({
+        statusCode: 201,
+        message: "New order created",
         data: newOrder,
     });
 });

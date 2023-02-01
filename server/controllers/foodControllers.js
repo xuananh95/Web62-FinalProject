@@ -1,9 +1,8 @@
 const { FoodData } = require("../models/FoodDataModel");
 const asyncHandler = require("express-async-handler");
 const { isValidObjectId } = require("../utils/checkValidObjectId");
-const { cloudinaryUploadImage } = require("../utils/cloudinaryUploadImage");
 
-const FOLDER = "food";
+// const FOLDER = "food";
 
 const addFoodData = asyncHandler(async (req, res) => {
     const { name, protein, fat, carb, image } = req.body;
@@ -20,8 +19,8 @@ const addFoodData = asyncHandler(async (req, res) => {
             image,
         });
         if (newFoodData) {
-            res.status(200).json({
-                statusCode: 200,
+            res.status(201).json({
+                statusCode: 201,
                 message: "New food added!",
                 data: {
                     name,
@@ -33,7 +32,7 @@ const addFoodData = asyncHandler(async (req, res) => {
             });
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         res.status(400);
         throw new Error("Invalid data!");
     }
@@ -46,6 +45,28 @@ const getFoodDataList = asyncHandler(async (req, res) => {
         message: "Success!",
         data: foods,
     });
+});
+
+const getFoodDataById = asyncHandler(async (req, res) => {
+    const id = req.params.id;
+    if (!isValidObjectId) {
+        res.status(400);
+        throw new Error("Invalid food id");
+    }
+    const food = await FoodData.findById(id);
+    if (food) {
+        res.status(200).json({
+            statusCode: 200,
+            message: "Success!",
+            data: food,
+        });
+    } else {
+        res.status(404).json({
+            statusCode: 404,
+            message: "Food data not found",
+            data: null,
+        });
+    }
 });
 
 const updateFoodDataById = asyncHandler(async (req, res) => {
@@ -113,6 +134,7 @@ const deleteFoodData = asyncHandler(async (req, res) => {
 module.exports = {
     addFoodData,
     getFoodDataList,
+    getFoodDataById,
     updateFoodDataById,
     deleteFoodData,
 };

@@ -14,7 +14,7 @@ const productsService = {
     uploadImage: (data, token) => {
         return axiosInstant({
             method: "POST",
-            url: "/products/upload",
+            url: "/uploadImage",
             headers: {
                 "Content-type": "multipart/form-data",
                 Authorization: ` Bearer ${token}`,
@@ -23,20 +23,28 @@ const productsService = {
         });
     },
 
-    getAllProducts: () => {
+    getAllProducts: (page) => {
         return axiosInstant({
             method: "GET",
-            url: "/products",
+            url: `/products?page=${page}`,
         });
     },
 
-    updateProduct: (id, token) => {
+    updateProduct: (data, id, token) => {
         return axiosInstant({
             method: "PUT",
             url: `/products/${id}`,
             headers: {
                 Authorization: ` Bearer ${token}`,
             },
+            data,
+        });
+    },
+
+    findUpdateProduct: (id) => {
+        return axiosInstant({
+            method: "GET",
+            url: `/products/findByID/${id}`,
         });
     },
 

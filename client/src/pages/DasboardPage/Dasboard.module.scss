@@ -1,9 +1,6 @@
 .wrapper {
     display: flex;
     flex-direction: rows;
-}
-
-.item {
-    flex: 1;
-    margin: 1rem 0;
+    padding: 0 3rem;
+    background-color: rgb(119, 118, 118);
 }

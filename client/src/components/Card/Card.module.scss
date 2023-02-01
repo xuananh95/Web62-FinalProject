@@ -1,10 +1,21 @@
 .wrapper {
     flex: 1;
+    background-color: rgb(236, 235, 235);
+
+    padding: 2rem 0;
+}
+
+.sort {
+    h3 {
+        margin-left: 2rem;
+    }
 }
 
 .wrapper p {
     font-size: 1.5rem;
     font-weight: 700;
+    color: red;
+    margin-bottom: 1rem;
 }
 
 .wrapper span {
@@ -16,6 +27,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 2.3333rem;
+    justify-content: space-between;
 }
 
 .pagination {

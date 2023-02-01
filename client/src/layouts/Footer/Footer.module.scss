@@ -1,26 +1,31 @@
 .wrapper {
     background-color: #001529;
-    height: 25%;
+
     display: flex;
     gap: 5rem;
-    padding: 1rem 0;
-    color: aliceblue;
+    padding: 1rem 3rem;
+    color: #fff;
     line-height: 2.2em;
     align-items: center;
     font-size: 0.8em;
-    justify-content: space-around;
+    justify-content: space-between;
+    font-size: 1rem;
 }
 
 .footer--left {
     h1 {
         text-shadow: 2px 2px 5px rgb(243, 243, 189);
         letter-spacing: 0.1em;
+        font-size: 2.5rem;
+        margin: 1rem 0;
     }
 }
 
 .footer--center {
     display: flex;
     flex-direction: column;
+    flex: 2;
+    text-align: center;
 }
 
 .link {
@@ -32,14 +37,13 @@
 }
 
 .footer--right {
-    div {
-        display: flex;
-        gap: 1rem;
-        font-size: 1.6rem;
-        cursor: pointer;
-    }
+    flex: 1;
 
-    p:hover {
-        color: rgb(209, 209, 211);
+    .icon {
+        font-size: 2.5rem;
+        &:hover {
+            color: rgb(136, 132, 132);
+            cursor: pointer;
+        }
     }
 }
