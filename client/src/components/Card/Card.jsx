@@ -13,14 +13,19 @@ const WheyProtein = () => {
     const { Meta } = Card;
     const { listsProduct, setListsProduct } = useContext(StateContext);
     const [totalPage, setTotalPage] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
         (async function fetchApi() {
-            const res = await productsService.getAllProducts();
+            const res = await productsService.getAllProducts(currentPage);
             setListsProduct(res?.data.data.products);
-            console.log(res?.data.data.products.length);
+            setTotalPage(res?.data.data.productCount);
         })();
-    }, []);
+    }, [currentPage]);
+
+    const onChangePage = (page) => {
+        setCurrentPage(page);
+    };
 
     const renderCard =
         listsProduct &&
@@ -95,6 +100,8 @@ const WheyProtein = () => {
             <div className={cx("card")}>{renderCard}</div>
             <div className={cx("pagination")}>
                 <Pagination
+                    current={currentPage}
+                    onChange={onChangePage}
                     defaultCurrent={1}
                     total={totalPage}
                     style={{ fontSize: "1rem" }}

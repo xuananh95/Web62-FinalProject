@@ -95,7 +95,6 @@ const Warehouse = () => {
                 className={cx("table")}
                 columns={columns}
                 dataSource={listsProduct}
-                tableLayout="auto"
             />
         </>
     );

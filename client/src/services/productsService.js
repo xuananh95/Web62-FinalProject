@@ -23,10 +23,10 @@ const productsService = {
         });
     },
 
-    getAllProducts: () => {
+    getAllProducts: (page) => {
         return axiosInstant({
             method: "GET",
-            url: "/products",
+            url: `/products?page=${page}`,
         });
     },
 
