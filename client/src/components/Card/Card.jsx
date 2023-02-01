@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Card, Input, Pagination, Rate, Select, Space } from "antd";
 import classNames from "classnames/bind";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
 import styles from "./Card.module.scss";
 import { StateContext } from "../../contexts/GlobalState";
@@ -12,11 +12,13 @@ const cx = classNames.bind(styles);
 const WheyProtein = () => {
     const { Meta } = Card;
     const { listsProduct, setListsProduct } = useContext(StateContext);
+    const [totalPage, setTotalPage] = useState(0);
 
     useEffect(() => {
         (async function fetchApi() {
             const res = await productsService.getAllProducts();
-            setListsProduct(res?.data.data);
+            setListsProduct(res?.data.data.products);
+            console.log(res?.data.data.products.length);
         })();
     }, []);
 
@@ -94,7 +96,7 @@ const WheyProtein = () => {
             <div className={cx("pagination")}>
                 <Pagination
                     defaultCurrent={1}
-                    total={50}
+                    total={totalPage}
                     style={{ fontSize: "1rem" }}
                 />
             </div>
