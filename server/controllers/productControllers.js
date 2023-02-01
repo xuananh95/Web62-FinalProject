@@ -29,12 +29,11 @@ const getAllProducts = asyncHandler(async (req, res) => {
     const products = await Product.find({})
         .skip(PER_PAGE * page - PER_PAGE)
         .limit(PER_PAGE);
-    const numbersOfPage = Math.floor(productCount / PER_PAGE) + 1;
     if (products) {
         res.status(200).json({
             statusCode: 200,
             message: "Success",
-            data: { products, numbersOfPage },
+            data: { products, productCount },
         });
     }
 });
