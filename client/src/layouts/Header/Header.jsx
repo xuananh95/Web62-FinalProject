@@ -7,6 +7,7 @@ import {
 import {
     faCaretDown,
     faCartShopping,
+    faList,
     faRightFromBracket,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -132,7 +133,10 @@ const Header = () => {
                                 {usersLocal?.username}
                             </di>
                             <Dropdown menu={{ items }} arrow>
-                                <FontAwesomeIcon icon={faCaretDown} />
+                                <FontAwesomeIcon
+                                    icon={faList}
+                                    style={{ cursor: "pointer" }}
+                                />
                             </Dropdown>
                         </Space>
                     </>
