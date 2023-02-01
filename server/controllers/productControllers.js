@@ -26,6 +26,16 @@ const getAllProducts = asyncHandler(async (req, res) => {
     const PER_PAGE = 10;
     const page = req.query.page;
     const productCount = await Product.count();
+    if (page === 0) {
+        const products = await Product.find({});
+        if (products) {
+            res.status(200).json({
+                statusCode: 200,
+                message: "Success",
+                data: { products, productCount },
+            });
+        }
+    }
     const products = await Product.find({})
         .skip(PER_PAGE * page - PER_PAGE)
         .limit(PER_PAGE);
