@@ -33,7 +33,14 @@ const GlobalState = ({ children }) => {
     const [uploadData, setUploadData] = useState();
     const [isUpdate, setIsUpdate] = useState(false);
 
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPage, setTotalPage] = useState(0);
+
     const value = {
+        currentPage,
+        setCurrentPage,
+        totalPage,
+        setTotalPage,
         isUpdate,
         setIsUpdate,
         listsProduct,

@@ -11,9 +11,14 @@ import productsService from "../../services/productsService";
 const cx = classNames.bind(styles);
 const WheyProtein = () => {
     const { Meta } = Card;
-    const { listsProduct, setListsProduct } = useContext(StateContext);
-    const [totalPage, setTotalPage] = useState(0);
-    const [currentPage, setCurrentPage] = useState(1);
+    const {
+        listsProduct,
+        setListsProduct,
+        totalPage,
+        setTotalPage,
+        currentPage,
+        setCurrentPage,
+    } = useContext(StateContext);
 
     useEffect(() => {
         (async function fetchApi() {

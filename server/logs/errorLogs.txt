@@ -339,3 +339,5 @@
 2023-2-1 - 14:12:1 - Error: BSON field 'skip' value must be >= 0, actual value '-3' - Path: /products?page=0 
 2023-2-1 - 15:4:3 - Error: Operation `products.count()` buffering timed out after 10000ms - Path: /products 
 
+2023-2-1 - 15:52:11 - Error: BSON field 'skip' value must be >= 0, actual value '-10' - Path: /products?page=0 
+2023-2-1 - 15:52:11 - Error: BSON field 'skip' value must be >= 0, actual value '-10' - Path: /products?page=0 

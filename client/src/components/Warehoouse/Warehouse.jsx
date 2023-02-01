@@ -14,16 +14,25 @@ const cx = classNames.bind(styles);
 
 const Warehouse = () => {
     const [api, contextHolder] = notification.useNotification();
-    const { listsProduct, setListsProduct, setIsUpdate, setProducts } =
-        useContext(StateContext);
+    const {
+        listsProduct,
+        setListsProduct,
+        setIsUpdate,
+        setProducts,
+        totalPage,
+        setTotalPage,
+        currentPage,
+        setCurrentPage,
+    } = useContext(StateContext);
     const navigate = useNavigate();
 
     useEffect(() => {
         (async function fetchApi() {
-            const res = await productsService.getAllProducts();
-            setListsProduct(res?.data.data);
+            const res = await productsService.getAllProducts(currentPage);
+            setListsProduct(res?.data.data.products);
+            setTotalPage(res?.data.data.productCount);
         })();
-    }, []);
+    }, [currentPage]);
 
     const onDelete = async (product) => {
         const token = await LocalStorage.getItem("users")?.accessToken;
@@ -32,6 +41,10 @@ const Warehouse = () => {
             duration: 1.5,
             message: `${res?.data?.message}`,
         });
+    };
+
+    const onChangePage = (page) => {
+        setCurrentPage(page);
     };
 
     const onUpdate = async (product) => {
@@ -95,6 +108,11 @@ const Warehouse = () => {
                 className={cx("table")}
                 columns={columns}
                 dataSource={listsProduct}
+                pagination={{
+                    total: totalPage,
+                    current: currentPage,
+                    onChange: onChangePage,
+                }}
             />
         </>
     );
