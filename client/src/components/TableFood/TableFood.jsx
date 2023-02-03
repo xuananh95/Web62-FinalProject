@@ -7,8 +7,8 @@ const TableFood = ({ columns, foodbasket }) => (
         <Table
             columns={columns}
             dataSource={foodbasket}
-            pagination={true}
-            pageSize={7}
+            // pagination={true}
+            pagination={{ pageSize: 6 }}
             summary={(foodbasket) => {
                 // console.log(foodbasket);
                 let totalQuantity = 0;

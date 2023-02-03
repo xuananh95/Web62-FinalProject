@@ -38,19 +38,20 @@ const Footer = () => {
 
             <div className={cx("footer--center")}>
                 <Link className={cx("link")} to="/">
-                    <HomeOutlined style={{ fontSize: "1.5rem" }} /> Home
+                    <HomeOutlined style={{ fontSize: "1.5rem" }} /> Trang chủ
                 </Link>
                 <Link className={cx("link")} to="/calo">
-                    <AppstoreOutlined style={{ fontSize: "1.5rem" }} /> Calo
+                    <AppstoreOutlined style={{ fontSize: "1.5rem" }} /> Dinh
+                    dưỡng
                 </Link>
                 <Link className={cx("link")} to="/product">
-                    <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />{" "}
-                    Product
+                    <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} /> Sản
+                    phẩm
                 </Link>
             </div>
 
             <div className={cx("footer--right")}>
-                <p>Follow us</p>
+                <p>Theo dõi</p>
                 <Space size={20}>
                     <YoutubeOutlined className={cx("icon")} />
                     <GooglePlusOutlined className={cx("icon")} />

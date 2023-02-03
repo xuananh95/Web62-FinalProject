@@ -88,7 +88,7 @@ const ProfilePage = () => {
             </div>
             <hr />
             <div>
-                <h2>Lịch sử mua hàng</h2>
+                <h2 style={{ marginTop: "1rem" }}>Lịch sử mua hàng</h2>
                 <Table
                     className={cx("table")}
                     dataSource={renderHistory}
@@ -99,7 +99,7 @@ const ProfilePage = () => {
             </div>
             <hr />
             <div>
-                <h2>Lịch sử món ăn</h2>
+                <h2 style={{ marginTop: "1rem" }}>Lịch sử món ăn</h2>
                 <SavedFood />
             </div>
         </div>
