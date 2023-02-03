@@ -1,6 +1,26 @@
 import axiosInstant from "./axiosInstant";
 
 const productsService = {
+    addOrder: (data, token) => {
+        return axiosInstant({
+            method: "POST",
+            url: "/orders/add-order",
+            headers: {
+                Authorization: ` Bearer ${token}`,
+            },
+            data,
+        });
+    },
+    getOrderByUser: (token) => {
+        return axiosInstant({
+            method: "GET",
+            url: "/orders",
+            headers: {
+                Authorization: ` Bearer ${token}`,
+            },
+        });
+    },
+
     create: (data, token) => {
         return axiosInstant({
             method: "POST",

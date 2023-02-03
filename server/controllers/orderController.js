@@ -45,7 +45,7 @@ const addOrder = asyncHandler(async (req, res) => {
     await newOrder.save();
     res.status(201).json({
         statusCode: 201,
-        message: "New order created",
+        message: "Thanh toán thành công!",
         data: newOrder,
     });
 });

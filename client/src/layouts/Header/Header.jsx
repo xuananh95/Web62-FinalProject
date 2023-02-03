@@ -10,29 +10,31 @@ import {
     faRightFromBracket,
     faUser,
 } from "@fortawesome/free-solid-svg-icons";
-import { notification } from "antd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { notification } from "antd";
 
 import { Avatar, Badge, Button, Dropdown, Menu, Space, Tooltip } from "antd";
 import classNames from "classnames/bind";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useContext } from "react";
+import { useSelector } from "react-redux";
 import { StateContext } from "../../contexts/GlobalState";
 import LocalStorage from "../../contexts/LocalStorage";
 import authSevices from "../../services/authServices";
+
 import styles from "./Header.module.scss";
 
 const cx = classNames.bind(styles);
 
 const Header = () => {
     const navigate = useNavigate();
-    const { setIsModalSignUp, setIsModalSignIn, isLogined, setIsLogined } =
+    const { setIsModalSignUp, setIsModalSignIn, currentPage, setIsLogined } =
         useContext(StateContext);
     const [api, contextHolder] = notification.useNotification();
-
+    const carts = useSelector((state) => state.cart);
     const usersLocal = LocalStorage?.getItem("users")?.other;
-
+    const totalCart = carts.reduce((prev, curr) => prev + curr.quantity, 0);
     const onLogout = async () => {
         const accessToken = await LocalStorage.getItem("users")?.accessToken;
         const res = await authSevices.logout(accessToken);
@@ -49,11 +51,11 @@ const Header = () => {
         {
             label:
                 usersLocal?.role === "ADMIN" ? (
-                    <Link to="/dasboard/kho-hang" className={cx("link")}>
+                    <Link to="/dashboard/kho-hang" className={cx("link")}>
                         Quản lí kho
                     </Link>
                 ) : (
-                    <Link to="/dashboard/profile" className={cx("link")}>
+                    <Link to="/profile" className={cx("link")}>
                         Thông tin cá nhân
                     </Link>
                 ),
@@ -90,7 +92,7 @@ const Header = () => {
         },
         {
             label: "Sản phẩm",
-            keyPath: "/product",
+            keyPath: `/product?page=${currentPage}`,
             icon: <ShoppingCartOutlined style={{ fontSize: "1.5rem" }} />,
         },
     ];
@@ -122,25 +124,29 @@ const Header = () => {
                 {usersLocal !== undefined ? (
                     <>
                         <Space size={40}>
-                            <Badge
-                                showZero
-                                count={2}
-                                size="default"
-                                offset={[1, 5]}
-                            >
-                                <Tooltip title="Giỏ hàng">
-                                    <Link to="/cart/:id">
-                                        <Avatar
-                                            size={"large"}
-                                            icon={
-                                                <FontAwesomeIcon
-                                                    icon={faCartShopping}
-                                                />
-                                            }
-                                        />
-                                    </Link>
-                                </Tooltip>
-                            </Badge>
+                            {usersLocal?.role === "ADMIN" ? (
+                                <></>
+                            ) : (
+                                <Badge
+                                    showZero
+                                    count={totalCart}
+                                    size="default"
+                                    offset={[1, 5]}
+                                >
+                                    <Tooltip title="Giỏ hàng">
+                                        <Link to={`/cart/${usersLocal._id}`}>
+                                            <Avatar
+                                                size={"large"}
+                                                icon={
+                                                    <FontAwesomeIcon
+                                                        icon={faCartShopping}
+                                                    />
+                                                }
+                                            />
+                                        </Link>
+                                    </Tooltip>
+                                </Badge>
+                            )}
                             <Space size={10}>
                                 <Avatar
                                     icon={<UserOutlined />}

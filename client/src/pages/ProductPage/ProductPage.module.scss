@@ -1,6 +1,8 @@
 .wrapper {
     margin: 0 3rem;
     display: flex;
+    height: max-content;
+    min-height: 100vh;
 }
 
 .item {

@@ -66,6 +66,7 @@ router.get("/all", protect, isAdmin, getAllOrders);
             data: 
         }
  */
+
 router.get("/", protect, getOrdersByUser);
 
 /**
