@@ -2,6 +2,7 @@ import { Space, Table } from "antd";
 import classNames from "classnames/bind";
 import { useEffect } from "react";
 import { useContext } from "react";
+import SavedFood from "../../components/SavedFood/SavedFood";
 import { StateContext } from "../../contexts/GlobalState";
 import LocalStorage from "../../contexts/LocalStorage";
 import productsService from "../../services/productsService";
@@ -100,6 +101,7 @@ const ProfilePage = () => {
             <hr />
             <div>
                 <h2>Lịch sử món ăn</h2>
+                <SavedFood />
             </div>
         </div>
     );

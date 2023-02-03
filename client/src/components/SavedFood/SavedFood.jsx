@@ -1,23 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Table, Typography } from "antd";
+import LocalStorage from "../../contexts/LocalStorage";
+import { useState } from "react";
 const { Text } = Typography;
+const columns = [
+  {
+    title: "Tên",
+    dataIndex: "text",
+    key: "text",
+  },
+  {
+    title: "Khối Lượng",
+    dataIndex: "quantity",
+    key: "quantity",
+    render: (quantity) => <p>{quantity}g</p>,
+  },
+  {
+    title: "Calo",
+    dataIndex: "calo",
+    key: "calo",
 
-const TableFood = ({ columns, foodbasket }) => (
+    render: (calo, quantity) => <p>{(+calo * +quantity.quantity) / 100}</p>,
+  },
+  {
+    title: "Protein",
+    dataIndex: "protein",
+    key: "protein",
+    render: (protein, quantity) => (
+      <p>{(+protein * +quantity.quantity) / 100}</p>
+    ),
+  },
+  {
+    title: "Tinh Bột",
+    dataIndex: "carb",
+    key: "carb",
+
+    render: (carb, quantity) => <p>{(+carb * +quantity.quantity) / 100}</p>,
+  },
+  {
+    title: "Chất Béo",
+    dataIndex: "fat",
+    key: "fat",
+
+    render: (fat, quantity) => <p>{(+fat * +quantity.quantity) / 100}</p>,
+  },
+];
+const user = LocalStorage.getItem("users").other;
+const [savedFoodTable, setSavedFoodTable] = useState([]);
+useEffect(() => {
+  setSavedFoodTable = LocalStorage.getItem(user._id);
+}, [user._id]);
+
+const SavedFood = () => (
   <>
     <Table
       columns={columns}
-      dataSource={foodbasket}
+      dataSource={savedFoodTable}
       pagination={true}
       pageSize={7}
-      summary={(foodbasket) => {
-        // console.log(foodbasket);
+      summary={(savedFoodTable) => {
         let totalQuantity = 0;
         let totalCalo = 0;
         let totalProtein = 0;
         let totalCarb = 0;
         let totalFat = 0;
 
-        foodbasket.forEach(({ calo, protein, carb, fat, quantity }) => {
+        savedFoodTable.forEach(({ calo, protein, carb, fat, quantity }) => {
           totalQuantity += Number(quantity);
           totalCalo += (Number(calo) * Number(quantity)) / 100;
           totalProtein += (Number(protein) * Number(quantity)) / 100;
@@ -62,4 +110,4 @@ const TableFood = ({ columns, foodbasket }) => (
     />
   </>
 );
-export default TableFood;
+export default SavedFood;

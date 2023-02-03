@@ -1,40 +1,45 @@
-import autoAnimate from "@formkit/auto-animate";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    Avatar,
-    Badge,
-    Button,
     Card,
-    Col,
-    Input,
-    Modal,
-    Popconfirm,
-    Row,
+    Layout,
     Space,
+    Col,
+    Row,
+    Avatar,
+    Input,
+    Button,
+    Badge,
+    Modal,
+    Table,
+    Popconfirm,
     Typography,
 } from "antd";
-import {
-    ArcElement,
-    Chart as ChartJS,
-    Legend,
-    RadialLinearScale,
-    Tooltip,
-} from "chart.js";
 import React, { useEffect, useRef, useState } from "react";
-import LocalStorage from "../../contexts/LocalStorage";
-
-import { PolarArea } from "react-chartjs-2";
+import { ClockCircleOutlined } from "@ant-design/icons";
+import autoAnimate from "@formkit/auto-animate";
+import styles from "./CaloPage.module.css";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { v4 as uuidv4 } from "uuid";
+import {
+    Chart as ChartJS,
+    RadialLinearScale,
+    ArcElement,
+    Tooltip,
+    Legend,
+} from "chart.js";
+import { PolarArea } from "react-chartjs-2";
 import FoodItem from "../../components/FoodItem/FoodItem";
 import TableFood from "../../components/TableFood/TableFood";
-import styles from "./CaloPage.module.css";
-import foodServices from "../../services/foodServices";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LocalStorage from "../../contexts/LocalStorage";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
-
+const { Header, Footer, Sider, Content } = Layout;
 const { Search } = Input;
 const Text = Typography;
+
+const onChange = (value) => {
+    console.log("changed", value);
+};
 
 const IconText = ({ icon, text }) => (
     <Space>
@@ -46,9 +51,6 @@ const { Meta } = Card;
 
 const CaloPage = () => {
     //props
-    const onChange = (value) => {
-        console.log("changed", value);
-    };
 
     //state&hooks
     const [totalprotein, setTotalprotein] = useState(0);
@@ -449,11 +451,13 @@ const CaloPage = () => {
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-    const handleSave = async () => {
-        const token = LocalStorage.getItem("users")?.accessToken;
-
-        const res = await foodServices.addFood(foodbasket, token);
-        console.log("response", res);
+    const handleSave = () => {
+        // const LocalFoodBasket = JSON.stringify(foodbasket);
+        const user = LocalStorage.getItem("users").other;
+        console.log(user);
+        const iduser = user._id;
+        LocalStorage.setItem(iduser, foodbasket);
+        setFoodbasket([]);
     };
     //
     const columns = [
@@ -524,12 +528,11 @@ const CaloPage = () => {
                 ) : null,
         },
     ];
-    console.log(foodbasket);
 
     return (
         <div className={styles.CaloPageWrapper}>
             <Row style={{ height: "110vh" }}>
-                <Col md={15} style={{ marginLeft: "3rem" }}>
+                <Col md={15} style={{ marginLeft: "20px" }}>
                     <div>
                         <h2
                             style={{
@@ -616,8 +619,8 @@ const CaloPage = () => {
                                     <Button
                                         key="Ok"
                                         type="primary"
-                                        onClick={handleOk}
                                         danger
+                                        onClick={handleOk}
                                     >
                                         Thoát
                                     </Button>,
