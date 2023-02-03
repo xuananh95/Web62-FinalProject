@@ -30,6 +30,7 @@ import { PolarArea } from "react-chartjs-2";
 import FoodItem from "../../components/FoodItem/FoodItem";
 import TableFood from "../../components/TableFood/TableFood";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LocalStorage from "../../contexts/LocalStorage";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 const { Header, Footer, Sider, Content } = Layout;
@@ -447,7 +448,12 @@ const CaloPage = () => {
     setIsModalOpen(false);
   };
   const handleSave = () => {
-    console.log("save");
+    // const LocalFoodBasket = JSON.stringify(foodbasket);
+    const user = LocalStorage.getItem("users").other;
+    console.log(user);
+    const iduser = user._id;
+    LocalStorage.setItem(iduser, foodbasket);
+    setFoodbasket([]);
   };
   //
   const columns = [
@@ -509,7 +515,6 @@ const CaloPage = () => {
         ) : null,
     },
   ];
-  console.log(foodbasket);
 
   return (
     <div className={styles.CaloPageWrapper}>
@@ -594,11 +599,11 @@ const CaloPage = () => {
                 onOk={handleOk}
                 onCancel={handleCancel}
                 footer={[
-                  <Button key="save" onClick={handleSave}>
-                    Lưu thực đơn
+                  <Button key="Ok" type="primary" danger onClick={handleOk}>
+                    Thoát
                   </Button>,
-                  <Button key="Ok" type="primary" onClick={handleOk}>
-                    Oke
+                  <Button key="save" type="primary" onClick={handleSave}>
+                    Lưu thực đơn
                   </Button>,
                 ]}
               >

@@ -68,8 +68,7 @@ const FoodItem = ({
       totalprotein + (Number(product.protein) * Number(foodvolume)) / 100;
     const c = totalcarb + (Number(product.carb) * Number(foodvolume)) / 100;
     const f = totalfat + (Number(product.fat) * Number(foodvolume)) / 100;
-    console.log(product);
-    console.log(p, c, f);
+
     setTotalprotein(p);
     setTotalcarb(c);
     setTotalfat(f);
