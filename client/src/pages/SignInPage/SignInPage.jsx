@@ -55,7 +55,7 @@ const SignInPage = () => {
                 footer={[]}
                 className={cx("wrapper")}
             >
-                <h2>Sign In</h2>
+                <h2>Đăng nhập</h2>
                 <Form
                     className={cx("form")}
                     onFinish={handleOk}
@@ -106,12 +106,12 @@ const SignInPage = () => {
 
                     <Form.Item>
                         <Button type="primary" htmlType="submit" block>
-                            Sign In
+                            Đăng nhập
                         </Button>
                     </Form.Item>
                     <Form.Item>
                         <Button type="link" block>
-                            Forgot pasword?
+                            Quên mật khẩu?
                         </Button>
                     </Form.Item>
                 </Form>

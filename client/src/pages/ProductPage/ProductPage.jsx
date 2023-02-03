@@ -16,55 +16,55 @@ import styles from "./ProductPage.module.scss";
 const cx = classNames.bind(styles);
 
 const ProductPage = () => {
-    const { Sider } = Layout;
-    const items = [
-        {
-            label: "Sữa tăng cân",
-            path: "sua-tang-can",
-            icon: (
-                <FontAwesomeIcon
-                    icon={faBagShopping}
-                    style={{ fontSize: "1.2rem" }}
-                />
-            ),
-        },
+    // const { Sider } = Layout;
+    // const items = [
+    //     {
+    //         label: "Sữa tăng cân",
+    //         path: "sua-tang-can",
+    //         icon: (
+    //             <FontAwesomeIcon
+    //                 icon={faBagShopping}
+    //                 style={{ fontSize: "1.2rem" }}
+    //             />
+    //         ),
+    //     },
 
-        {
-            label: "Hỗ trợ giảm cân",
-            path: "ho-tro-giam-can",
-            icon: (
-                <FontAwesomeIcon
-                    icon={faDumbbell}
-                    style={{ fontSize: "1.2rem" }}
-                />
-            ),
-        },
-        {
-            label: "Vitamin khoáng chất",
-            path: "vitamin-khoang-chat",
-            icon: (
-                <FontAwesomeIcon
-                    icon={faScaleUnbalanced}
-                    style={{ fontSize: "1.2rem" }}
-                />
-            ),
-        },
+    //     {
+    //         label: "Hỗ trợ giảm cân",
+    //         path: "ho-tro-giam-can",
+    //         icon: (
+    //             <FontAwesomeIcon
+    //                 icon={faDumbbell}
+    //                 style={{ fontSize: "1.2rem" }}
+    //             />
+    //         ),
+    //     },
+    //     {
+    //         label: "Vitamin khoáng chất",
+    //         path: "vitamin-khoang-chat",
+    //         icon: (
+    //             <FontAwesomeIcon
+    //                 icon={faScaleUnbalanced}
+    //                 style={{ fontSize: "1.2rem" }}
+    //             />
+    //         ),
+    //     },
 
-        {
-            label: "Phụ kiện tập ",
-            path: "phu-kien-tap",
-            icon: (
-                <FontAwesomeIcon
-                    icon={faBriefcase}
-                    style={{ fontSize: "1.2rem" }}
-                />
-            ),
-        },
-    ];
+    //     {
+    //         label: "Phụ kiện tập ",
+    //         path: "phu-kien-tap",
+    //         icon: (
+    //             <FontAwesomeIcon
+    //                 icon={faBriefcase}
+    //                 style={{ fontSize: "1.2rem" }}
+    //             />
+    //         ),
+    //     },
+    // ];
 
     return (
         <div className={cx("wrapper")}>
-            <Sider width="15%" className={cx("item")}>
+            {/* <Sider width="15%" className={cx("item")}>
                 <Menu
                     style={{
                         fontSize: "1rem",
@@ -81,7 +81,7 @@ const ProductPage = () => {
                         };
                     })}
                 />
-            </Sider>
+            </Sider> */}
             <Card />
 
             <Outlet />

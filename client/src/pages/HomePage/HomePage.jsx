@@ -1,7 +1,7 @@
-import React from "react";
-import styles from "./HomePage.module.css";
 import { Col, Row } from "antd";
+import React from "react";
 import { TDEEForm } from "../../components/TDEEForm/TDEEForm";
+import styles from "./HomePage.module.css";
 
 const HomePage = () => {
     return (

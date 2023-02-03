@@ -1,5 +1,4 @@
-import { Button, Image, Space, Table, notification } from "antd";
-import useNotification from "antd/es/notification/useNotification";
+import { Button, Image, notification, Space, Table } from "antd";
 import classNames from "classnames/bind";
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";

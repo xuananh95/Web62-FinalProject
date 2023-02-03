@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import "./App.css";
@@ -6,7 +6,6 @@ import "./App.css";
 import CreateProduct from "./components/CreateProduct/CreateProduct";
 import Warehouse from "./components/Warehoouse/Warehouse";
 import { StateContext } from "./contexts/GlobalState";
-import LocalStorage from "./contexts/LocalStorage";
 import Footer from "./layouts/Footer/Footer";
 import Header from "./layouts/Header/Header";
 import CaloPage from "./pages/CaloPage/CaloPage";
@@ -31,7 +30,6 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/calo" element={<CaloPage />} />
                 <Route path="/product" element={<ProductPage />} />
-
                 <Route path="/cart/:id" element={<CartPage />} />
                 <Route path="/profile" element={<ProfilePage />} />
                 <Route path="dashboard" element={<DasboardPage />}>

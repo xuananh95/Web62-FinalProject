@@ -86,7 +86,7 @@ const Header = () => {
             icon: <HomeOutlined style={{ fontSize: "1.5rem" }} />,
         },
         {
-            label: "Calo",
+            label: "Dinh dưỡng",
             keyPath: "/calo",
             icon: <AppstoreOutlined style={{ fontSize: "1.5rem" }} />,
         },
@@ -173,13 +173,13 @@ const Header = () => {
                             size="large"
                             onClick={() => setIsModalSignIn(true)}
                         >
-                            Sign In
+                            Đăng nhập
                         </Button>
                         <Button
                             size="large"
                             onClick={() => setIsModalSignUp(true)}
                         >
-                            Sign Up
+                            Đăng kí
                         </Button>
                     </>
                 )}

@@ -62,7 +62,7 @@ const WheyProtein = () => {
                 <div key={key}>
                     <Card
                         hoverable
-                        style={{ width: 240 }}
+                        style={{ width: 300 }}
                         cover={<img alt="example" src={el.image} />}
                     >
                         <Meta title={el.name} /> <Rate value={4} disabled />

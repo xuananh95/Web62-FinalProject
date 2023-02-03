@@ -1,36 +1,34 @@
+import autoAnimate from "@formkit/auto-animate";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-    Card,
-    Layout,
-    Space,
-    Col,
-    Row,
     Avatar,
-    Input,
-    Button,
     Badge,
+    Button,
+    Card,
+    Col,
+    Input,
+    Layout,
     Modal,
-    Table,
     Popconfirm,
+    Row,
+    Space,
     Typography,
 } from "antd";
-import React, { useEffect, useRef, useState } from "react";
-import { ClockCircleOutlined } from "@ant-design/icons";
-import autoAnimate from "@formkit/auto-animate";
-import styles from "./CaloPage.module.css";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { v4 as uuidv4 } from "uuid";
 import {
-    Chart as ChartJS,
-    RadialLinearScale,
     ArcElement,
-    Tooltip,
+    Chart as ChartJS,
     Legend,
+    RadialLinearScale,
+    Tooltip,
 } from "chart.js";
+import React, { useEffect, useRef, useState } from "react";
 import { PolarArea } from "react-chartjs-2";
+import { v4 as uuidv4 } from "uuid";
 import FoodItem from "../../components/FoodItem/FoodItem";
 import TableFood from "../../components/TableFood/TableFood";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LocalStorage from "../../contexts/LocalStorage";
+import styles from "./CaloPage.module.css";
 
 ChartJS.register(RadialLinearScale, ArcElement, Tooltip, Legend);
 const { Header, Footer, Sider, Content } = Layout;

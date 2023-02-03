@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
 import { Table, Typography } from "antd";
+import React from "react";
 import LocalStorage from "../../contexts/LocalStorage";
-import { useState } from "react";
 const { Text } = Typography;
 const columns = [
     {

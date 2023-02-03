@@ -1,7 +1,6 @@
-import { Space, Table } from "antd";
+import { Table } from "antd";
 import classNames from "classnames/bind";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import SavedFood from "../../components/SavedFood/SavedFood";
 import { StateContext } from "../../contexts/GlobalState";
 import LocalStorage from "../../contexts/LocalStorage";

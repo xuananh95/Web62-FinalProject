@@ -1,4 +1,4 @@
-import { faWarehouse, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faWarehouse } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Layout, Menu } from "antd";
 import classNames from "classnames/bind";

@@ -1,23 +1,16 @@
+import {
+  faRightLeft
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Button,
   Card,
-  Input,
-  Pagination,
-  Rate,
-  Select,
-  InputNumber,
+  Input, InputNumber
 } from "antd";
 import classNames from "classnames/bind";
-import {
-  faCartPlus,
-  faPlus,
-  faRightLeft,
-} from "@fortawesome/free-solid-svg-icons";
 
-import styles from "./FoodItem.module.scss";
 import { useState } from "react";
-import { useEffect } from "react";
+import styles from "./FoodItem.module.scss";
 
 const cx = classNames.bind(styles);
 const FoodItem = ({

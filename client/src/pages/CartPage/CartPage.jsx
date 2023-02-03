@@ -1,26 +1,18 @@
-import {
-    faCreditCard,
-    faIdCard,
-    faTrash,
-    faVrCardboard,
-} from "@fortawesome/free-solid-svg-icons";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     Button,
-    Form,
     Image,
     Input,
     InputNumber,
     notification,
-    QRCode,
     Radio,
     Space,
     Table,
     Tooltip,
 } from "antd";
 import classNames from "classnames/bind";
-import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { StateContext } from "../../contexts/GlobalState";

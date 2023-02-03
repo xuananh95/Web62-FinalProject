@@ -1,6 +1,6 @@
 import { Button, Input, Select, Space } from "antd";
-import React from "react";
 import classNames from "classnames/bind";
+import React from "react";
 
 import styles from "./Search.module.scss";
 

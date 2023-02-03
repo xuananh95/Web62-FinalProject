@@ -61,7 +61,7 @@ const SignUpPage = () => {
                 footer={[]}
                 className={cx("wrapper")}
             >
-                <h2>Sign Up</h2>
+                <h2>Đăng kí</h2>
                 <Form
                     onFinish={handleOk}
                     form={form}
@@ -205,11 +205,13 @@ const SignUpPage = () => {
                             },
                         ]}
                     >
-                        <Checkbox>I agree with the policy and privacy</Checkbox>
+                        <Checkbox>
+                            Tôi đồng ý với chính sách và quyền riêng tư
+                        </Checkbox>
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" htmlType="submit" block>
-                            Sign Up
+                            Đăng kí
                         </Button>
                     </Form.Item>
                 </Form>

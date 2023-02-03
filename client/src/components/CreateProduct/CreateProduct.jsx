@@ -1,17 +1,14 @@
 import {
     Button,
     Form,
-    Image,
     Input,
     InputNumber,
     notification,
     Select,
     Space,
-    Upload,
 } from "antd";
 import classNames from "classnames/bind";
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { StateContext } from "../../contexts/GlobalState";
 import LocalStorage from "../../contexts/LocalStorage";
 import productsService from "../../services/productsService";
