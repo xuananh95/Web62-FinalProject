@@ -5,35 +5,33 @@ const foodDataSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    image: {
-        type: String,
+    quantity: {
+        type: Number,
         required: true,
     },
     protein: {
         type: Number,
-        max: 100,
-        min: 0,
+        required: true,
     },
     fat: {
         type: Number,
-        max: 100,
-        min: 0,
+        required: true,
     },
     carb: {
         type: Number,
-        max: 100,
-        min: 0,
+        required: true,
     },
     // auto calculated
     calories: {
         type: Number,
+        required: true,
     },
 });
 
-foodDataSchema.pre("save", function (next) {
-    this.calories = 4 * this.carb + 4 * this.protein + 9 * this.fat;
-    return next();
-});
+// foodDataSchema.pre("save", function (next) {
+//     this.calories = 4 * this.carb + 4 * this.protein + 9 * this.fat;
+//     return next();
+// });
 
 const FoodData = mongoose.model("FoodData", foodDataSchema);
 module.exports = { FoodData };

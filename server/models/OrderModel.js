@@ -28,7 +28,7 @@ const orderSchema = mongoose.Schema({
         type: Number,
     },
     dateCreated: {
-        type: Date,
+        type: String,
     },
     isPaid: {
         type: Boolean,

@@ -12,6 +12,7 @@ import {
   Table,
   Popconfirm,
   Typography,
+  notification,
 } from "antd";
 import React, { useEffect, useRef, useState } from "react";
 import { ClockCircleOutlined } from "@ant-design/icons";
@@ -60,6 +61,7 @@ const CaloPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const foodListRef = useRef(null);
   const [foodbasket, setFoodbasket] = useState([]);
+  const [api, contextHolder] = notification.useNotification();
 
   const [data, setData] = useState({
     labels: ["Protein", "Tinh bột", "Chất Béo"],
@@ -450,10 +452,15 @@ const CaloPage = () => {
   const handleSave = () => {
     // const LocalFoodBasket = JSON.stringify(foodbasket);
     const user = LocalStorage.getItem("users").other;
-    console.log(user);
+    // console.log(user);
     const iduser = user._id;
-    LocalStorage.setItem(iduser, foodbasket);
+    LocalStorage.setItem(`id${iduser}`, foodbasket);
     setFoodbasket([]);
+    setIsModalOpen(false);
+    api.success({
+      duration: 1.5,
+      message: "Lưu bữa ăn thành công!",
+    });
   };
   //
   const columns = [
@@ -518,8 +525,9 @@ const CaloPage = () => {
 
   return (
     <div className={styles.CaloPageWrapper}>
+      {contextHolder}
       <Row style={{ height: "110vh" }}>
-        <Col md={15} style={{ marginLeft: "20px" }}>
+        <Col md={15} style={{ marginLeft: "3rem" }}>
           <div>
             <h2
               style={{

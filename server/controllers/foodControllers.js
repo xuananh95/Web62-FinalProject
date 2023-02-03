@@ -5,32 +5,34 @@ const { isValidObjectId } = require("../utils/checkValidObjectId");
 // const FOLDER = "food";
 
 const addFoodData = asyncHandler(async (req, res) => {
-    const { name, protein, fat, carb, image } = req.body;
-    if (!name || !protein || !fat || !carb || !image) {
-        res.status(400);
-        throw new Error("Missing required fields!");
-    }
+    //const { text, protein, fat, carb, quantity, calo: calories } = req.body;
+
+    console.log(req.body);
+    // if (!name || !protein || !fat || !carb || !calories || !quantity) {
+    //     res.status(400);
+    //     throw new Error("Missing required fields!");
+    // }
     try {
-        const newFoodData = await FoodData.create({
-            name,
-            protein,
-            fat,
-            carb,
-            image,
+        // const newFoodData = await FoodData.create({
+        //     name,
+        //     protein,
+        //     fat,
+        //     carb,
+        //     quantity,
+        //     calories,
+        // });
+        // if (newFoodData) {
+        //     res.status(201).json({
+        //         statusCode: 201,
+        //         message: "New food added!",
+        //         data: newFoodData,
+        //     });
+        // }
+
+        return res.status(200).json({
+            code: 200,
+            message: "success",
         });
-        if (newFoodData) {
-            res.status(201).json({
-                statusCode: 201,
-                message: "New food added!",
-                data: {
-                    name,
-                    protein,
-                    fat,
-                    carb,
-                    image,
-                },
-            });
-        }
     } catch (error) {
         // console.log(error);
         res.status(400);

@@ -45,68 +45,26 @@ const columns = [
     render: (fat, quantity) => <p>{(+fat * +quantity.quantity) / 100}</p>,
   },
 ];
-const user = LocalStorage.getItem("users").other;
-const [savedFoodTable, setSavedFoodTable] = useState([]);
-useEffect(() => {
-  setSavedFoodTable = LocalStorage.getItem(user._id);
-}, [user._id]);
 
-const SavedFood = () => (
-  <>
-    <Table
-      columns={columns}
-      dataSource={savedFoodTable}
-      pagination={{ pageSize: 6 }}
-      summary={(savedFoodTable) => {
-        let totalQuantity = 0;
-        let totalCalo = 0;
-        let totalProtein = 0;
-        let totalCarb = 0;
-        let totalFat = 0;
+const SavedFood = () => {
+  const [savedFoodTable, setSavedFoodTable] = useState([]);
+  const user = LocalStorage.getItem("users").other._id;
 
-        savedFoodTable.forEach(({ calo, protein, carb, fat, quantity }) => {
-          totalQuantity += Number(quantity);
-          totalCalo += (Number(calo) * Number(quantity)) / 100;
-          totalProtein += (Number(protein) * Number(quantity)) / 100;
-          totalCarb += (Number(carb) * Number(quantity)) / 100;
-          totalFat += (Number(fat) * Number(quantity)) / 100;
-        });
-        return (
-          <>
-            <Table.Summary.Row>
-              <Table.Summary.Cell index={0}>
-                <b>Tổng</b>{" "}
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={1}>
-                <Text>
-                  <b>{totalQuantity}</b>
-                </Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={2}>
-                <Text>
-                  <b>{parseFloat(totalCalo.toFixed(1))}</b>
-                </Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={3}>
-                <Text>
-                  <b>{parseFloat(totalProtein.toFixed(1))}</b>
-                </Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={4}>
-                <Text>
-                  <b>{parseFloat(totalCarb.toFixed(1))}</b>
-                </Text>
-              </Table.Summary.Cell>
-              <Table.Summary.Cell index={5}>
-                <Text>
-                  <b>{parseFloat(totalFat.toFixed(1))}</b>
-                </Text>
-              </Table.Summary.Cell>
-            </Table.Summary.Row>
-          </>
-        );
-      }}
-    />
-  </>
-);
+  console.log(savedFoodTable);
+
+  useEffect(() => {
+    const food = LocalStorage.getItem(`id${user}`);
+    setSavedFoodTable(food);
+  }, []);
+  console.log("add", savedFoodTable);
+  return (
+    <>
+      <Table
+        pagination={{ pageSize: 5 }}
+        columns={columns}
+        dataSource={savedFoodTable}
+      />
+    </>
+  );
+};
 export default SavedFood;

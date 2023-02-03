@@ -5,20 +5,15 @@ import { StateContext } from "../../contexts/GlobalState";
 
 import { faEnvelope, faKey } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import authSevices from "../../services/authServices";
 import LocalStorage from "../../contexts/LocalStorage";
+import authSevices from "../../services/authServices";
 import styles from "./SignInPage.module.scss";
 
 const cx = classNames.bind(styles);
 
 const SignInPage = () => {
-    const {
-        isModalSignIn,
-        setIsModalSignIn,
-        formLogin,
-        setFormLogin,
-        setIsLogined,
-    } = useContext(StateContext);
+    const { isModalSignIn, setIsModalSignIn, setIsLogined } =
+        useContext(StateContext);
     const [form] = Form.useForm();
 
     const [api, contextHolder] = notification.useNotification();
@@ -27,13 +22,13 @@ const SignInPage = () => {
         try {
             const res = await authSevices.login(values);
             LocalStorage.setItem("users", res?.data.data);
+
             api.success({
                 duration: 1.5,
                 message: `${res?.data.message}`,
             });
 
             form.resetFields();
-
             setTimeout(() => {
                 setIsModalSignIn(false);
                 setIsLogined(true);

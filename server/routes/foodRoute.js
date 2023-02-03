@@ -37,7 +37,7 @@ const router = express.Router();
             data: 
         }
  */
-router.post("/add-food-data", protect, isAdmin, imageUploadLocal, addFoodData);
+router.post("/add-food-data", protect, addFoodData);
 
 /**
  *  2. Get food data list

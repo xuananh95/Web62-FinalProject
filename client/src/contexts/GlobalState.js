@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import LocalStorage from "./LocalStorage";
 
 export const StateContext = createContext();
 
@@ -30,13 +31,18 @@ const GlobalState = ({ children }) => {
         description: "",
         image: "",
     });
+
     const [uploadData, setUploadData] = useState();
     const [isUpdate, setIsUpdate] = useState(false);
-
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPage, setTotalPage] = useState(0);
+    const cartId = LocalStorage.getItem("users")?.other?._id;
+    const [isReload, setIsReload] = useState([]);
 
     const value = {
+        isReload,
+        setIsReload,
+        cartId,
         currentPage,
         setCurrentPage,
         totalPage,

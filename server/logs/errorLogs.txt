@@ -345,3 +345,17 @@
 2023-2-1 - 16:47:29 - Error: secretOrPrivateKey must have a value - Path: /users/sign-in 
 2023-2-1 - 16:49:39 - Error: secretOrPrivateKey must have a value - Path: /users/sign-in 
 2023-2-1 - 16:50:29 - Error: secretOrPrivateKey must have a value - Path: /users/sign-in 
+2023-2-2 - 21:44:1 - Error: Invalid token - Path: /foods/add-food-data 
+2023-2-2 - 21:45:27 - Error: Invalid token - Path: /foods/add-food-data 
+2023-2-2 - 21:47:16 - Error: Invalid token - Path: /foods/add-food-data 
+2023-2-2 - 21:48:16 - Error: Unauthorized - Path: /foods/add-food-data 
+2023-2-2 - 21:54:12 - Error: Invalid token - Path: /foods/add-food-data 
+2023-2-2 - 22:0:6 - Error: Missing required fields! - Path: /foods/add-food-data 
+2023-2-2 - 22:1:9 - Error: Invalid data! - Path: /foods/add-food-data 
+2023-2-2 - 22:2:19 - Error: name is not defined - Path: /foods/add-food-data 
+2023-2-3 - 11:58:37 - Error: Invalid token - Path: /orders 
+2023-2-3 - 11:58:37 - Error: Invalid token - Path: /orders 
+2023-2-3 - 11:59:22 - Error: Invalid token - Path: /orders 
+2023-2-3 - 12:0:47 - Error: Invalid token - Path: /orders 
+2023-2-3 - 12:0:47 - Error: Invalid token - Path: /orders 
+2023-2-3 - 12:1:7 - Error: Invalid token - Path: /orders 
