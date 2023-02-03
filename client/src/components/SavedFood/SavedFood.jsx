@@ -56,8 +56,7 @@ const SavedFood = () => (
     <Table
       columns={columns}
       dataSource={savedFoodTable}
-      pagination={true}
-      pageSize={7}
+      pagination={{ pageSize: 6 }}
       summary={(savedFoodTable) => {
         let totalQuantity = 0;
         let totalCalo = 0;
